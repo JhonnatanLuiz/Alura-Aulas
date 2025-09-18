@@ -35,11 +35,12 @@ Abaixo, os principais módulos com links para seus arquivos principais:
     - [desafios-js-projeto_inicial/desafios-logica-js-projeto_inicial](Lógica-de-programação/Curso%201/desafios-js-projeto_inicial/desafios-logica-js-projeto_inicial/index.html)
     - [logica-js-projeto_inicial](Lógica-de-programação/Curso%201/logica-js-projeto_inicial/index.html)
   - Curso 2
-    - [game-js-curso-2-aula_2](Lógica-de-programação/Curso%202/game-js-curso-2-aula_2/index.html)
-    - [game-js-curso-2-aula_3](Lógica-de-programação/Curso%202/game-js-curso-2-aula_3/index.html)
-    - [js-curso-2-desafio_1](Lógica-de-programação/Curso%202/js-curso-2-desafio_1/index.html)
-    - [js-curso-2-desafio_2](Lógica-de-programação/Curso%202/js-curso-2-desafio_2/index.html)
-    - [js-curso-2-desafio_3](Lógica-de-programação/Curso%202/js-curso-2-desafio_3/index.html)
+    - [game-js-curso-2-aula_2](Lógica-de-programação/Curso%202/game-js-curso-2-aula_2/index.html) • [README](Lógica-de-programação/Curso%202/game-js-curso-2-aula_2/README.md)
+    - [game-js-curso-2-aula_3](Lógica-de-programação/Curso%202/game-js-curso-2-aula_3/index.html) • [README](Lógica-de-programação/Curso%202/game-js-curso-2-aula_3/README.md)
+    - [js-curso-2-desafio_1](Lógica-de-programação/Curso%202/js-curso-2-desafio_1/index.html) • [README](Lógica-de-programação/Curso%202/js-curso-2-desafio_1/README.md)
+    - [js-curso-2-desafio_2](Lógica-de-programação/Curso%202/js-curso-2-desafio_2/index.html) • [README](Lógica-de-programação/Curso%202/js-curso-2-desafio_2/README.md)
+    - [js-curso-2-desafio_3](Lógica-de-programação/Curso%202/js-curso-2-desafio_3/index.html) • [README](Lógica-de-programação/Curso%202/js-curso-2-desafio_3/README.md)
+    - [js-curso-2-desafio_4](Lógica-de-programação/Curso%202/js-curso-2-desafio_4/index.html) • [README](Lógica-de-programação/Curso%202/js-curso-2-desafio_4/README.md)
 
 Obs.: Alguns diretórios possuem pastas auxiliares (como `img/` e recursos exportados). Os links acima apontam para a entrada principal de cada exercício.
 
@@ -93,11 +94,12 @@ Below are the main modules with links to their entry points:
     - [desafios-js-projeto_inicial/desafios-logica-js-projeto_inicial](Lógica-de-programação/Curso%201/desafios-js-projeto_inicial/desafios-logica-js-projeto_inicial/index.html)
     - [logica-js-projeto_inicial](Lógica-de-programação/Curso%201/logica-js-projeto_inicial/index.html)
   - Curso 2
-    - [game-js-curso-2-aula_2](Lógica-de-programação/Curso%202/game-js-curso-2-aula_2/index.html)
-    - [game-js-curso-2-aula_3](Lógica-de-programação/Curso%202/game-js-curso-2-aula_3/index.html)
-    - [js-curso-2-desafio_1](Lógica-de-programação/Curso%202/js-curso-2-desafio_1/index.html)
-    - [js-curso-2-desafio_2](Lógica-de-programação/Curso%202/js-curso-2-desafio_2/index.html)
-    - [js-curso-2-desafio_3](Lógica-de-programação/Curso%202/js-curso-2-desafio_3/index.html)
+    - [game-js-curso-2-aula_2](Lógica-de-programação/Curso%202/game-js-curso-2-aula_2/index.html) • [README](Lógica-de-programação/Curso%202/game-js-curso-2-aula_2/README.md)
+    - [game-js-curso-2-aula_3](Lógica-de-programação/Curso%202/game-js-curso-2-aula_3/index.html) • [README](Lógica-de-programação/Curso%202/game-js-curso-2-aula_3/README.md)
+    - [js-curso-2-desafio_1](Lógica-de-programação/Curso%202/js-curso-2-desafio_1/index.html) • [README](Lógica-de-programação/Curso%202/js-curso-2-desafio_1/README.md)
+    - [js-curso-2-desafio_2](Lógica-de-programação/Curso%202/js-curso-2-desafio_2/index.html) • [README](Lógica-de-programação/Curso%202/js-curso-2-desafio_2/README.md)
+    - [js-curso-2-desafio_3](Lógica-de-programação/Curso%202/js-curso-2-desafio_3/index.html) • [README](Lógica-de-programação/Curso%202/js-curso-2-desafio_3/README.md)
+    - [js-curso-2-desafio_4](Lógica-de-programação/Curso%202/js-curso-2-desafio_4/index.html) • [README](Lógica-de-programação/Curso%202/js-curso-2-desafio_4/README.md)
 
 Note: Some directories include auxiliary assets (like `img/` and exported resources). The links above point to each exercise's main entry point.
 
