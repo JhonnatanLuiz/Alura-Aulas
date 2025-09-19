@@ -58,6 +58,20 @@ Obs.: Alguns diretórios possuem pastas auxiliares (como `img/` e recursos expor
 - [ ] Testes básicos (quando fizer sentido)
 - [ ] Publicar alguns projetos no GitHub Pages
 
+### Atualizações Recentes
+
+- Adicionado suporte para a API Web Speech como alternativa à ResponsiveVoice.
+- Corrigidos erros relacionados à CORS e chaves de API.
+- Novos desafios e exercícios foram incluídos no Curso 2.
+
+### Estrutura do Projeto
+
+O projeto é dividido em cursos, cada um contendo desafios e jogos interativos. Abaixo está a estrutura atual:
+
+- **Curso 1**: Lógica de Programação
+- **Curso 2**: JavaScript
+  - Desafios e jogos interativos
+
 ### Como Atualizo Este README
 - Ao concluir um novo exercício/módulo, adiciono o link na seção "Estrutura do Repositório" e listo os tópicos aprendidos na seção "Tópicos e Habilidades".
 
