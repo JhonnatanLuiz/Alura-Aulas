@@ -42,3 +42,7 @@ let listaDeNomes3 = ['Ana', 'Bruno', 'Carlos'];
 
 // Exibir no console apenas o terceiro nome da lista
 console.log(listaDeNomes3[2]);
+
+
+
+
