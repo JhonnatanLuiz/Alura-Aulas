@@ -1,41 +1,517 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Guia de Estudos: Git e GitHub</title>
+		<link rel="stylesheet" href="style.css" />
+		<!-- Highlight.js themes (light/dark) - local first, CDN fallback -->
+		<link id="hljs-light-local" rel="stylesheet" href="node_modules/highlight.js/styles/github.min.css" />
+		<link id="hljs-dark-local" rel="stylesheet" href="node_modules/highlight.js/styles/github-dark.min.css" disabled />
+		<link id="hljs-light" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css" disabled />
+		<link id="hljs-dark" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css" disabled />
+	</head>
+	<body>
+		<header class="site-header">
+			<div class="container">
+				<h1>Guia de Estudos: Git e GitHub</h1>
+				<p class="subtitle">Comandos essenciais, fluxo de trabalho e dicas práticas</p>
+				<div class="header-actions">
+					<input id="search" type="search" placeholder="Pesquisar no guia (ex: commit)" aria-label="Pesquisar no guia" />
+					<button id="toggleTheme" aria-pressed="false" aria-label="Alternar tema">🌗 Tema</button>
+				</div>
+			</div>
+		</header>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Inter:wght@400;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <title>JS Game</title>
-</head>
+		<nav class="toc container" aria-label="Sumário">
+			<h2>Índice</h2>
+			<ol>
+				<li><a href="#intro">Introdução</a></li>
+				<li><a href="#install">Instalação</a></li>
+				<li><a href="#config">Configuração inicial</a></li>
+				<li><a href="#workflow">Fluxo básico (local)</a></li>
+				<li><a href="#branches">Branches</a></li>
+				<li><a href="#remotes">Remotos e GitHub</a></li>
+				<li><a href="#collab">Colaboração (fork, PR)</a></li>
+				<li><a href="#ignore">.gitignore</a></li>
+				<li><a href="#undo">Desfazendo alterações</a></li>
+				<li><a href="#stash-tags">Stash e Tags</a></li>
+				<li><a href="#markdown">Markdown no README</a></li>
+				<li><a href="#strategies">Estratégias de Git</a></li>
+				<li><a href="#advanced">Git avançado</a></li>
+				<li><a href="#workflows">Workflows (diagramas)</a></li>
+				<li><a href="#exercises">Exercícios práticos</a></li>
+				<li><a href="#troubleshooting">Problemas comuns</a></li>
+				<li><a href="#cheatsheet">Cheat Sheet</a></li>
+			</ol>
+		</nav>
 
-<body>
+		<main class="container" id="content">
+			<section id="intro">
+				<h2>Introdução</h2>
+				<p>
+					Git é um sistema de controle de versão distribuído que registra o histórico de alterações do seu código. GitHub é uma plataforma para hospedar repositórios Git na nuvem, facilitar colaboração, revisão de código e automações (CI/CD).
+				</p>
+				<ul>
+					<li>Git: ferramenta local e distribuída de versionamento.</li>
+					<li>GitHub: serviço online que hospeda repositórios Git e oferece recursos sociais e de colaboração.</li>
+				</ul>
+			</section>
 
-    <div class="container">
-        <div class="container__conteudo">
-            <div class="container__informacoes">
-                <div class="container__texto">
-                    <h1>Adivinhe o <span class="container__texto-azul">numero secreto</span></h1>
-                    <p class="texto__paragrafo">Escolha um número entre 1 a 10</p>
-                </div>
-                <input type="number" min="1" max="10" class="container__input">
-                <div class="chute container__botoes">
-                    <button onclick="verificarChute()" class="container__botao">Chutar</button>
-                    <button onclick="reiniciarJogo()" id="reiniciar" class="container__botao" disabled>Novo jogo</button>
-                </div>
-            </div>
-            <img src="./img/ia.png" alt="Uma pessoa olhando para a esquerda" class="container__imagem-pessoa" />
-        </div>
-    </div>
+			<section id="install">
+				<h2>Instalação</h2>
+				<p>Baixe e instale o Git no site oficial: <a href="https://git-scm.com" target="_blank" rel="noopener">git-scm.com</a>.</p>
+				<div class="callout">No Windows, o instalador adiciona o Git ao PowerShell e ao Git Bash.</div>
+				<div class="cmd">
+					<button class="copy" aria-label="Copiar comando">Copiar</button>
+					<pre><code>git --version</code></pre>
+				</div>
+			</section>
 
+			<section id="config">
+				<h2>Configuração inicial</h2>
+				<p>Defina seu nome e e-mail (aparecem nos commits):</p>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git config --global user.name "Seu Nome"
+git config --global user.email "seuemail@example.com"</code></pre>
+				</div>
+				<p>Outras sugestões úteis:</p>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git config --global init.defaultBranch main
+git config --global pull.rebase false
+git config --global core.autocrlf true   # Windows</code></pre>
+				</div>
+			</section>
 
+			<section id="workflow">
+				<h2>Fluxo básico (local)</h2>
+				<ol>
+					<li>Inicialize o repositório</li>
+				</ol>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git init
+git status</code></pre>
+				</div>
+				<ol start="2">
+					<li>Adicione arquivos e faça commits</li>
+				</ol>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git add .
+git commit -m "Mensagem clara do que mudou"</code></pre>
+				</div>
+				<ol start="3">
+					<li>Histórico e diferenças</li>
+				</ol>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git log --oneline --graph --decorate
+git diff            # alterações não staged
+git diff --staged   # alterações staged</code></pre>
+				</div>
+			</section>
 
+			<section id="branches">
+				<h2>Branches</h2>
+				<p>Crie linhas paralelas de desenvolvimento.</p>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git branch                # lista branches
+git branch feature/login # cria branch
+git switch feature/login # troca de branch
+git merge feature/login   # mescla branch</code></pre>
+				</div>
+				<div class="callout info">Evite commits grandes; prefira commits pequenos e frequentes.</div>
+			</section>
 
-    <script src="app.js" defer></script>
-</body>
+			<section id="remotes">
+				<h2>Remotos e GitHub</h2>
+				<p>Conecte seu repositório local a um remoto no GitHub.</p>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git remote add origin https://github.com/usuario/repositorio.git
+git push -u origin main
+git pull origin main</code></pre>
+				</div>
+				<p>Usando SSH (recomendado):</p>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>ssh-keygen -t ed25519 -C "seuemail@example.com"
+# adicione a chave pública em GitHub &gt; Settings &gt; SSH and GPG keys
+git remote add origin git@github.com:usuario/repositorio.git</code></pre>
+				</div>
+			</section>
 
-</html>
+			<section id="collab">
+				<h2>Colaboração (fork e Pull Request)</h2>
+				<ol>
+					<li>Faça um fork do repositório no GitHub</li>
+					<li>Clone seu fork</li>
+				</ol>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git clone https://github.com/seu-usuario/repositorio.git
+cd repositorio
+git remote add upstream https://github.com/original/repositorio.git
+git fetch upstream
+git merge upstream/main</code></pre>
+				</div>
+				<p>Crie uma branch, implemente a mudança e abra um Pull Request.</p>
+			</section>
+
+			<section id="ignore">
+				<h2>.gitignore</h2>
+				<p>Evite versionar arquivos temporários ou secretos.</p>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code># .gitignore
+node_modules/
+dist/
+.env
+*.log
+.vscode/</code></pre>
+				</div>
+				<p>Templates: <a href="https://github.com/github/gitignore" target="_blank" rel="noopener">github/gitignore</a></p>
+			</section>
+
+			<section id="undo">
+				<h2>Desfazendo alterações</h2>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git restore arquivo.txt           # descarta alterações no working dir
+git restore --staged arquivo.txt # remove do stage
+git commit --amend               # edita último commit
+git reset --soft HEAD~1          # volta 1 commit, mantém alterações
+git reset --hard HEAD~1          # volta 1 commit, descarta tudo</code></pre>
+				</div>
+				<div class="callout warning">Cuidado com --hard: ele descarta alterações permanentemente.</div>
+			</section>
+
+			<section id="stash-tags">
+				<h2>Stash e Tags</h2>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code># Stash
+git stash
+git stash list
+git stash pop
+
+# Tags
+git tag v1.0.0
+git tag -a v1.1.0 -m "Versão 1.1.0"
+git push origin --tags</code></pre>
+				</div>
+			</section>
+
+			<section id="markdown">
+				<h2>Markdown no README</h2>
+				<p>README.md apresenta seu projeto no GitHub.</p>
+				<pre><code># Meu Projeto
+
+Uma breve descrição.
+
+## Instalação
+
+```sh
+npm install
+```
+
+## Uso
+
+```sh
+npm run start
+```</code></pre>
+			</section>
+
+			<section id="strategies">
+				<h2>Estratégias de Git</h2>
+				<ul>
+					<li>Git Flow: main, develop, feature, release, hotfix.</li>
+					<li>Trunk-based: foco em main com feature flags.</li>
+					<li>Conventional Commits: padrão para mensagens (ex: feat, fix).</li>
+				</ul>
+			</section>
+
+			<section id="advanced">
+				<h2>Git avançado</h2>
+				<h3>Rebase interativo</h3>
+				<p>Use para reorganizar, editar mensagens, combinar (squash) ou remover commits antes de enviar ao remoto.</p>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git log --oneline --decorate --graph
+git rebase -i HEAD~5   # escolha os últimos 5 commits para editar
+# no editor: pick, reword, edit, squash, fixup, drop
+# após resolver conflitos:
+git rebase --continue
+# para cancelar:
+git rebase --abort</code></pre>
+				</div>
+
+				<h3>Cherry-pick</h3>
+				<p>Aplicar um commit específico em outra branch.</p>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git switch main
+git cherry-pick &lt;hash&gt;   # ex.: a1b2c3d
+# opcional: adicionar referência do commit original
+git cherry-pick -x &lt;hash&gt;
+# conflitos? resolva, então:
+git add .
+git cherry-pick --continue
+# para cancelar:
+git cherry-pick --abort</code></pre>
+				</div>
+
+				<h3>Bisect (encontrar commit que quebrou)</h3>
+				<p>Pesquisa binária no histórico para localizar o commit que introduziu um bug.</p>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git bisect start
+git bisect bad                 # versão atual está ruim
+git bisect good &lt;hash-ou-tag&gt;  # uma versão conhecida como boa
+# teste o projeto e marque:
+git bisect good   # se está bom
+git bisect bad    # se está ruim
+# quando terminar, o Git aponta o commit culpado
+git bisect reset  # volta ao estado original</code></pre>
+				</div>
+			</section>
+
+			<section id="workflows">
+				<h2>Workflows (diagramas)</h2>
+				<p>Diagramas renderizados com Mermaid. É necessário estar online para o script do Mermaid carregar.</p>
+				<h3>Git Flow (simplificado)</h3>
+				<pre class="mermaid">flowchart LR
+  main((main)):::main
+  develop((develop)):::develop
+  feature1[feature/1] --> develop
+  feature2[feature/2] --> develop
+  develop -->|release| main
+  hotfix[hotfix/x] --> main
+  classDef main fill:#60a5fa,stroke:#1e3a8a,color:#fff
+  classDef develop fill:#34d399,stroke:#065f46,color:#063
+</pre>
+
+				<h3>Trunk-based (simplificado)</h3>
+				<pre class="mermaid">flowchart TB
+  trunk((main))
+  subgraph pequenas-features
+    f1[feature/a] --> trunk
+    f2[feature/b] --> trunk
+  end
+  trunk --> deploy[(deploy)]
+</pre>
+
+				<h3>Branching por release</h3>
+				<pre class="mermaid">flowchart LR
+	main((main))
+	release1((release/1.0))
+	release2((release/1.1))
+	featureA[feature/A] --> release1
+	featureB[feature/B] --> release2
+	release1 -->|tag v1.0.0| main
+	release2 -->|tag v1.1.0| main
+	hotfix[hotfix/1.0.1] --> main
+</pre>
+			</section>
+
+			<section id="exercises">
+				<h2>Exercícios práticos</h2>
+				<div class="exercise" data-id="ex1">
+					<h3>1) Mensagem de commit (Conventional Commits)</h3>
+					<p>Escreva um comando de commit usando o padrão: <code>feat|fix|docs|chore|refactor</code> e uma descrição. Ex.: <code>git commit -m "feat(login): adiciona validação"</code></p>
+					<label>Comando:
+						<input type="text" placeholder='git commit -m "feat(login): adiciona validação"' />
+					</label>
+					<div class="exercise-actions">
+						<button class="validate">Validar</button>
+						<button class="hint">Mostrar dica</button>
+						<button class="show-solution">Mostrar solução</button>
+					</div>
+					<ul class="hints"></ul>
+					<pre class="solution hidden"></pre>
+					<p class="result" aria-live="polite"></p>
+				</div>
+
+				<div class="exercise" data-id="ex2">
+					<h3>2) Branch e merge</h3>
+					<p>Crie e troque para uma nova branch, depois faça merge na branch atual.</p>
+					<label>Criação e troca:
+						<input type="text" placeholder="git switch -c minha-branch" />
+					</label>
+					<label>Merge:
+						<input type="text" placeholder="git merge minha-branch" />
+					</label>
+					<div class="exercise-actions">
+						<button class="validate">Validar</button>
+						<button class="hint">Mostrar dica</button>
+						<button class="show-solution">Mostrar solução</button>
+					</div>
+					<ul class="hints"></ul>
+					<pre class="solution hidden"></pre>
+					<p class="result" aria-live="polite"></p>
+				</div>
+
+				<div class="exercise" data-id="ex3">
+					<h3>3) Bisect básico</h3>
+					<p>Insira os comandos essenciais para iniciar o bisect, marcar ruim e bom, e depois resetar.</p>
+					<label>Início:
+						<input type="text" placeholder="git bisect start" />
+					</label>
+					<label>Marcar ruim:
+						<input type="text" placeholder="git bisect bad" />
+					</label>
+					<label>Marcar bom:
+						<input type="text" placeholder="git bisect good v1.0.0" />
+					</label>
+					<label>Reset:
+						<input type="text" placeholder="git bisect reset" />
+					</label>
+					<div class="exercise-actions">
+						<button class="validate">Validar</button>
+						<button class="hint">Mostrar dica</button>
+						<button class="show-solution">Mostrar solução</button>
+					</div>
+					<ul class="hints"></ul>
+					<pre class="solution hidden"></pre>
+					<p class="result" aria-live="polite"></p>
+				</div>
+
+				<div class="exercise" data-id="ex4">
+					<h3>4) Stash</h3>
+					<p>Guarde mudanças locais temporariamente e recupere depois.</p>
+					<label>Salvar no stash:
+						<input type="text" placeholder="git stash" />
+					</label>
+					<label>Listar stashes:
+						<input type="text" placeholder="git stash list" />
+					</label>
+					<label>Aplicar/retirar do stash:
+						<input type="text" placeholder="git stash pop" />
+					</label>
+					<div class="exercise-actions">
+						<button class="validate">Validar</button>
+						<button class="hint">Mostrar dica</button>
+						<button class="show-solution">Mostrar solução</button>
+					</div>
+					<ul class="hints"></ul>
+					<pre class="solution hidden"></pre>
+					<p class="result" aria-live="polite"></p>
+				</div>
+
+				<div class="exercise" data-id="ex5">
+					<h3>5) Rebase com conflitos</h3>
+					<p>Rebase sobre <code>main</code>, resolva conflitos e continue. Se necessário, aborte.</p>
+					<label>Iniciar rebase:
+						<input type="text" placeholder="git rebase main" />
+					</label>
+					<label>Resolver e continuar:
+						<input type="text" placeholder="git add ." />
+					</label>
+					<label>Continuar rebase:
+						<input type="text" placeholder="git rebase --continue" />
+					</label>
+					<label>Abortar (opcional):
+						<input type="text" placeholder="git rebase --abort" />
+					</label>
+					<div class="exercise-actions">
+						<button class="validate">Validar</button>
+						<button class="hint">Mostrar dica</button>
+						<button class="show-solution">Mostrar solução</button>
+					</div>
+					<ul class="hints"></ul>
+					<pre class="solution hidden"></pre>
+					<p class="result" aria-live="polite"></p>
+				</div>
+
+				<div class="exercise" data-id="ex6">
+					<h3>6) Reset vs Revert</h3>
+					<p>Faça um revert de um commit e depois um reset (soft ou hard).</p>
+					<label>Revert:
+						<input type="text" placeholder="git revert &lt;hash&gt;" />
+					</label>
+					<label>Reset:
+						<input type="text" placeholder="git reset --hard HEAD~1" />
+					</label>
+					<div class="exercise-actions">
+						<button class="validate">Validar</button>
+						<button class="hint">Mostrar dica</button>
+						<button class="show-solution">Mostrar solução</button>
+					</div>
+					<ul class="hints"></ul>
+					<pre class="solution hidden"></pre>
+					<p class="result" aria-live="polite"></p>
+				</div>
+
+				<div class="exercise" data-id="ex7">
+					<h3>7) Cherry-pick múltiplo</h3>
+					<p>Aplique múltiplos commits usando lista de hashes ou um range.</p>
+					<label>Comando:
+						<input type="text" placeholder="git cherry-pick a1b2c3 d4e5f6" />
+					</label>
+					<div class="exercise-actions">
+						<button class="validate">Validar</button>
+						<button class="hint">Mostrar dica</button>
+						<button class="show-solution">Mostrar solução</button>
+					</div>
+					<ul class="hints"></ul>
+					<pre class="solution hidden"></pre>
+					<p class="result" aria-live="polite"></p>
+				</div>
+			</section>
+
+			<section id="troubleshooting">
+				<h2>Problemas comuns</h2>
+				<details>
+					<summary>Erro de autenticação ao fazer push</summary>
+					<p>Prefira SSH ou tokens pessoais (PAT) no lugar de senha.</p>
+				</details>
+				<details>
+					<summary>Conflitos de merge</summary>
+					<p>Edite os arquivos conflitantes, teste, depois:</p>
+					<div class="cmd"><button class="copy">Copiar</button><pre><code>git add .
+git commit</code></pre></div>
+				</details>
+			</section>
+
+			<section id="cheatsheet">
+				<h2>Cheat Sheet</h2>
+				<div class="grid">
+					<div>
+						<h3>Diário</h3>
+						<pre><code>git status
+git add .
+git commit -m "mensagem"
+git push</code></pre>
+					</div>
+					<div>
+						<h3>Branches</h3>
+						<pre><code>git branch
+git switch -c nova-branch
+git merge nome-da-branch</code></pre>
+					</div>
+					<div>
+						<h3>Histórico</h3>
+						<pre><code>git log --oneline --graph
+git blame arquivo.txt</code></pre>
+					</div>
+				</div>
+			</section>
+
+			<button id="backToTop" aria-label="Voltar ao topo">↑</button>
+		</main>
+
+		<footer class="site-footer">
+			<div class="container">
+				<p>Feito para estudos — personalize como quiser.</p>
+			</div>
+		</footer>
+
+		<script src="node_modules/mermaid/dist/mermaid.min.js" onerror="var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js';document.head.appendChild(s);"></script>
+		<script src="node_modules/highlight.js/lib/highlight.min.js" onerror="var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js';document.head.appendChild(s);"></script>
+		<script src="app.js"></script>
+	</body>
+	</html>
