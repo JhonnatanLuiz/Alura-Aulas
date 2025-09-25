@@ -40,6 +40,7 @@
 				<li><a href="#strategies">Estratégias de Git</a></li>
 				<li><a href="#advanced">Git avançado</a></li>
 				<li><a href="#workflows">Workflows (diagramas)</a></li>
+				<li><a href="#gists">Gist e compartilhar códigos</a></li>
 				<li><a href="#exercises">Exercícios práticos</a></li>
 				<li><a href="#troubleshooting">Problemas comuns</a></li>
 				<li><a href="#cheatsheet">Cheat Sheet</a></li>
@@ -316,6 +317,49 @@ git bisect reset  # volta ao estado original</code></pre>
 	release2 -->|tag v1.1.0| main
 	hotfix[hotfix/1.0.1] --> main
 </pre>
+			</section>
+
+			<section id="gists">
+				<h2>Gist e compartilhamento de códigos</h2>
+				<p>GitHub Gist é ideal para compartilhar trechos de código, anotações e arquivos simples. Pode ser público ou secreto (não listado).</p>
+				<h3>Criar um Gist (Web)</h3>
+				<ol>
+					<li>Acesse <a target="_blank" rel="noopener" href="https://gist.github.com">gist.github.com</a>.</li>
+					<li>Preencha a descrição (opcional), adicione um ou mais arquivos com extensão (ex.: <code>exemplo.js</code>) e o conteúdo.</li>
+					<li>Escolha Público (Public) ou Secreto (Secret) e clique em Create gist.</li>
+				</ol>
+
+				<h3>Criar um Gist (GitHub CLI)</h3>
+				<p>Requer <a target="_blank" rel="noopener" href="https://cli.github.com/">GitHub CLI</a> instalado e autenticado (<code>gh auth login</code>).</p>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code># Criar Gist público a partir de um arquivo
+gh gist create caminho/arquivo.txt --public --desc "Minha anotação"
+
+# Criar Gist secreto a partir de múltiplos arquivos
+gh gist create a.js b.js --private --desc "Snippets variados"</code></pre>
+				</div>
+
+				<h3>Compartilhar</h3>
+				<ul>
+					<li>Link do Gist: URL principal do Gist (ex.: <code>https://gist.github.com/usuario/abc123</code>).</li>
+					<li>Link do arquivo raw (para importar em ferramentas): clique em Raw no arquivo do Gist.</li>
+					<li>Permalinks por revisão: em "Revisions" copie a URL de uma revisão específica para conteúdo imutável.</li>
+					<li>Embed em HTML: use a tag script fornecida pelo Gist.</li>
+				</ul>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code><!-- Exemplo de embed em uma página HTML -->
+<script src="https://gist.github.com/usuario/abc123.js"></script></code></pre>
+				</div>
+
+				<h3>Markdown</h3>
+				<p>Você pode colar trechos de código em Markdown com cercas de código:</p>
+				<pre><code>```js
+function soma(a, b) { return a + b }
+```
+</code></pre>
+				<p>No GitHub, colar uma URL de Gist também gera embed automático em issues e PRs.</p>
 			</section>
 
 			<section id="exercises">

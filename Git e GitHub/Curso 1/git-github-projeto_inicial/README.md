@@ -73,6 +73,43 @@ Tipos de validação (resumo):
 - Diagramas: Edite os blocos `<pre class="mermaid">` em `index.html`. O tema acompanha o modo do site.
 
 ## Solução de problemas
+## Gist e compartilhamento de códigos
+
+GitHub Gist é uma forma rápida de compartilhar trechos de código e notas.
+
+Criar (Web):
+1. Acesse https://gist.github.com
+2. Adicione descrição, arquivos e conteúdo
+3. Escolha Público ou Secreto e clique em Create gist
+
+Criar (GitHub CLI):
+
+```powershell
+# Público
+gh gist create caminho/arquivo.txt --public --desc "Minha anotação"
+
+# Secreto com múltiplos arquivos
+gh gist create a.js b.js --private --desc "Snippets variados"
+```
+
+Compartilhar:
+- Link do Gist: URL principal
+- Raw: clique em Raw no arquivo do Gist (útil para importar)
+- Permalinks: use a aba Revisions para links imutáveis
+- Embed em HTML:
+
+```html
+<script src="https://gist.github.com/usuario/abc123.js"></script>
+```
+
+Markdown:
+
+```md
+```js
+function soma(a, b) { return a + b }
+```
+```
+
 
 - Mermaid/Highlight não carregam: verifique se está online ou se `node_modules/` existe e contém `mermaid` e `highlight.js`.
 - Tema não alterna: confirme que o `localStorage` não está bloqueado e que o botão "Tema" está visível no cabeçalho.
