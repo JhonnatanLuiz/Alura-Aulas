@@ -1,8 +1,10 @@
-# Guia de Estudos: Git e GitHub
+# Guia de Estudos: Git e GitHub / Git & GitHub Study Guide
 
 Este projeto é uma página estática para estudos de Git e GitHub com conteúdo didático, exemplos práticos, diagramas e exercícios interativos.
 
-## Conteúdo e recursos
+This project is a static study page for Git and GitHub featuring educational content, practical examples, diagrams, and interactive exercises.
+
+## Conteúdo e recursos (PT)
 
 - Índice navegável com rolagem suave.
 - Tema claro/escuro com persistência.
@@ -15,110 +17,120 @@ Este projeto é uma página estática para estudos de Git e GitHub com conteúdo
   - Conventional Commits, Branch/Merge, Bisect, Stash, Rebase com conflitos, Reset vs Revert, Cherry-pick múltiplo.
 - Realce de sintaxe (Highlight.js) com tema ajustado ao modo claro/escuro.
 
-## Estrutura
+## Content and features (EN)
+
+- Navigable table of contents with smooth scrolling.
+- Light/dark theme with persistence.
+- Command blocks with "Copy" button.
+- Learning sections:
+  - Introduction, Install, Initial config, Basic workflow, Branches, Remotes, Collaboration, .gitignore, Undoing, Stash/Tags, Markdown, Strategies, Common issues, Cheat Sheet.
+  - Advanced Git: interactive rebase, cherry-pick, bisect.
+  - Workflows with Mermaid diagrams: Git Flow, Trunk‑based, Release branching.
+- Interactive exercises with validation, progressive hints, and solutions:
+  - Conventional Commits, Branch/Merge, Bisect, Stash, Rebase with conflicts, Reset vs Revert, Multi cherry-pick.
+- Syntax highlighting (Highlight.js) respecting the selected theme.
+
+## Estrutura / Structure
 
 ```
 Curso 1/
   git-github-projeto_inicial/
-    index.html     # Página principal do guia
-    style.css      # Estilos (responsivo, temas, componentes)
-    app.js         # Interações (busca, copiar, tema, exercícios, mermaid/hljs)
-    README.md      # Este documento
+    index.html     # Página principal do guia / Main guide page
+    style.css      # Estilos (responsivo, temas, componentes) / Styles
+    app.js         # Interações (busca, copiar, tema, exercícios, mermaid/hljs) / Interactions
+    README.md      # Este documento / This document
 ```
 
-## Como executar
+## Como executar (PT) / How to run (EN)
 
-Abra o arquivo `index.html` no navegador.
+Abra o arquivo `index.html` no navegador. / Open `index.html` in your browser.
 
-### Modo online (CDN)
+### Modo online (CDN) / Online mode (CDN)
 
-Sem dependências instaladas, a página usa CDNs para carregar Mermaid e Highlight.js automaticamente.
+Sem dependências instaladas, a página usa CDNs para carregar Mermaid e Highlight.js automaticamente. / Without local dependencies, the page loads Mermaid and Highlight.js from CDNs.
 
-### Modo offline (local)
+### Modo offline (local) / Offline mode (local)
 
-Para utilizar os assets locais (recomendado para ficar independente da internet):
-
-1) Inicialize um `package.json` e instale dependências na pasta `git-github-projeto_inicial`:
+Para utilizar os assets locais (independente da internet), instale as dependências em `git-github-projeto_inicial`: / To use local assets (work offline), install dependencies in `git-github-projeto_inicial`:
 
 ```powershell
 npm init -y
 npm install mermaid highlight.js
 ```
 
-2) Reabra o `index.html`. A página detecta automaticamente os arquivos em `node_modules/` e prioriza os assets locais; se não encontrar, faz fallback para a CDN.
+Reabra `index.html`. O projeto tenta usar assets de `node_modules/` e faz fallback para a CDN se não encontrar. / Reopen `index.html`. The project prefers `node_modules/` assets and falls back to CDN if missing.
 
-Observação: Não é necessário servidor — é uma página estática. Se preferir, você pode usar um servidor simples (ex.: Live Server do VS Code) para recarregar automaticamente a cada edição.
+Observação: Não é necessário servidor. Opcionalmente, use Live Server no VS Code para recarregar a cada edição. / No server required; Live Server is optional.
 
-## Exercícios e validações
+## Exercícios e validações (PT) / Exercises and validation (EN)
 
-- Cada exercício conta com campos de entrada e botão "Validar".
-- Dicas progressivas: clique em "Mostrar dica" múltiplas vezes para revelar mais pistas.
-- "Mostrar solução": exibe uma resposta sugerida com realce de sintaxe.
-- Progresso salvo: entradas e estado (aprovado) são salvos no `localStorage` por exercício.
+- Campos de entrada e botão "Validar". / Input fields and a "Validate" button.
+- Dicas progressivas e "Mostrar solução" com highlight. / Progressive hints and "Show solution" with highlighting.
+- Progresso salvo por exercício em `localStorage`. / Progress saved per exercise in `localStorage`.
 
-Tipos de validação (resumo):
-- Conventional Commits: aceita `feat|fix|docs|chore|refactor|perf|style|test|build|ci` e formato `type(scope)?: desc`.
-- Branch/Merge: aceita `git switch -c` ou `git checkout -b` para criar/trocar; `git merge <branch>` para integrar.
-- Bisect: sequência mínima (`start`, `bad`, `good`, `reset`).
+Resumo de validações / Validation summary:
+- Conventional Commits: `feat|fix|docs|chore|refactor|perf|style|test|build|ci` e `type(scope)?: desc`.
+- Branch/Merge: `git switch -c` ou `git checkout -b`; `git merge <branch>`.
+- Bisect: `start`, `bad`, `good`, `reset`.
 - Stash: `git stash`, `git stash list`, `git stash pop/apply`.
-- Rebase com conflitos: `git rebase <base>`, `git add .`, `git rebase --continue`, opcional `--abort`.
-- Reset vs Revert: `git revert <hash>`, e um `git reset --soft|--mixed|--hard <ref>`.
-- Cherry-pick múltiplo: aceita múltiplos hashes em linha ou range (`a..b` ou `a...b`).
+- Rebase conflitos: `git rebase <base>`, `git add .`, `git rebase --continue`, opcional `--abort`.
+- Reset vs Revert: `git revert <hash>`, `git reset --soft|--mixed|--hard <ref>`.
+- Cherry-pick múltiplo: múltiplos hashes ou range `a..b`/`a...b`.
 
-## Personalização
+## Personalização (PT) / Customization (EN)
 
-- Tema: O botão de tema alterna entre claro e escuro, e atualiza temas do Mermaid e Highlight.js.
-- Estilo: Ajuste variáveis no `:root` e `.theme-dark` no `style.css`.
-- Validações: Amplie regexes em `app.js` nas seções dos exercícios. É possível aceitar comandos adicionais equivalentes.
-- Diagramas: Edite os blocos `<pre class="mermaid">` em `index.html`. O tema acompanha o modo do site.
+- Tema: alternância claro/escuro que também ajusta Mermaid e Highlight.js. / Theme toggle that also updates Mermaid and HLJS.
+- Estilos: edite variáveis no `:root` e `.theme-dark` em `style.css`. / Tweak CSS variables in `style.css`.
+- Validações: ajuste regexes no `app.js`. / Tweak exercise regexes in `app.js`.
+- Diagramas: edite blocos `<pre class="mermaid">` no `index.html`. / Edit `<pre class="mermaid">` blocks.
 
-## Solução de problemas
-## Gist e compartilhamento de códigos
+## Gist e compartilhamento de códigos (PT) / Gists and code sharing (EN)
 
-GitHub Gist é uma forma rápida de compartilhar trechos de código e notas.
+GitHub Gist facilita compartilhar trechos de código e notas. / GitHub Gist makes sharing snippets and notes easy.
 
-Criar (Web):
-1. Acesse https://gist.github.com
-2. Adicione descrição, arquivos e conteúdo
-3. Escolha Público ou Secreto e clique em Create gist
+Criar (Web) / Create (Web):
+1. https://gist.github.com
+2. Descrição, arquivos com extensão e conteúdo. / Description, files with extensions, content.
+3. Público ou Secreto. / Public or Secret.
 
-Criar (GitHub CLI):
+Criar (GitHub CLI) / Create (GitHub CLI):
 
 ```powershell
-# Público
+# Público / Public
 gh gist create caminho/arquivo.txt --public --desc "Minha anotação"
 
-# Secreto com múltiplos arquivos
+# Secreto com múltiplos arquivos / Private with multiple files
 gh gist create a.js b.js --private --desc "Snippets variados"
 ```
 
-Compartilhar:
-- Link do Gist: URL principal
-- Raw: clique em Raw no arquivo do Gist (útil para importar)
-- Permalinks: use a aba Revisions para links imutáveis
-- Embed em HTML:
+Compartilhar / Share:
+- Link do Gist: URL principal. / Gist link: main URL.
+- Raw: clique em Raw no arquivo. / Raw file link.
+- Permalinks: use a aba Revisions. / Use Revisions for immutable links.
+- Embed HTML: use a tag `<script>`. / Use the `<script>` embed.
 
 ```html
 <script src="https://gist.github.com/usuario/abc123.js"></script>
 ```
 
-Markdown:
+Markdown (fenced code):
 
-```md
+````md
 ```js
 function soma(a, b) { return a + b }
 ```
-```
+````
 
+## Solução de problemas (PT) / Troubleshooting (EN)
 
-- Mermaid/Highlight não carregam: verifique se está online ou se `node_modules/` existe e contém `mermaid` e `highlight.js`.
-- Tema não alterna: confirme que o `localStorage` não está bloqueado e que o botão "Tema" está visível no cabeçalho.
-- Copiar comando não funciona: alguns navegadores exigem HTTPS ou interação do usuário; tente clicar novamente ou usar outro navegador.
-- Regex muito rígida: ajuste as expressões em `app.js` (função de validação de cada exercício) para aceitar variações.
+- Mermaid/Highlight não carregam: verifique internet ou `node_modules/`. / Check internet or `node_modules/`.
+- Tema não alterna: confirme `localStorage` e o botão de tema. / Ensure `localStorage` and theme button.
+- Copiar não funciona: alguns navegadores exigem HTTPS; tente novamente ou outro navegador. / Some browsers require HTTPS.
+- Regex rígida: ajuste em `app.js`. / Loosen regex in `app.js`.
 
-## Capturas de tela
+## Capturas de tela (PT) / Screenshots (EN)
 
-Você pode adicionar imagens de exemplo (tema claro/escuro, diagramas e exercícios) na pasta `img/` (crie a pasta ao lado deste README, se não existir) e referenciá-las aqui:
+Adicione imagens em `img/` e referencie aqui. / Add images under `img/` and reference here.
 
 ```
 git-github-projeto_inicial/
@@ -127,43 +139,28 @@ git-github-projeto_inicial/
     home_dark.png
 ```
 
-Exemplo de inclusão no README:
-
 ![Página (tema claro)](./img/home_light.png)
 
 ![Página (tema escuro)](./img/home_dark.png)
 
-Sugestão: capture a seção de exercícios validando um exemplo e a seção de Workflows exibindo os diagramas Mermaid.
-
 ## FAQ
 
-1) Como rodar 100% offline?
-
-Instale as dependências locais (na pasta `git-github-projeto_inicial`). A página prioriza assets locais e só usa CDN se os arquivos locais não estiverem presentes.
+1) Offline?
 
 ```powershell
 npm init -y
 npm install mermaid highlight.js
 ```
 
-2) O botão "Copiar" não funcionou. Por quê?
+2) Botão "Copiar" não funciona? / Copy button not working?
 
-Alguns navegadores bloqueiam o acesso à área de transferência sem interação direta ou exigem páginas servidas via HTTP/HTTPS. Clique novamente no botão ou use uma extensão como Live Server no VS Code.
+Pode exigir HTTPS ou interação adicional. / May require HTTPS or user interaction.
 
-3) Mermaid não renderiza os diagramas.
+3) Mermaid não renderiza? / Mermaid not rendering?
 
-- Verifique o console do navegador (F12) para erros de rede; sem internet e sem `node_modules` o Mermaid não carrega.
-- Confirme que os blocos estão dentro de `<pre class="mermaid"> ... </pre>`.
-- O tema do Mermaid é ajustado automaticamente; alterne o tema para forçar re-inicialização.
+Cheque o console (F12), confirme `<pre class="mermaid">` e alterne o tema para reinicializar. / Check console, blocks, and toggle theme.
 
-4) O tema não alterna ou volta sozinho.
-
-- A escolha fica em `localStorage`. Verifique se o navegador permite armazenamento local.
-- Você pode limpar o tema salvo removendo a chave `theme` no `localStorage` (DevTools > Application > Local Storage).
-
-5) Como limpar o progresso dos exercícios?
-
-Abra o console do navegador (F12) e execute:
+4) Limpar progresso dos exercícios? / Clear exercise progress?
 
 ```js
 Object.keys(localStorage)
@@ -171,24 +168,6 @@ Object.keys(localStorage)
   .forEach(k => localStorage.removeItem(k));
 ```
 
-6) Posso usar `git checkout -b` em vez de `git switch -c`?
+## Licença / License
 
-Sim. As validações aceitam ambas as formas no exercício de Branch/Merge.
-
-7) Como adiciono um novo diagrama?
-
-Insira um bloco como abaixo no `index.html` (em Workflows):
-
-```html
-<pre class="mermaid">flowchart LR
-  A --> B
-</pre>
-```
-
-8) Como flexibilizar as validações?
-
-Altere as regex dos exercícios em `app.js` (procure por `ex1`, `ex2`, etc.). Você pode permitir variações adicionais como flags, opções curtas/longas e comandos equivalentes.
-
-## Licença
-
-Uso educacional. Você pode adaptar o conteúdo e reutilizar nos seus estudos.
+Uso educacional. Adapte livremente. / Educational use. Feel free to adapt.
