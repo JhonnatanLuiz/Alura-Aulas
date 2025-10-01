@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ordenar três números</h1>
+    <div>
+        <label for="numero1">Primeiro número</label>
+        <input type="number" id="numero1" placeholder="Ex: 5">
+    </div>
+    <div>
+        <label for="numero2">Segundo número</label>
+        <input type="number" id="numero2" placeholder="Ex: 3">
+    </div>
+    <div>
+        <label for="numero3">Terceiro número</label>
+        <input type="number" id="numero3" placeholder="Ex: 9">
+    </div>
+    <button onclick="ordenarNumeros()">Ordenar</button>
+    <p id="resultado"></p>
+
+    <script>
+        function ordenarTresNumeros(numero1, numero2, numero3) {
+            return [numero1, numero2, numero3].sort((a, b) => a - b);
+        }
+
+        function ordenarNumeros() {
+            const campoNumero1 = document.getElementById('numero1');
+            const campoNumero2 = document.getElementById('numero2');
+            const campoNumero3 = document.getElementById('numero3');
+            const resultado = document.getElementById('resultado');
+
+            const numero1 = parseFloat(campoNumero1.value);
+            const numero2 = parseFloat(campoNumero2.value);
+            const numero3 = parseFloat(campoNumero3.value);
+
+            if ([numero1, numero2, numero3].some(num => Number.isNaN(num))) {
+                resultado.textContent = 'Preencha os três números corretamente para ordenar.';
+                return;
+            }
+
+            const numerosOrdenados = ordenarTresNumeros(numero1, numero2, numero3);
+            resultado.textContent = `Números ordenados: ${numerosOrdenados.join(', ')}`;
+        }
+    </script>
+</body>
+</html>
