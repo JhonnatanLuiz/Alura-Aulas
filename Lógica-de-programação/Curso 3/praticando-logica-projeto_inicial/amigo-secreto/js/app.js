@@ -27,7 +27,11 @@ function adicionar() {
     if (!input) return;
 
     const nome = input.value.trim();
-    if (nome === '') return; // não adiciona vazio
+    if (nome === '') {
+        alert('O campo não pode ficar vazio. Por favor, digite um nome.');
+        input.focus();
+        return;
+    }
 
     // nova checagem: valida caracteres
     if (!nomeValido(nome)) {
@@ -58,8 +62,8 @@ function sortear() {
     // limpa resultado anterior antes de gerar novo sorteio
     sorteio.innerHTML = '';
 
-    if (amigos.length < 2) {
-        alert('Adicione pelo menos 2 amigos para sortear.');
+    if (amigos.length < 4) {
+        alert('Adicione pelo menos 4 amigos para sortear.');
         return;
     }
 

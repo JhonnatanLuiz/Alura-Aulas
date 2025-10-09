@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hora da Prática 2</title>
+</head>
+<body>
+  <script>
+    // 1) validarNumero usando if / else if / else
+function validarNumero(valor) {
+  const n = Number(valor);
+  if (Number.isNaN(n)) {
+    return 'inválido';
+  } else if (n > 0) {
+    return 'positivo';
+  } else if (n < 0) {
+    return 'negativo';
+  } else {
+    return 'zero';
+  }
+}
+
+// Testes para validarNumero
+console.log(validarNumero(5));        // "positivo"
+console.log(validarNumero(-1.2));     // "negativo"
+console.log(validarNumero(0));        // "zero"
+console.log(validarNumero('abc'));    // "inválido"
+
+// 2) verificarMaioridade com condicionais simples
+function verificarMaioridade(idade) {
+  const i = Number(idade);
+  if (Number.isNaN(i) || i < 0) {
+    return 'idade inválida';
+  } else if (i >= 18) {
+    return 'maior';
+  } else {
+    return 'menor';
+  }
+}
+
+// Testes para verificarMaioridade
+console.log(verificarMaioridade(20));   // "maior"
+console.log(verificarMaioridade(17));   // "menor"
+console.log(verificarMaioridade('18')); // "maior" (aceita strings numéricas)
+console.log(verificarMaioridade(-3));   // "idade inválida"
+console.log(verificarMaioridade('abc'));// "idade inválida"
+
+// Exemplos de uso: integrando com prompts (opcional)
+    // const entrada = prompt('Digite um número:');
+    // alert('Tipo: ' + validarNumero(entrada));
+    //
+    // const idadeInput = prompt('Digite a idade:');
+    // alert('Maioridade: ' + verificarMaioridade(idadeInput));
+
+    // 3) stringVazia com if / else
+function stringVazia(str) {
+  if (str === null || str === undefined) {
+    return true;
+  } else if (String(str).trim().length === 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// Testes para stringVazia
+console.log(stringVazia(''));        // true
+console.log(stringVazia('   '));     // true
+console.log(stringVazia('texto'));   // false
+
+// 4) anoBissexto com if encadeado
+function anoBissexto(ano) {
+  const a = Number(ano);
+  if (Number.isNaN(a) || a < 0) {
+    return false;
+  } else if (a % 400 === 0) {
+    return true;
+  } else if (a % 100 === 0) {
+    return false;
+  } else if (a % 4 === 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+// Testes para anoBissexto
+console.log(anoBissexto(2020)); // true
+console.log(anoBissexto(1900)); // false
+console.log(anoBissexto(2000)); // true
+
+// 5) mediaNumeros sem reduce (loop e if simples)
+function mediaNumeros(numeros) {
+  if (!Array.isArray(numeros) || numeros.length === 0) {
+    return null;
+  }
+  let soma = 0;
+  for (let i = 0; i < numeros.length; i++) {
+    soma += Number(numeros[i]);
+  }
+  return soma / numeros.length;
+}
+// Testes para mediaNumeros
+console.log(mediaNumeros([10, 20, 30])); // 20
+console.log(mediaNumeros([5]));          // 5
+console.log(mediaNumeros([]));           // null
+
+// 6) tamanhoArray com if / else
+function tamanhoArray(arr) {
+  if (!Array.isArray(arr)) {
+    return null;
+  } else {
+    return arr.length;
+  }
+}
+// Testes para tamanhoArray
+console.log(tamanhoArray([1, 2, 3])); // 3
+console.log(tamanhoArray([]));        // 0
+console.log(tamanhoArray('abc'));     // null
+
+
+// 7) Criar um array e verificar presença com includes
+const itens = ['caneta', 'caderno', 'lapis', 'borracha'];
+const elemento = 'caderno';
+
+// imprime array e resultado booleano de includes
+console.log('Itens:', itens);
+console.log(`O elemento "${elemento}" está presente?`, itens.includes(elemento)); // true
+
+// Exemplo: busca case‑insensitive (normaliza para minúsculas)
+const busca = 'Caderno';
+const presenteCI = itens.map(i => i.toLowerCase()).includes(busca.toLowerCase());
+console.log(`Busca case-insensitive para "${busca}":`, presenteCI); // true
+
+
+
+  // 8) Função que verifica se um elemento está presente no array (retorna true/false)
+  function elementoPresente(arr, elemento) {
+    if (!Array.isArray(arr)) return false;
+    return arr.includes(elemento);
+  }
+
+  // Testes
+  console.log(elementoPresente(itens, 'caderno')); // true
+  console.log(elementoPresente(itens, 'Caneta'));  // false (case-sensitive)
+
+  // Versão case-insensitive (opcional)
+  function elementoPresenteCI(arr, elemento) {
+    if (!Array.isArray(arr)) return false;
+    const alvo = String(elemento).toLowerCase();
+    return arr.some(item => String(item).toLowerCase() === alvo);
+  }
+  console.log(elementoPresenteCI(itens, 'Caneta')); // true
+
+  // 9) Verificação de presença de string em array (exemplo simples)
+
+const procura = 'lapis';
+
+// verificação direta (case-sensitive)
+console.log(itens.includes(procura)); // true
+
+// verificação case-insensitive
+const procuraCI = 'Lapis';
+const isPresentCI = itens.some(i => i.toLowerCase() === procuraCI.toLowerCase());
+console.log(isPresentCI); // true
+
+
+// 10) estudantePresente (versão simples com if / else e loops)
+function estudantePresente(lista, alvo) {
+  if (!Array.isArray(lista) || !alvo || typeof alvo !== 'object') {
+    return false;
+  }
+
+  // Se tiver 'id' compara por id
+  if ('id' in alvo) {
+    for (let i = 0; i < lista.length; i++) {
+      if (lista[i] && lista[i].id === alvo.id) {
+        return true;
+      }
+    }
+    return false;
+  } else {
+    // Compara todas as chaves do alvo (shallow)
+    for (let i = 0; i < lista.length; i++) {
+      let combina = true;
+      for (const k in alvo) {
+        if (lista[i][k] !== alvo[k]) {
+          combina = false;
+          break;
+        }
+      }
+      if (combina) return true;
+    }
+    return false;
+  }
+}
+
+// Testes simples
+console.log(estudantePresente(estudantesObjs, { id: 2 }));          // true
+console.log(estudantePresente(estudantesObjs, { nome: 'Carla' })); // true
+console.log(estudantePresente(estudantesObjs, { nome: 'Carlos' }));// false
+
+// 11) somaParesProdutoImpares (mantida com if simples)
+function somaParesProdutoImpares(numeros) {
+  if (!Array.isArray(numeros)) return null;
+
+  let somaPares = 0;
+  let produtoImpares = 1;
+  let temImpar = false;
+
+  for (let i = 0; i < numeros.length; i++) {
+    const n = Number(numeros[i]);
+    if (Number.isNaN(n)) continue;
+
+    if (n % 2 === 0) {
+      somaPares += n;
+    } else {
+      produtoImpares *= n;
+      temImpar = true;
+    }
+  }
+
+  if (!temImpar) produtoImpares = 0;
+  return { somaPares, produtoImpares };
+}
+
+// Testes simples
+console.log(somaParesProdutoImpares([1,2,3,4])); // { somaPares: 6, produtoImpares: 3 }
+console.log(somaParesProdutoImpares([5,7,9]));   // { somaPares: 0, produtoImpares: 315 }
+console.log(somaParesProdutoImpares([]));        // null
+  </script>
+</body>
+</html>

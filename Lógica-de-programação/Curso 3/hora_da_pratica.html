@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hora da Prática</title>
+</head>
+<body>
+    <script>
+        var minhaLista = [1, 2, 3];
+        var outraLista = [4, 5, 6];
+        var novaLista = minhaLista.concat(outraLista); // metodo concat une duas listas
+        novaLista.pop(); // metodo pop remove o ultimo item da lista
+        
+        // Algoritmo de embaralhamento (Fisher-Yates Shuffle)
+        function fisherYatesShuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1)); // Escolhe um índice aleatório
+                [array[i], array[j]] = [array[j], array[i]]; // Troca os elementos de posição
+            }
+            return array; // Retorna o array embaralhado
+        }
+        fisherYatesShuffle(novaLista); // metodo para embaralhar a lista
+        
+        function removerDuplicatas(array) {
+            return [...new Set(array)]; // Converte o array em um Set (que não permite duplicatas) e depois de volta para um array
+        }
+        novaLista = removerDuplicatas(novaLista); // metodo para remover duplicatas da lista
+
+        console.log(novaLista); // Exibe a lista final no console
+    </script>
+</body>
+</html>
