@@ -111,7 +111,7 @@ section h2 { margin-top: 0; border-bottom: 1px solid var(--border); padding-bott
 	background: rgba(255,255,255,0.08);
 	color: var(--text);
 	border: 1px solid var(--border);
-	padding: 6px 10px; border-radius: 6px; cursor: pointer; backdrop-filter: blur(4px);
+	padding: 6px 10px; border-radius: 6px; cursor: pointer; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
 }
 .cmd .copy:active { transform: scale(0.98); }
 
