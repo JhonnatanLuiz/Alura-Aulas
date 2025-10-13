@@ -30,6 +30,7 @@
 				<li><a href="#install">Instalação</a></li>
 				<li><a href="#config">Configuração inicial</a></li>
 				<li><a href="#workflow">Fluxo básico (local)</a></li>
+				<li><a href="#history">Visualizando Histórico (log, show, diff)</a></li>
 				<li><a href="#branches">Branches</a></li>
 				<li><a href="#remotes">Remotos e GitHub</a></li>
 				<li><a href="#collab">Colaboração (fork, PR)</a></li>
@@ -112,6 +113,258 @@ git commit -m "Mensagem clara do que mudou"</code></pre>
 					<pre><code>git log --oneline --graph --decorate
 git diff            # alterações não staged
 git diff --staged   # alterações staged</code></pre>
+				</div>
+			</section>
+
+			<section id="history">
+				<h2>Visualizando Histórico (git log, git show, git diff)</h2>
+				<p>
+					Entender o histórico do projeto é essencial para rastrear mudanças, revisar código e depurar problemas. 
+					Git oferece comandos poderosos para visualizar commits, diferenças e detalhes específicos.
+				</p>
+
+				<h3>📜 git log - Visualizando o histórico de commits</h3>
+				<p>O comando <code>git log</code> mostra a lista de commits do repositório. Você pode personalizá-lo com vários parâmetros:</p>
+
+				<h4>Formato padrão (completo)</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git log</code></pre>
+				</div>
+				<p>Exibe: hash completo, autor, data e mensagem de cada commit.</p>
+
+				<h4>Formato resumido (uma linha por commit)</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git log --oneline</code></pre>
+				</div>
+				<p>Mostra apenas o hash abreviado e a mensagem do commit. Ideal para visualização rápida.</p>
+
+				<h4>Visualização gráfica das branches</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git log --graph</code></pre>
+				</div>
+				<p>Desenha um gráfico ASCII mostrando a estrutura de branches e merges.</p>
+
+				<h4>Exibir referências (branches e tags)</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git log --decorate</code></pre>
+				</div>
+				<p>Mostra onde estão os ponteiros de branches (HEAD, main, origin/main) e tags.</p>
+
+				<h4>Combinação recomendada (formato completo)</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git log --oneline --graph --decorate --all</code></pre>
+				</div>
+				<p>
+					<strong>--all</strong>: mostra todos os branches (não apenas o atual)<br>
+					Esta é a visualização mais útil para entender todo o histórico do projeto!
+				</p>
+
+				<h4>Limitar número de commits exibidos</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git log -n 5          # últimos 5 commits
+git log --oneline -10  # últimos 10 commits em formato resumido</code></pre>
+				</div>
+
+				<h4>Filtrar por autor</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git log --author="Seu Nome"
+git log --author="email@exemplo.com"</code></pre>
+				</div>
+
+				<h4>Filtrar por data</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git log --since="2024-01-01"
+git log --until="2024-12-31"
+git log --since="2 weeks ago"</code></pre>
+				</div>
+
+				<h4>Buscar por palavra-chave na mensagem</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git log --grep="bugfix"
+git log --grep="feature" --oneline</code></pre>
+				</div>
+
+				<h4>Ver alterações de arquivos específicos</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git log -- caminho/arquivo.txt
+git log --oneline -- src/</code></pre>
+				</div>
+
+				<div class="callout">
+					<strong>💡 Dica:</strong> Crie um alias para seu formato favorito:<br>
+					<code>git config --global alias.lg "log --oneline --graph --decorate --all"</code><br>
+					Depois use: <code>git lg</code>
+				</div>
+
+				<h3>🔍 git show - Exibindo detalhes de um commit específico</h3>
+				<p>
+					O comando <code>git show</code> mostra informações completas sobre um commit específico, 
+					incluindo o diff (diferenças) das alterações feitas.
+				</p>
+
+				<h4>Visualizar o último commit</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git show</code></pre>
+				</div>
+				<p>Mostra: autor, data, mensagem e diff completo do commit mais recente (HEAD).</p>
+
+				<h4>Visualizar commit específico (por hash)</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git show a1b2c3d</code></pre>
+				</div>
+				<p>Substitua <code>a1b2c3d</code> pelo hash (ou hash abreviado) do commit que deseja ver.</p>
+
+				<h4>Visualizar commit relativo ao HEAD</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git show HEAD~1   # commit anterior ao atual
+git show HEAD~2   # 2 commits atrás
+git show HEAD^    # pai do commit atual</code></pre>
+				</div>
+
+				<h4>Ver apenas arquivos alterados (sem diff)</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git show --name-only a1b2c3d
+git show --stat a1b2c3d  # com estatísticas de linhas</code></pre>
+				</div>
+
+				<h4>Ver conteúdo de arquivo específico em um commit</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git show a1b2c3d:caminho/arquivo.txt</code></pre>
+				</div>
+				<p>Mostra o conteúdo do arquivo <strong>naquele commit</strong>, sem o diff.</p>
+
+				<div class="callout info">
+					<strong>📌 Diferença:</strong><br>
+					• <code>git log</code> → lista vários commits<br>
+					• <code>git show</code> → detalhes de UM commit específico (com diff)
+				</div>
+
+				<h3>🔀 git diff - Visualizando diferenças</h3>
+				<p>
+					O comando <code>git diff</code> mostra as diferenças (linhas adicionadas/removidas) 
+					entre dois pontos do histórico ou do estado atual.
+				</p>
+
+				<h4>Diferenças não staged (working directory vs stage)</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git diff</code></pre>
+				</div>
+				<p>Mostra mudanças feitas nos arquivos que ainda <strong>não foram adicionadas</strong> ao stage (antes do <code>git add</code>).</p>
+
+				<h4>Diferenças staged (stage vs último commit)</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git diff --staged
+# ou
+git diff --cached</code></pre>
+				</div>
+				<p>Mostra mudanças que estão <strong>prontas para commit</strong> (após <code>git add</code>).</p>
+
+				<h4>Comparar working directory com último commit</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git diff HEAD</code></pre>
+				</div>
+				<p>Mostra <strong>todas</strong> as mudanças (staged + não staged) em relação ao último commit.</p>
+
+				<h4>Comparar dois commits</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git diff a1b2c3d..d4e5f6g
+git diff HEAD~2..HEAD     # últimos 2 commits</code></pre>
+				</div>
+
+				<h4>Comparar duas branches</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git diff main..feature/login
+git diff main...feature/login  # apenas mudanças únicas da feature</code></pre>
+				</div>
+
+				<h4>Diff de arquivo específico</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git diff caminho/arquivo.txt
+git diff --staged src/app.js</code></pre>
+				</div>
+
+				<h4>Estatísticas resumidas (sem detalhes linha a linha)</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git diff --stat
+git diff --shortstat</code></pre>
+				</div>
+
+				<h4>Ver apenas nomes dos arquivos modificados</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git diff --name-only
+git diff --name-status  # com status: M (modified), A (added), D (deleted)</code></pre>
+				</div>
+
+				<div class="callout warning">
+					<strong>⚠️ Atenção:</strong> <code>git diff</code> sem argumentos só mostra mudanças <strong>não staged</strong>. 
+					Use <code>--staged</code> para ver o que será commitado!
+				</div>
+
+				<h3>📊 Resumo Prático - Quando usar cada comando</h3>
+				<div class="grid">
+					<div class="callout">
+						<strong>git log</strong><br>
+						<small>Ver histórico geral de commits</small><br>
+						<code>git log --oneline --graph</code>
+					</div>
+					<div class="callout">
+						<strong>git show</strong><br>
+						<small>Ver detalhes de UM commit</small><br>
+						<code>git show a1b2c3d</code>
+					</div>
+					<div class="callout">
+						<strong>git diff</strong><br>
+						<small>Comparar alterações</small><br>
+						<code>git diff</code> ou <code>git diff --staged</code>
+					</div>
+				</div>
+
+				<h3>🎯 Exercício Prático</h3>
+				<div class="exercise" data-id="ex-history">
+					<h3>Testando os comandos de visualização</h3>
+					<p>Execute os comandos abaixo no terminal do seu repositório Git e observe os resultados:</p>
+					<ol>
+						<li>Liste os últimos 5 commits em formato resumido com gráfico</li>
+						<li>Veja os detalhes completos do último commit</li>
+						<li>Crie um novo arquivo, adicione ao stage e veja as diferenças staged</li>
+					</ol>
+					<label>1. Comando para listar commits:</label>
+					<input type="text" placeholder="git log ...">
+					<label>2. Comando para ver último commit:</label>
+					<input type="text" placeholder="git show ...">
+					<label>3. Comando para ver diferenças staged:</label>
+					<input type="text" placeholder="git diff ...">
+					<div class="exercise-actions">
+						<button class="validate">Validar Respostas</button>
+						<button class="hint">💡 Dica</button>
+						<button class="show-solution">Ver Solução</button>
+					</div>
+					<div class="result"></div>
+					<ul class="hints"></ul>
+					<pre class="solution hidden"></pre>
 				</div>
 			</section>
 
