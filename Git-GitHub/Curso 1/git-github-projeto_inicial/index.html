@@ -369,16 +369,251 @@ git diff --name-status  # com status: M (modified), A (added), D (deleted)</code
 			</section>
 
 			<section id="branches">
-				<h2>Branches</h2>
-				<p>Crie linhas paralelas de desenvolvimento.</p>
+				<h2>Branches - Ramificações</h2>
+				<p>
+					Branches (ramificações) são linhas paralelas de desenvolvimento que permitem trabalhar em diferentes 
+					funcionalidades simultaneamente sem afetar o código principal (branch <code>main</code>).
+				</p>
+
+				<h3>🤔 Por que usar Branches?</h3>
+				<p>Branches resolvem problemas importantes ao colaborar em equipe:</p>
+				<ul>
+					<li><strong>✅ Organização:</strong> Cada desenvolvedor trabalha em sua própria branch sem interferir no trabalho dos outros</li>
+					<li><strong>✅ Evita conflitos:</strong> Mudanças são isoladas até estarem prontas para serem integradas</li>
+					<li><strong>✅ Controle de qualidade:</strong> Funcionalidades vão para produção apenas quando estiverem completas e testadas</li>
+					<li><strong>✅ Trabalho paralelo:</strong> Múltiplas features podem ser desenvolvidas ao mesmo tempo</li>
+					<li><strong>✅ Segurança:</strong> A branch principal (main) permanece estável enquanto experimentos acontecem em outras branches</li>
+				</ul>
+
+				<div class="callout info">
+					<strong>💡 Exemplo prático:</strong> Se você está desenvolvendo um sistema de login e um colega está 
+					trabalhando no carrinho de compras, cada um cria sua branch. Assim, o código instável de um não afeta o outro!
+				</div>
+
+				<h3>📋 Comandos Básicos de Branches</h3>
+
+				<h4>Listar branches existentes</h4>
 				<div class="cmd">
 					<button class="copy">Copiar</button>
-					<pre><code>git branch                # lista branches
-git branch feature/login # cria branch
-git switch feature/login # troca de branch
-git merge feature/login   # mescla branch</code></pre>
+					<pre><code>git branch</code></pre>
 				</div>
-				<div class="callout info">Evite commits grandes; prefira commits pequenos e frequentes.</div>
+				<p>Mostra todas as branches locais. A branch atual aparece com asterisco (*) e em destaque.</p>
+
+				<h4>Criar uma nova branch</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git branch feature/login
+git branch bugfix/correcao-formulario
+git branch nome-da-funcionalidade</code></pre>
+				</div>
+				<p>
+					Cria uma nova branch mas <strong>não muda</strong> para ela automaticamente.
+					<br><strong>Convenção de nomes:</strong> use prefixos como <code>feature/</code>, <code>bugfix/</code>, <code>hotfix/</code>
+				</p>
+
+				<h4>Trocar de branch (git switch)</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git switch feature/login
+git switch main  # volta para a branch principal</code></pre>
+				</div>
+				<p>
+					O comando <code>git switch</code> é a forma moderna e recomendada de trocar entre branches.
+					<br><em>Nota: o comando antigo era <code>git checkout</code>, mas <code>git switch</code> é mais claro.</em>
+				</p>
+
+				<h4>Criar e trocar de branch em um comando</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git switch -c feature/carrinho
+# equivale a:
+# git branch feature/carrinho
+# git switch feature/carrinho</code></pre>
+				</div>
+				<p>A flag <code>-c</code> significa "create" (criar).</p>
+
+				<h4>Deletar uma branch</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git branch -d feature/login  # deleta se já foi mergeada
+git branch -D feature/login  # força deletar mesmo sem merge</code></pre>
+				</div>
+
+				<h3>🔀 Unindo Branches com git merge</h3>
+				<p>
+					Após finalizar o trabalho em uma branch, você precisa <strong>mesclar (merge)</strong> as mudanças 
+					de volta para a branch principal.
+				</p>
+
+				<h4>Como fazer merge</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code># 1. Volte para a branch que vai RECEBER as mudanças
+git switch main
+
+# 2. Mescle a branch de feature
+git merge feature/login</code></pre>
+				</div>
+				<p>
+					<strong>Importante:</strong> Você sempre faz merge <em>estando na branch de destino</em>. 
+					Se você está em <code>main</code> e executa <code>git merge feature/login</code>, 
+					as mudanças de <code>feature/login</code> vêm <strong>para</strong> a <code>main</code>.
+				</p>
+
+				<h3>🎯 Tipos de Merge</h3>
+
+				<h4>1️⃣ Fast-Forward Merge</h4>
+				<p>
+					Acontece quando não houve novos commits na branch principal desde que a feature foi criada.
+					Git simplesmente "avança" o ponteiro da branch principal para o último commit da feature.
+				</p>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code># Situação:
+# main:    A---B
+#               \
+# feature:      C---D
+
+# Após git merge feature (em main):
+# main:    A---B---C---D  (fast-forward)</code></pre>
+				</div>
+				<p>
+					<strong>Características:</strong>
+					<br>✅ Histórico linear (sem commit de merge extra)
+					<br>✅ Mais limpo e simples
+					<br>⚠️ Não fica registrado explicitamente que houve uma branch separada
+				</p>
+
+				<h4>2️⃣ Merge Commit (Three-Way Merge)</h4>
+				<p>
+					Acontece quando houve novos commits tanto na branch principal quanto na feature.
+					Git cria um <strong>commit de merge</strong> especial que une as duas histórias.
+				</p>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code># Situação:
+# main:    A---B---E
+#               \
+# feature:      C---D
+
+# Após git merge feature (em main):
+# main:    A---B---E---M  (merge commit)
+#               \       /
+# feature:      C---D</code></pre>
+				</div>
+				<p>
+					<strong>Características:</strong>
+					<br>✅ Preserva o histórico completo das branches
+					<br>✅ Deixa claro onde houve merge
+					<br>✅ Útil para entender quando funcionalidades foram integradas
+					<br>⚠️ Cria um commit extra (o commit "M" de merge)
+				</p>
+
+				<h4>Forçar criação de merge commit</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git merge --no-ff feature/login</code></pre>
+				</div>
+				<p>
+					A flag <code>--no-ff</code> (no fast-forward) força a criação de um commit de merge 
+					mesmo quando fast-forward seria possível. Útil para manter histórico explícito.
+				</p>
+
+				<h3>⚠️ Resolvendo Conflitos de Merge</h3>
+				<p>
+					Conflitos acontecem quando o mesmo trecho de código foi modificado em duas branches diferentes.
+					Git não sabe qual versão manter e pede para você decidir.
+				</p>
+
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code># Git avisa sobre conflito:
+Auto-merging arquivo.txt
+CONFLICT (content): Merge conflict in arquivo.txt
+Automatic merge failed; fix conflicts and then commit the result.</code></pre>
+				</div>
+
+				<h4>Passos para resolver conflitos:</h4>
+				<ol>
+					<li>Abra o arquivo em conflito no editor</li>
+					<li>Procure pelos marcadores de conflito:
+						<div class="cmd">
+							<button class="copy">Copiar</button>
+							<pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+código da branch atual (main)
+=======
+código da branch que está sendo mergeada (feature)
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/login</code></pre>
+						</div>
+					</li>
+					<li>Edite o arquivo para manter o código correto (remova os marcadores)</li>
+					<li>Adicione o arquivo resolvido: <code>git add arquivo.txt</code></li>
+					<li>Finalize o merge: <code>git commit</code></li>
+				</ol>
+
+				<div class="callout warning">
+					<strong>⚠️ Dica importante:</strong> Sempre teste o código após resolver conflitos! 
+					Mesmo que você resolva manualmente, pode haver erros lógicos.
+				</div>
+
+				<h3>🎯 Fluxo de Trabalho Completo com Branches</h3>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code># 1. Certifique-se de estar na main atualizada
+git switch main
+git pull origin main
+
+# 2. Crie uma nova branch para sua funcionalidade
+git switch -c feature/sistema-login
+
+# 3. Trabalhe normalmente (adicione, commita)
+# ... faça suas alterações ...
+git add .
+git commit -m "Adiciona tela de login"
+git commit -m "Adiciona validação de senha"
+
+# 4. Volte para a main
+git switch main
+
+# 5. Atualize a main (caso alguém tenha enviado código novo)
+git pull origin main
+
+# 6. Mescle sua branch
+git merge feature/sistema-login
+
+# 7. Envie para o repositório remoto
+git push origin main
+
+# 8. (Opcional) Delete a branch local após merge
+git branch -d feature/sistema-login</code></pre>
+				</div>
+
+				<h3>📊 Visualizando Branches Graficamente</h3>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git log --oneline --graph --all --decorate</code></pre>
+				</div>
+				<p>Este comando mostra um gráfico ASCII do histórico de commits com todas as branches.</p>
+
+				<h3>✅ Boas Práticas com Branches</h3>
+				<ul>
+					<li>✅ <strong>Nomes descritivos:</strong> <code>feature/adiciona-carrinho</code> é melhor que <code>branch1</code></li>
+					<li>✅ <strong>Branches curtas:</strong> Finalize e merge branches rapidamente (evite branches que vivem por semanas)</li>
+					<li>✅ <strong>Commits pequenos:</strong> Faça commits frequentes e focados</li>
+					<li>✅ <strong>Sempre atualize a main:</strong> Antes de criar uma branch, faça <code>git pull</code></li>
+					<li>✅ <strong>Teste antes de merge:</strong> Garanta que o código funciona antes de mesclar</li>
+					<li>✅ <strong>Delete branches antigas:</strong> Mantenha o repositório limpo deletando branches já mergeadas</li>
+					<li>✅ <strong>Comunique-se:</strong> Em equipe, avise quando for fazer merge de branches importantes</li>
+				</ul>
+
+				<div class="callout info">
+					<strong>💡 Resumo:</strong><br>
+					• <code>git branch</code> → lista/cria branches<br>
+					• <code>git switch</code> → troca de branch<br>
+					• <code>git merge</code> → une branches<br>
+					• <strong>Fast-forward:</strong> merge simples, histórico linear<br>
+					• <strong>Merge commit:</strong> preserva histórico de ambas as branches
+				</div>
 			</section>
 
 			<section id="remotes">
