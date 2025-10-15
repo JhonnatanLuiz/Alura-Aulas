@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafios Rafa Ballerini</title>
+</head>
+<body>
+    <script>
+        console.log('\n--- DESAFIO 1 ---\n');
+
+        // ============================================
+        // DESAFIO 1: Comparar numeroUm e stringUm
+        // ============================================
+        // Objetivo: verificar se têm o mesmo valor mas tipos diferentes
+        
+        // Declaração das variáveis para o desafio 1
+        const numeroUm = 1;       // tipo: number
+        const stringUm = '1';     // tipo: string
+
+        // Usamos uma estrutura condicional para cobrir três casos:
+        // 1) Mesmo valor E mesmo tipo -> usar operador de igualdade estrita (===)
+        // 2) Mesmo valor MAS tipos diferentes -> usar igualdade solta (==)
+        // 3) Valores diferentes -> caso padrão
+
+        // Primeiro verifica se valor e tipo são exatamente iguais
+        if (numeroUm === stringUm) {
+            // Esta mensagem só será exibida se numeroUm e stringUm forem iguais em valor E tipo
+            // Exemplo verdadeiro: 1 === 1 (ambos números) ou 'abc' === 'abc' (ambas strings)
+            console.log('As variáveis numeroUm e stringUm têm o mesmo valor e o mesmo tipo.');
+        // Se não são estritamente iguais, verificamos se têm o mesmo valor após coerção
+        } else if (numeroUm == stringUm) {
+            // A igualdade solta (==) faz coerção de tipos automaticamente
+            // Por exemplo: 1 == '1' retorna true porque '1' é convertido para número
+            // Neste ramo sabemos que os valores coincidem após coerção, mas os tipos são diferentes
+            console.log('As variáveis numeroUm e stringUm têm o mesmo valor, mas tipos diferentes.');
+        } else {
+            // Se nenhuma das condições anteriores for verdadeira, os valores são diferentes
+            console.log('As variáveis numeroUm e stringUm não têm o mesmo valor.');
+        }
+
+        console.log('\n--- DESAFIO 2 ---\n');
+
+        // ============================================
+        // DESAFIO 2: Comparar numeroTrinta e stringTrinta
+        // ============================================
+        // Objetivo: verificar se têm o mesmo valor E o mesmo tipo
+        
+        // Declaração das variáveis para o desafio 2
+        const numeroTrinta = 30;     // tipo: number
+        const stringTrinta = '30';   // tipo: string
+
+        // Verificar se valor e tipo são exatamente iguais usando ===
+        if (numeroTrinta === stringTrinta) {
+            // Esta mensagem só será exibida se ambos forem iguais em valor E tipo
+            // Por exemplo: 30 === 30 (ambos números) retornaria true
+            console.log('As variáveis numeroTrinta e stringTrinta têm o mesmo valor e mesmo tipo');
+        } else {
+            // Se === retorna false, significa que ou o valor é diferente OU os tipos são diferentes
+            // Neste caso: 30 (number) !== '30' (string) porque os tipos são diferentes
+            console.log('As variáveis numeroTrinta e stringTrinta não têm o mesmo tipo');
+        }
+
+        console.log('\n--- DESAFIO 3 ---\n');
+
+        // ============================================
+        // DESAFIO 3: Comparar numeroDez e stringDez
+        // ============================================
+        // Objetivo: verificar se têm o mesmo valor mas tipos diferentes
+        
+        // Declaração das variáveis para o desafio 3
+        const numeroDez = 10;     // tipo: number
+        const stringDez = '10';   // tipo: string
+
+        // Primeiro verificamos se são estritamente iguais (valor e tipo)
+        if (numeroDez === stringDez) {
+            // Se entrar aqui, valor E tipo são iguais
+            console.log('As variáveis numeroDez e stringDez têm o mesmo valor e o mesmo tipo');
+        // Agora verificamos se têm o mesmo valor após coerção (mas tipos diferentes)
+        } else if (numeroDez == stringDez) {
+            // A igualdade solta (==) converte '10' para número 10 e compara
+            // Como 10 == 10 é true, mas 10 !== '10' (tipos diferentes), entra aqui
+            console.log('As variáveis numeroDez e stringDez têm o mesmo valor, mas tipos diferentes');
+        } else {
+            // Se nenhuma das condições anteriores for verdadeira, os valores são diferentes
+            console.log('As variáveis numeroDez e stringDez não têm o mesmo valor');
+        }
+
+        // ============================================
+        // RESUMO DOS OPERADORES DE COMPARAÇÃO
+        // ============================================
+        // === (igualdade estrita)
+        //   - Compara valor E tipo
+        //   - Não faz conversão automática
+        //   - Exemplos: 1 === 1 (true), 1 === '1' (false)
+        //
+        // == (igualdade solta)
+        //   - Compara apenas valores após coerção de tipo
+        //   - Pode causar comportamentos inesperados
+        //   - Exemplos: 1 == '1' (true), 0 == false (true)
+        //
+        // DICA: Sempre prefira usar === para evitar surpresas!
+        // Se precisar comparar valores de tipos diferentes, converta explicitamente:
+        // Number('10') === 10 (true)
+        // String(10) === '10' (true)
+    </script>
+</body>
+</html>

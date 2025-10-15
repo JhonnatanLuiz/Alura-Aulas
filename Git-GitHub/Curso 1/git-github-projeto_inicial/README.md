@@ -10,11 +10,15 @@ This project is a static study page for Git and GitHub featuring educational con
 - Tema claro/escuro com persistência.
 - Blocos de comandos com botão "Copiar".
 - Seções didáticas:
-  - Introdução, Instalação, Configuração inicial, Fluxo básico, Branches, Remotos, Colaboração, .gitignore, Desfazendo, Stash/Tags, Markdown, Estratégias, Problemas comuns, Cheat Sheet.
+  - Introdução, Instalação, Configuração inicial, Fluxo básico, Branches, Remotos, Colaboração, .gitignore, **Working Tree e Staging Area**, Desfazendo, Stash/Tags, **GitHub Releases**, Markdown, Estratégias, Problemas comuns, Cheat Sheet.
+  - **Working Tree e Staging Area**: explicação detalhada dos três estados do Git com diagrama interativo.
+  - **Stash completo**: git stash, list, pop, apply, drop, clear com explicações sobre diferenças entre pop vs apply.
+  - **Tags completo**: Tags simples vs anotadas, git tag -v para ver autor/data, versionamento semântico (SemVer), boas práticas.
+  - **GitHub Releases**: Como criar releases baseadas em tags, anexar arquivos binários, notas de lançamento, automação com GitHub CLI e Actions.
   - Git avançado: rebase interativo, cherry-pick, bisect.
   - Workflows com diagramas Mermaid: Git Flow, Trunk-based e Branching por release.
 - Exercícios práticos com validação, dicas progressivas e solução:
-  - Conventional Commits, Branch/Merge, Bisect, Stash, Rebase com conflitos, Reset vs Revert, Cherry-pick múltiplo.
+  - Conventional Commits, Branch/Merge, Bisect, **Stash (6 comandos completos)**, Rebase com conflitos, Reset vs Revert, Cherry-pick múltiplo.
 - Realce de sintaxe (Highlight.js) com tema ajustado ao modo claro/escuro.
 
 ## Content and features (EN)
@@ -23,11 +27,15 @@ This project is a static study page for Git and GitHub featuring educational con
 - Light/dark theme with persistence.
 - Command blocks with "Copy" button.
 - Learning sections:
-  - Introduction, Install, Initial config, Basic workflow, Branches, Remotes, Collaboration, .gitignore, Undoing, Stash/Tags, Markdown, Strategies, Common issues, Cheat Sheet.
+  - Introduction, Install, Initial config, Basic workflow, Branches, Remotes, Collaboration, .gitignore, **Working Tree & Staging Area**, Undoing, Stash/Tags, **GitHub Releases**, Markdown, Strategies, Common issues, Cheat Sheet.
+  - **Working Tree & Staging Area**: detailed explanation of Git's three states with interactive diagram.
+  - **Complete Stash**: git stash, list, pop, apply, drop, clear with explanations on pop vs apply differences.
+  - **Complete Tags**: Lightweight vs annotated tags, git tag -v to view author/date, semantic versioning (SemVer), best practices.
+  - **GitHub Releases**: How to create releases from tags, attach binary files, release notes, automation with GitHub CLI and Actions.
   - Advanced Git: interactive rebase, cherry-pick, bisect.
   - Workflows with Mermaid diagrams: Git Flow, Trunk‑based, Release branching.
 - Interactive exercises with validation, progressive hints, and solutions:
-  - Conventional Commits, Branch/Merge, Bisect, Stash, Rebase with conflicts, Reset vs Revert, Multi cherry-pick.
+  - Conventional Commits, Branch/Merge, Bisect, **Stash (6 complete commands)**, Rebase with conflicts, Reset vs Revert, Multi cherry-pick.
 - Syntax highlighting (Highlight.js) respecting the selected theme.
 
 ## Estrutura / Structure
@@ -72,7 +80,7 @@ Resumo de validações / Validation summary:
 - Conventional Commits: `feat|fix|docs|chore|refactor|perf|style|test|build|ci` e `type(scope)?: desc`.
 - Branch/Merge: `git switch -c` ou `git checkout -b`; `git merge <branch>`.
 - Bisect: `start`, `bad`, `good`, `reset`.
-- Stash: `git stash`, `git stash list`, `git stash pop/apply`.
+- Stash (completo): `git stash`, `git stash list`, `git stash pop`, `git stash apply`, `git stash drop`, `git stash clear`.
 - Rebase conflitos: `git rebase <base>`, `git add .`, `git rebase --continue`, opcional `--abort`.
 - Reset vs Revert: `git revert <hash>`, `git reset --soft|--mixed|--hard <ref>`.
 - Cherry-pick múltiplo: múltiplos hashes ou range `a..b`/`a...b`.

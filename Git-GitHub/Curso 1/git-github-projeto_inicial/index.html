@@ -35,8 +35,10 @@
 				<li><a href="#remotes">Remotos e GitHub</a></li>
 				<li><a href="#collab">Colaboração (fork, PR)</a></li>
 				<li><a href="#ignore">.gitignore</a></li>
+				<li><a href="#working-tree-staging">Working Tree e Staging Area</a></li>
 				<li><a href="#undo">Desfazendo alterações</a></li>
 				<li><a href="#stash-tags">Stash e Tags</a></li>
+				<li><a href="#github-releases">GitHub Releases</a></li>
 				<li><a href="#markdown">Markdown no README</a></li>
 				<li><a href="#strategies">Estratégias de Git</a></li>
 				<li><a href="#advanced">Git avançado</a></li>
@@ -666,6 +668,96 @@ dist/
 				<p>Templates: <a href="https://github.com/github/gitignore" target="_blank" rel="noopener">github/gitignore</a></p>
 			</section>
 
+			<section id="working-tree-staging">
+				<h2>Working Tree e Staging Area</h2>
+				
+				<p>Entender esses conceitos é fundamental para dominar o Git:</p>
+
+				<h3>Working Tree (Árvore de Trabalho)</h3>
+				<p>O <strong>working tree</strong> é o estado atual do seu código com <strong>todas as alterações</strong>, incluindo arquivos modificados, criados ou deletados que ainda não foram adicionados para commit.</p>
+				
+				<div class="callout info">
+					<strong>Working Tree = Seu diretório de trabalho</strong><br>
+					São todos os arquivos que você vê e edita no seu projeto, incluindo alterações não salvas no Git.
+				</div>
+
+				<h3>Staging Area (Área de Preparação)</h3>
+				<p>A <strong>staging area</strong> (também chamada de <em>index</em>) é onde ficam os arquivos quando você executa <code>git add</code>. É uma área intermediária entre o working tree e o repositório.</p>
+
+				<div class="callout info">
+					<strong>Staging Area = Preparação para commit</strong><br>
+					Arquivos adicionados com <code>git add</code> ficam "staged" (preparados) e serão incluídos no próximo commit.
+				</div>
+
+				<h3>Os Três Estados do Git</h3>
+				<pre class="mermaid">
+graph LR
+    A[Working Tree<br/>Arquivos modificados] -->|git add| B[Staging Area<br/>Arquivos preparados]
+    B -->|git commit| C[Repository<br/>Histórico de commits]
+    C -->|git checkout| A
+    B -->|git restore --staged| A
+    A -->|git restore| D[Descartado]
+</pre>
+
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code># Ver estado dos arquivos
+git status                   # mostra working tree e staging area
+
+# Exemplo de saída:
+# Changes to be committed:      ← STAGING AREA
+#   modified:   arquivo1.txt
+#
+# Changes not staged:           ← WORKING TREE (modificado mas não staged)
+#   modified:   arquivo2.txt
+#
+# Untracked files:              ← WORKING TREE (novo arquivo)
+#   arquivo3.txt
+
+# Manipular staging area
+git add arquivo.txt          # working tree → staging area
+git restore --staged arquivo.txt  # staging area → working tree
+git restore arquivo.txt      # descarta alterações do working tree
+
+# Ver diferenças
+git diff                     # diferenças no working tree (não staged)
+git diff --staged            # diferenças na staging area (staged)
+git diff HEAD               # todas as diferenças (staged + não staged)</code></pre>
+				</div>
+
+				<div class="callout warning">
+					<strong>Importante:</strong><br>
+					• <code>git restore arquivo.txt</code> - descarta alterações do <strong>working tree</strong> (não pode recuperar!)<br>
+					• <code>git restore --staged arquivo.txt</code> - remove da <strong>staging area</strong> mas mantém alterações no working tree
+				</div>
+
+				<h3>Fluxo de Trabalho Típico</h3>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code># 1. Editar arquivos (working tree)
+# (você modifica os arquivos no editor)
+
+# 2. Verificar o que mudou
+git status                   # ver arquivos modificados
+git diff                     # ver as alterações linha por linha
+
+# 3. Adicionar à staging area
+git add arquivo1.txt         # adiciona arquivo específico
+git add .                    # adiciona todos os arquivos modificados
+
+# 4. Verificar o que vai ser commitado
+git status                   # arquivos na staging area
+git diff --staged            # ver exatamente o que vai no commit
+
+# 5. Fazer o commit
+git commit -m "Mensagem"     # staging area → repository
+
+# 6. Se errar, pode desfazer
+git restore --staged arquivo.txt  # tira da staging area
+git restore arquivo.txt      # descarta alterações do working tree</code></pre>
+				</div>
+			</section>
+
 			<section id="undo">
 				<h2>Desfazendo alterações</h2>
 				<div class="cmd">
@@ -681,17 +773,392 @@ git reset --hard HEAD~1          # volta 1 commit, descarta tudo</code></pre>
 
 			<section id="stash-tags">
 				<h2>Stash e Tags</h2>
+				
+				<h3>Stash - Guardando trabalho em progresso</h3>
+				<p>O <strong>stash</strong> permite guardar alterações temporariamente sem fazer commit, útil quando você precisa trocar de branch mas não quer commitar trabalho incompleto.</p>
+				
 				<div class="cmd">
 					<button class="copy">Copiar</button>
-					<pre><code># Stash
-git stash
-git stash list
-git stash pop
+					<pre><code># Salvar alterações no stash
+git stash                    # guarda working tree e staging area
+git stash save "mensagem"    # com descrição personalizada
+git stash -u                 # inclui arquivos não rastreados (untracked)
 
-# Tags
-git tag v1.0.0
-git tag -a v1.1.0 -m "Versão 1.1.0"
-git push origin --tags</code></pre>
+# Listar stashes
+git stash list               # mostra todos os stashes salvos
+# Exemplo de saída:
+# stash@{0}: WIP on main: 1a2b3c4 Mensagem do commit
+# stash@{1}: On feature: correção de bug
+
+# Aplicar stash
+git stash pop                # aplica o último stash e REMOVE da lista
+git stash pop stash@{1}      # aplica stash específico e remove
+
+git stash apply              # aplica o último stash e MANTÉM na lista
+git stash apply stash@{0}    # aplica stash específico e mantém
+
+# Remover stash
+git stash drop               # remove o último stash da lista
+git stash drop stash@{1}     # remove stash específico
+
+git stash clear              # REMOVE TODOS os stashes (cuidado!)
+
+# Ver conteúdo do stash
+git stash show               # mostra resumo das alterações
+git stash show -p            # mostra diff completo
+git stash show stash@{1}     # mostra stash específico</code></pre>
+				</div>
+
+				<div class="callout info">
+					<strong>Diferença entre pop e apply:</strong><br>
+					• <code>git stash pop</code> - Aplica as alterações e <strong>remove</strong> o stash da lista (útil quando terminou de usar)<br>
+					• <code>git stash apply</code> - Aplica as alterações mas <strong>mantém</strong> o stash na lista (útil para aplicar o mesmo stash em múltiplas branches)
+				</div>
+
+				<div class="callout warning">
+					<strong>Atenção:</strong> <code>git stash clear</code> remove permanentemente todos os stashes. Use com cuidado!
+				</div>
+
+				<h3>Tags - Marcando versões e commits importantes</h3>
+				
+				<p><strong>Tags</strong> são ponteiros para commits específicos, muito utilizadas para marcar versões (releases) do seu projeto. Diferente de branches, tags não mudam — são referências fixas.</p>
+
+				<h4>Tipos de Tags</h4>
+				
+				<div class="callout info">
+					<strong>1. Tags Simples (Lightweight)</strong><br>
+					São apenas um ponteiro para um commit, sem informações adicionais.<br>
+					Comando: <code>git tag v1.0.0</code>
+				</div>
+
+				<div class="callout info">
+					<strong>2. Tags Anotadas (Annotated Tags) - RECOMENDADO</strong><br>
+					São objetos completos do Git que contêm:<br>
+					• Mensagem descritiva<br>
+					• Nome do autor<br>
+					• Email do autor<br>
+					• Data de criação<br>
+					• Podem ser assinadas e verificadas (GPG)<br>
+					Comando: <code>git tag -a v1.1.0 -m "Versão 1.1.0"</code>
+				</div>
+
+				<h4>Comandos de Tags</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code># Criar tag simples (lightweight)
+git tag v1.0.0                           # tag no commit atual
+git tag v0.9.0 a1b2c3d                  # tag em commit específico
+
+# Criar tag anotada (recomendado para releases)
+git tag -a v1.1.0 -m "Versão 1.1.0"     # com mensagem
+git tag -a v2.0.0 -m "Release principal" a1b2c3d  # em commit específico
+
+# Listar tags
+git tag                                  # lista todas as tags
+git tag -l "v1.*"                       # lista tags com padrão
+git tag -n                              # lista com mensagens
+
+# Ver informações da tag (annotated tag)
+git tag -v v1.1.0                       # mostra autor, data e mensagem
+git show v1.1.0                         # mostra commit completo da tag
+
+# Enviar tags para remoto
+git push origin v1.0.0                  # envia tag específica
+git push origin --tags                  # envia TODAS as tags
+git push origin --follow-tags           # envia apenas tags anotadas dos commits enviados
+
+# Deletar tags
+git tag -d v1.0.0                       # deleta tag local
+git push origin --delete v1.0.0         # deleta tag remota
+git push origin :refs/tags/v1.0.0       # sintaxe alternativa</code></pre>
+				</div>
+
+				<h4>Versionamento Semântico (SemVer)</h4>
+				<p>Padrão comum para tags de versão: <code>v&lt;MAJOR&gt;.&lt;MINOR&gt;.&lt;PATCH&gt;</code></p>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code># Exemplos de versionamento semântico
+v1.0.0   # Primeira versão estável
+v1.1.0   # Novas funcionalidades (backward compatible)
+v1.1.1   # Correção de bugs
+v2.0.0   # Mudanças incompatíveis (breaking changes)
+
+# Sufixos para pre-releases
+v1.0.0-alpha.1
+v1.0.0-beta.2
+v1.0.0-rc.1  # release candidate</code></pre>
+				</div>
+
+				<div class="callout warning">
+					<strong>Boas práticas:</strong><br>
+					✅ Use <strong>tags anotadas</strong> para releases oficiais (contêm metadados importantes)<br>
+					✅ Siga o padrão SemVer para facilitar o entendimento de versões<br>
+					✅ Sempre envie tags com <code>git push origin --tags</code> após criar releases<br>
+					❌ Não delete ou mova tags públicas (pode quebrar dependências)
+				</div>
+
+				<h4>Ver informações completas de uma Tag Anotada</h4>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code># Exemplo de saída do git tag -v ou git show
+$ git show v1.1.0
+
+tag v1.1.0
+Tagger: João Silva &lt;joao@example.com&gt;
+Date:   Mon Oct 15 10:30:00 2025 -0300
+
+Versão 1.1.0
+- Adiciona funcionalidade X
+- Corrige bug Y
+- Melhora performance de Z
+
+commit a1b2c3d4e5f6...
+Author: João Silva &lt;joao@example.com&gt;
+Date:   Mon Oct 15 10:00:00 2025 -0300
+
+    feat: implementa funcionalidade X</code></pre>
+				</div>
+			</section>
+
+			<section id="github-releases">
+				<h2>GitHub Releases - Publicando versões</h2>
+				
+				<p><strong>Releases</strong> são versões empacotadas do seu projeto publicadas no GitHub. Elas são baseadas em <strong>tags do Git</strong> e permitem distribuir versões estáveis do software, incluindo arquivos binários compilados.</p>
+
+				<h3>Diferença entre Tags e Releases</h3>
+				<div class="callout info">
+					<strong>Git Tag:</strong> Marcador local/remoto de um commit específico no repositório Git.<br><br>
+					<strong>GitHub Release:</strong> Recurso do GitHub que usa uma tag como base e adiciona:<br>
+					• Título e descrição da versão<br>
+					• Notas de lançamento (changelog)<br>
+					• Arquivos binários anexados (executáveis, .zip, .tar.gz, etc.)<br>
+					• Interface visual no GitHub para download
+				</div>
+
+				<h3>Como criar uma Release no GitHub (Interface Web)</h3>
+				
+				<h4>Passo a Passo:</h4>
+				<ol>
+					<li><strong>Crie e envie uma tag para o GitHub:</strong>
+						<div class="cmd">
+							<button class="copy">Copiar</button>
+							<pre><code>git tag -a v1.0.0 -m "Primeira versão estável"
+git push origin v1.0.0</code></pre>
+						</div>
+					</li>
+					
+					<li><strong>Acesse o repositório no GitHub</strong></li>
+					
+					<li><strong>Clique em "Releases"</strong> (barra lateral direita ou em "Code" → "Releases")</li>
+					
+					<li><strong>Clique em "Create a new release"</strong></li>
+					
+					<li><strong>Selecione a tag</strong> que você criou (v1.0.0) ou crie uma nova no momento</li>
+					
+					<li><strong>Preencha os campos:</strong>
+						<ul>
+							<li><strong>Release title:</strong> Nome da versão (ex: "Versão 1.0.0")</li>
+							<li><strong>Description:</strong> Notas de lançamento (changelog):
+								<div class="cmd">
+									<button class="copy">Copiar</button>
+									<pre><code>## O que há de novo em v1.0.0
+
+### ✨ Novas Funcionalidades
+- Adiciona suporte a tema escuro
+- Implementa sistema de autenticação
+
+### 🐛 Correções de Bugs
+- Corrige erro no login
+- Resolve problema de cache
+
+### 📦 Arquivos Binários
+- `app-v1.0.0-windows.exe` - Versão para Windows
+- `app-v1.0.0-linux.tar.gz` - Versão para Linux
+- `app-v1.0.0-mac.dmg` - Versão para macOS</code></pre>
+								</div>
+							</li>
+						</ul>
+					</li>
+					
+					<li><strong>Anexe arquivos binários:</strong>
+						<ul>
+							<li>Arraste arquivos para a área "Attach binaries"</li>
+							<li>Tipos comuns: executáveis (.exe, .app), compactados (.zip, .tar.gz), instaladores (.msi, .dmg)</li>
+							<li>Limite: 2GB por arquivo</li>
+						</ul>
+					</li>
+					
+					<li><strong>Opções adicionais:</strong>
+						<ul>
+							<li>☑️ <strong>Set as a pre-release:</strong> Para versões beta/alpha</li>
+							<li>☑️ <strong>Set as the latest release:</strong> Marca como versão mais recente</li>
+						</ul>
+					</li>
+					
+					<li><strong>Clique em "Publish release"</strong></li>
+				</ol>
+
+				<h3>Criar Release via GitHub CLI (gh)</h3>
+				<p>Para automação de releases via terminal:</p>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code># Instalar GitHub CLI: https://cli.github.com/
+
+# Criar release a partir de uma tag existente
+gh release create v1.0.0 \
+  --title "Versão 1.0.0" \
+  --notes "Primeira versão estável com autenticação"
+
+# Criar release com arquivos binários anexados
+gh release create v1.1.0 \
+  --title "Versão 1.1.0" \
+  --notes "Adiciona tema escuro" \
+  ./dist/app-windows.exe \
+  ./dist/app-linux.tar.gz \
+  ./dist/app-macos.dmg
+
+# Criar pre-release (versão beta)
+gh release create v2.0.0-beta.1 \
+  --title "v2.0.0 Beta 1" \
+  --notes "Versão de testes" \
+  --prerelease \
+  ./dist/app-beta.zip
+
+# Listar releases
+gh release list
+
+# Ver detalhes de uma release
+gh release view v1.0.0
+
+# Baixar assets de uma release
+gh release download v1.0.0 --pattern "*.exe"</code></pre>
+				</div>
+
+				<h3>Exemplo Prático: Pipeline de Release</h3>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code># 1. Finalizar código e fazer commit
+git add .
+git commit -m "release: v1.0.0"
+
+# 2. Criar tag anotada
+git tag -a v1.0.0 -m "Release v1.0.0 - Primeira versão estável"
+
+# 3. Enviar tag para GitHub
+git push origin main
+git push origin v1.0.0
+
+# 4. Compilar/gerar binários (exemplo com Node.js)
+npm run build
+# Resultado: dist/app-v1.0.0.exe, dist/app-v1.0.0.tar.gz
+
+# 5. Criar release com GitHub CLI
+gh release create v1.0.0 \
+  --title "Versão 1.0.0 - Lançamento Oficial" \
+  --notes-file CHANGELOG.md \
+  ./dist/app-v1.0.0.exe \
+  ./dist/app-v1.0.0.tar.gz
+
+# OU criar manualmente no GitHub e anexar os binários</code></pre>
+				</div>
+
+				<h3>Estrutura de Notas de Lançamento (Release Notes)</h3>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>## Versão 1.2.0 - 2025-01-15
+
+### 🎉 Destaques
+- Sistema de notificações em tempo real
+- Integração com API de pagamentos
+
+### ✨ Novas Funcionalidades
+- [#42] Adiciona dashboard de analytics
+- [#38] Implementa exportação de relatórios em PDF
+- [#35] Suporte a multi-idiomas (PT, EN, ES)
+
+### 🐛 Correções
+- [#45] Corrige erro ao salvar perfil
+- [#40] Resolve problema de carregamento lento
+- [#37] Fix: validação de email incorreta
+
+### 🔧 Melhorias
+- Otimiza queries do banco de dados (30% mais rápido)
+- Atualiza dependências de segurança
+- Melhora acessibilidade (WCAG 2.1 AA)
+
+### 📦 Arquivos para Download
+- `app-v1.2.0-windows-x64.exe` - Windows 64-bit
+- `app-v1.2.0-linux-x64.tar.gz` - Linux 64-bit
+- `app-v1.2.0-macos-arm64.dmg` - macOS Apple Silicon
+- `source-code.zip` - Código-fonte (automático)
+
+### ⚠️ Breaking Changes
+Nenhuma mudança incompatível nesta versão.
+
+### 📄 Documentação
+Veja o [Manual do Usuário](docs/manual.pdf) para instruções completas.</code></pre>
+				</div>
+
+				<div class="callout warning">
+					<strong>Boas práticas para Releases:</strong><br>
+					✅ Sempre use <strong>tags anotadas</strong> como base<br>
+					✅ Escreva notas de lançamento detalhadas (o que mudou, o que foi corrigido)<br>
+					✅ Inclua instruções de instalação/upgrade<br>
+					✅ Anexe binários compilados para facilitar a distribuição<br>
+					✅ Use versionamento semântico (SemVer): v1.2.3<br>
+					✅ Marque versões experimentais como "pre-release"<br>
+					✅ Mantenha um arquivo CHANGELOG.md no repositório<br>
+					❌ Não delete releases públicas (usuários podem depender delas)
+				</div>
+
+				<h3>Acessar Releases Publicadas</h3>
+				<p>Usuários podem baixar releases em:</p>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code># URL padrão das releases
+https://github.com/usuario/repositorio/releases
+
+# Download direto de um arquivo específico
+https://github.com/usuario/repositorio/releases/download/v1.0.0/app.exe
+
+# Última versão (latest)
+https://github.com/usuario/repositorio/releases/latest</code></pre>
+				</div>
+
+				<h3>Automatização com GitHub Actions</h3>
+				<p>Exemplo de workflow para criar releases automaticamente:</p>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code># .github/workflows/release.yml
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Dispara ao criar tag v1.0.0, v2.1.3, etc.
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Build application
+        run: |
+          npm install
+          npm run build
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            dist/app-*.exe
+            dist/app-*.tar.gz
+          body: |
+            Release ${{ github.ref_name }}
+            Ver CHANGELOG.md para detalhes.
+          draft: false
+          prerelease: false</code></pre>
 				</div>
 			</section>
 
@@ -913,16 +1380,25 @@ function soma(a, b) { return a + b }
 				</div>
 
 				<div class="exercise" data-id="ex4">
-					<h3>4) Stash</h3>
-					<p>Guarde mudanças locais temporariamente e recupere depois.</p>
+					<h3>4) Stash - Manipulando trabalhos em progresso</h3>
+					<p>Pratique os comandos para guardar, visualizar, aplicar e remover alterações temporárias com stash.</p>
 					<label>Salvar no stash:
 						<input type="text" placeholder="git stash" />
 					</label>
 					<label>Listar stashes:
 						<input type="text" placeholder="git stash list" />
 					</label>
-					<label>Aplicar/retirar do stash:
+					<label>Aplicar e remover do stash (pop):
 						<input type="text" placeholder="git stash pop" />
+					</label>
+					<label>Aplicar sem remover (apply):
+						<input type="text" placeholder="git stash apply" />
+					</label>
+					<label>Remover item específico da stash (drop):
+						<input type="text" placeholder="git stash drop" />
+					</label>
+					<label>Limpar todos os stashes (clear):
+						<input type="text" placeholder="git stash clear" />
 					</label>
 					<div class="exercise-actions">
 						<button class="validate">Validar</button>

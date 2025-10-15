@@ -141,8 +141,11 @@ function initExercises() {
 			} else if (id === 'ex4') {
 				const a = /^git\s+stash$/i.test(inputs[0].value.trim());
 				const b = /^git\s+stash\s+list$/i.test(inputs[1].value.trim());
-				const c = /^git\s+stash\s+(pop|apply)$/i.test(inputs[2].value.trim());
-				ok = a && b && c;
+				const c = /^git\s+stash\s+pop(\s+stash@\{\d+\})?$/i.test(inputs[2].value.trim());
+				const d = /^git\s+stash\s+apply(\s+stash@\{\d+\})?$/i.test(inputs[3].value.trim());
+				const e = /^git\s+stash\s+drop(\s+stash@\{\d+\})?$/i.test(inputs[4].value.trim());
+				const f = /^git\s+stash\s+clear$/i.test(inputs[5].value.trim());
+				ok = a && b && c && d && e && f;
 			} else if (id === 'ex5') {
 				const a = /^git\s+rebase\s+\S+$/i.test(inputs[0].value.trim());
 				const b = /^git\s+add\s+\.\s*$/i.test(inputs[1].value.trim());
@@ -211,7 +214,14 @@ function getExerciseTips(id) {
 		case 'ex3':
 			return ['Comece com git bisect start', 'Marque commits como good/bad e finalize com reset'];
 		case 'ex4':
-			return ['Salve com git stash', 'Liste com git stash list', 'Recupere com git stash pop/apply'];
+			return [
+				'Salve com git stash (guarda working tree + staging area)',
+				'Liste com git stash list para ver todos os stashes',
+				'git stash pop aplica E remove da lista',
+				'git stash apply aplica MAS mantém na lista',
+				'git stash drop remove item específico',
+				'git stash clear remove TODOS os stashes'
+			];
 		case 'ex5':
 			return ['Inicie: git rebase main', 'Após resolver conflitos: git add . e git rebase --continue'];
 		case 'ex6':
@@ -231,7 +241,7 @@ function getExerciseSolution(id) {
 		case 'ex3':
 			return 'git bisect start\ngit bisect bad\ngit bisect good v1.0.0\n# ...marque good/bad conforme testes...\ngit bisect reset';
 		case 'ex4':
-			return 'git stash\ngit stash list\ngit stash pop';
+			return 'git stash\ngit stash list\ngit stash pop\ngit stash apply\ngit stash drop\ngit stash clear';
 		case 'ex5':
 			return 'git rebase main\n# resolva conflitos\ngit add .\ngit rebase --continue\n# se necessário\ngit rebase --abort';
 		case 'ex6':
