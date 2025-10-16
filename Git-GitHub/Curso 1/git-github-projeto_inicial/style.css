@@ -119,6 +119,8 @@ pre code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberati
 
 .callout { background: var(--callout); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border); }
 .callout.warning { background: var(--warning); }
+.callout.ethics { background: #fef3c7; border-left: 4px solid #f59e0b; }
+.theme-dark .callout.ethics { background: #7c2d1244; border-left: 4px solid #fb923c; }
 
 .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }

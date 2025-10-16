@@ -4,6 +4,39 @@ Este projeto é uma página estática para estudos de Git e GitHub com conteúdo
 
 This project is a static study page for Git and GitHub featuring educational content, practical examples, diagrams, and interactive exercises.
 
+## ✨ Recursos principais / Main Features
+
+### 🎨 Interface e Tema / Interface & Theme
+- ✅ Tema claro/escuro com persistência em `localStorage`
+- ✅ Alternância automática entre temas do Highlight.js e Mermaid
+- ✅ Design responsivo para desktop, tablet e mobile
+- ✅ Rolagem suave para navegação por âncoras
+
+### 📚 Conteúdo Educacional / Educational Content
+- ✅ **Git Cherry-pick**: Aplicar commits específicos sem rebases complicados
+- ✅ **Git Blame**: Rastrear autoria de linhas com autor e hash
+- ✅ **Ética do Git Blame**: Aviso destacado sobre uso construtivo (não apontar culpados)
+- ✅ Working Tree e Staging Area com diagramas interativos
+- ✅ Stash completo (6 comandos: stash, list, pop, apply, drop, clear)
+- ✅ Tags e GitHub Releases com exemplos práticos
+- ✅ Workflows com diagramas Mermaid (Git Flow, Trunk-based)
+
+### 🛠️ Recursos Interativos / Interactive Features
+- ✅ Busca em tempo real nas seções
+- ✅ Botões "Copiar" em todos os blocos de comandos
+- ✅ 7 exercícios práticos com validação automática
+- ✅ Dicas progressivas e soluções com syntax highlighting
+- ✅ **Progresso dos exercícios salvo automaticamente** em `localStorage`
+- ✅ Botão "Voltar ao topo" para navegação rápida
+
+### 🎯 Tecnologias / Technologies
+- ✅ HTML5 semântico
+- ✅ CSS3 com variáveis CSS e responsividade
+- ✅ JavaScript ES6+ (Vanilla JS, sem frameworks)
+- ✅ Highlight.js 11.9.0 para syntax highlighting
+- ✅ Mermaid 10+ para diagramas de workflow
+- ✅ LocalStorage API para persistência de dados
+
 ## Conteúdo e recursos (PT)
 
 - Índice navegável com rolagem suave.
@@ -15,7 +48,8 @@ This project is a static study page for Git and GitHub featuring educational con
   - **Stash completo**: git stash, list, pop, apply, drop, clear com explicações sobre diferenças entre pop vs apply.
   - **Tags completo**: Tags simples vs anotadas, git tag -v para ver autor/data, versionamento semântico (SemVer), boas práticas.
   - **GitHub Releases**: Como criar releases baseadas em tags, anexar arquivos binários, notas de lançamento, automação com GitHub CLI e Actions.
-  - Git avançado: rebase interativo, cherry-pick, bisect.
+  - Git avançado: rebase interativo, **cherry-pick** (aplicar commits de outras branches sem rebases complicados), **git blame** (rastrear autoria de linhas com autor e hash do último commit), bisect.
+  - **Ética do git blame**: Aviso destacado sobre uso construtivo do comando - entender histórico, não apontar culpados.
   - Workflows com diagramas Mermaid: Git Flow, Trunk-based e Branching por release.
 - Exercícios práticos com validação, dicas progressivas e solução:
   - Conventional Commits, Branch/Merge, Bisect, **Stash (6 comandos completos)**, Rebase com conflitos, Reset vs Revert, Cherry-pick múltiplo.
@@ -32,7 +66,8 @@ This project is a static study page for Git and GitHub featuring educational con
   - **Complete Stash**: git stash, list, pop, apply, drop, clear with explanations on pop vs apply differences.
   - **Complete Tags**: Lightweight vs annotated tags, git tag -v to view author/date, semantic versioning (SemVer), best practices.
   - **GitHub Releases**: How to create releases from tags, attach binary files, release notes, automation with GitHub CLI and Actions.
-  - Advanced Git: interactive rebase, cherry-pick, bisect.
+  - Advanced Git: interactive rebase, **cherry-pick** (apply commits from other branches without complex rebases), **git blame** (track line authorship with author and hash of last commit), bisect.
+  - **Git blame ethics**: Highlighted warning about constructive use - understand history, not blame people.
   - Workflows with Mermaid diagrams: Git Flow, Trunk‑based, Release branching.
 - Interactive exercises with validation, progressive hints, and solutions:
   - Conventional Commits, Branch/Merge, Bisect, **Stash (6 complete commands)**, Rebase with conflicts, Reset vs Revert, Multi cherry-pick.
@@ -74,7 +109,29 @@ Observação: Não é necessário servidor. Opcionalmente, use Live Server no VS
 
 - Campos de entrada e botão "Validar". / Input fields and a "Validate" button.
 - Dicas progressivas e "Mostrar solução" com highlight. / Progressive hints and "Show solution" with highlighting.
-- Progresso salvo por exercício em `localStorage`. / Progress saved per exercise in `localStorage`.
+- **Progresso salvo automaticamente** por exercício em `localStorage`. / **Progress automatically saved** per exercise in `localStorage`.
+
+### LocalStorage (Persistência / Persistence)
+
+O site utiliza `localStorage` para salvar preferências e progresso do usuário: / The site uses `localStorage` to save user preferences and progress:
+
+- **Tema**: Preferência de tema claro/escuro é salva e restaurada automaticamente. / **Theme**: Light/dark theme preference is saved and restored automatically.
+- **Progresso dos exercícios**: Respostas e validações são salvas por exercício (chave: `ex-<id>`). / **Exercise progress**: Answers and validations are saved per exercise (key: `ex-<id>`).
+
+Para limpar o progresso dos exercícios: / To clear exercise progress:
+
+```js
+// No console do navegador (F12) / In browser console (F12)
+Object.keys(localStorage)
+  .filter(k => k.startsWith('ex-'))
+  .forEach(k => localStorage.removeItem(k));
+```
+
+Para limpar todas as preferências (tema + exercícios): / To clear all preferences (theme + exercises):
+
+```js
+localStorage.clear();
+```
 
 Resumo de validações / Validation summary:
 - Conventional Commits: `feat|fix|docs|chore|refactor|perf|style|test|build|ci` e `type(scope)?: desc`.

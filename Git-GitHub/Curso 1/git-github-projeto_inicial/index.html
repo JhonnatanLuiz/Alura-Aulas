@@ -1207,7 +1207,12 @@ git rebase --abort</code></pre>
 				</div>
 
 				<h3>Cherry-pick</h3>
-				<p>Aplicar um commit específico em outra branch.</p>
+				<p>Aplicar um commit específico em outra branch sem a necessidade de rebase complicados ou técnicas avançadas.</p>
+				<div class="callout">
+					<strong>💡 Caso de uso:</strong> Você corrigiu um bug na branch <code>develop</code>, mas precisa aplicar 
+					a mesma correção na branch <code>main</code> sem trazer todas as outras mudanças. Use <code>git cherry-pick</code> 
+					para copiar apenas o commit da correção!
+				</div>
 				<div class="cmd">
 					<button class="copy">Copiar</button>
 					<pre><code>git switch main
@@ -1219,6 +1224,36 @@ git add .
 git cherry-pick --continue
 # para cancelar:
 git cherry-pick --abort</code></pre>
+				</div>
+
+				<h3>Git Blame (rastrear autoria de linhas)</h3>
+				<p>
+					O comando <code>git blame</code> exibe todas as linhas de determinado arquivo com informação extra: 
+					o autor (e hash) do último commit que modificou cada uma dessas linhas. É útil para entender o contexto 
+					e histórico de alterações no código.
+				</p>
+				<div class="cmd">
+					<button class="copy">Copiar</button>
+					<pre><code>git blame arquivo.txt
+
+# Exemplo de saída:
+# a1b2c3d4 (João Silva  2024-01-15 10:30:00 +0000  1) função principal() {
+# e5f6g7h8 (Maria Costa 2024-02-20 14:45:00 +0000  2)   console.log("olá");
+# a1b2c3d4 (João Silva  2024-01-15 10:30:00 +0000  3) }
+
+# Ver apenas linhas específicas
+git blame -L 10,20 arquivo.txt
+
+# Ignorar espaços em branco
+git blame -w arquivo.txt
+
+# Ver email ao invés do nome
+git blame -e arquivo.txt</code></pre>
+				</div>
+				<div class="callout ethics">
+					<strong>⚠️ Uso ético do git blame:</strong> Este comando serve para <strong>entender o histórico</strong> 
+					do código e o contexto das mudanças, <strong>não para encontrar ou apontar culpados</strong> por determinados 
+					problemas. Use-o de forma construtiva para comunicação e aprendizado, não para atribuir responsabilidades negativas.
 				</div>
 
 				<h3>Bisect (encontrar commit que quebrou)</h3>
