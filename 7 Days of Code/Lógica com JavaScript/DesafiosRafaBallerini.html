@@ -1,13 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desafios Rafa Ballerini</title>
+    <title>Desafios Rafa Ballerini - 7 Days of Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .info-box {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+        code {
+            background: rgba(0,0,0,0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
+    <h1>🚀 Desafios Rafa Ballerini - 7 Days of Code</h1>
+    
+    <div class="info-box">
+        <h2>📋 Como Visualizar os Resultados:</h2>
+        <ol>
+            <li>Abra o <strong>Console do Navegador</strong> pressionando <code>F12</code></li>
+            <li>Vá para a aba <strong>"Console"</strong></li>
+            <li>Veja os resultados de cada desafio</li>
+        </ol>
+        <p><strong>Observação:</strong> O "undefined" que aparece no console é o valor de retorno do <code>console.log()</code> - isso é normal e esperado! As mensagens são exibidas corretamente antes do "undefined".</p>
+    </div>
+
     <script>
-        console.log('\n--- DESAFIO 1 ---\n');
+        // ============================================
+        // DIA 1 - OPERADORES DE COMPARAÇÃO
+        // ============================================
+        
+        console.log('\n🎯 ============================================');
+        console.log('📅 DIA 1 - OPERADORES DE COMPARAÇÃO');
+        console.log('============================================\n');
+
+        console.log('--- DESAFIO 1 ---\n');
 
         // ============================================
         // DESAFIO 1: Comparar numeroUm e stringUm
@@ -33,7 +80,7 @@
             // A igualdade solta (==) faz coerção de tipos automaticamente
             // Por exemplo: 1 == '1' retorna true porque '1' é convertido para número
             // Neste ramo sabemos que os valores coincidem após coerção, mas os tipos são diferentes
-            console.log('As variáveis numeroUm e stringUm têm o mesmo valor, mas tipos diferentes.');
+            console.log('✅ As variáveis numeroUm e stringUm têm o mesmo valor, mas tipos diferentes.');
         } else {
             // Se nenhuma das condições anteriores for verdadeira, os valores são diferentes
             console.log('As variáveis numeroUm e stringUm não têm o mesmo valor.');
@@ -58,7 +105,7 @@
         } else {
             // Se === retorna false, significa que ou o valor é diferente OU os tipos são diferentes
             // Neste caso: 30 (number) !== '30' (string) porque os tipos são diferentes
-            console.log('As variáveis numeroTrinta e stringTrinta não têm o mesmo tipo');
+            console.log('✅ As variáveis numeroTrinta e stringTrinta não têm o mesmo tipo');
         }
 
         console.log('\n--- DESAFIO 3 ---\n');
@@ -80,7 +127,7 @@
         } else if (numeroDez == stringDez) {
             // A igualdade solta (==) converte '10' para número 10 e compara
             // Como 10 == 10 é true, mas 10 !== '10' (tipos diferentes), entra aqui
-            console.log('As variáveis numeroDez e stringDez têm o mesmo valor, mas tipos diferentes');
+            console.log('✅ As variáveis numeroDez e stringDez têm o mesmo valor, mas tipos diferentes');
         } else {
             // Se nenhuma das condições anteriores for verdadeira, os valores são diferentes
             console.log('As variáveis numeroDez e stringDez não têm o mesmo valor');
@@ -89,20 +136,62 @@
         // ============================================
         // RESUMO DOS OPERADORES DE COMPARAÇÃO
         // ============================================
-        // === (igualdade estrita)
-        //   - Compara valor E tipo
-        //   - Não faz conversão automática
-        //   - Exemplos: 1 === 1 (true), 1 === '1' (false)
-        //
-        // == (igualdade solta)
-        //   - Compara apenas valores após coerção de tipo
-        //   - Pode causar comportamentos inesperados
-        //   - Exemplos: 1 == '1' (true), 0 == false (true)
-        //
-        // DICA: Sempre prefira usar === para evitar surpresas!
-        // Se precisar comparar valores de tipos diferentes, converta explicitamente:
-        // Number('10') === 10 (true)
-        // String(10) === '10' (true)
+        console.log('\n📚 ============================================');
+        console.log('RESUMO DOS OPERADORES DE COMPARAÇÃO');
+        console.log('============================================\n');
+        console.log('=== (igualdade estrita)');
+        console.log('  - Compara valor E tipo');
+        console.log('  - Não faz conversão automática');
+        console.log('  - Exemplos: 1 === 1 (true), 1 === \'1\' (false)\n');
+        console.log('== (igualdade solta)');
+        console.log('  - Compara apenas valores após coerção de tipo');
+        console.log('  - Pode causar comportamentos inesperados');
+        console.log('  - Exemplos: 1 == \'1\' (true), 0 == false (true)\n');
+        console.log('💡 DICA: Sempre prefira usar === para evitar surpresas!');
+        console.log('Se precisar comparar valores de tipos diferentes, converta explicitamente:');
+        console.log('  Number(\'10\') === 10 (true)');
+        console.log('  String(10) === \'10\' (true)\n');
+
+        // ============================================
+        // DIA 2 - CONCATENAÇÃO E TEMPLATE LITERALS
+        // ============================================
+        
+        console.log('🎯 ============================================');
+        console.log('📅 DIA 2 - CONCATENAÇÃO E TEMPLATE LITERALS');
+        console.log('============================================\n');
+
+        // Declaração das variáveis do usuário
+        const nomeUsuario = "Jhonnatan";
+        const idadeUsuario = 39;
+        const linguagemFavorita = "JavaScript";  // Corrigido: camelCase (convenção JavaScript)
+
+        // MÉTODO 1: Concatenação tradicional com + (Dia 2 original)
+        console.log('--- Método 1: Concatenação com + ---');
+        console.log("Olá, meu nome é " + nomeUsuario + ", tenho " + idadeUsuario + " anos e minha linguagem de programação favorita é " + linguagemFavorita + ".");
+        
+        // MÉTODO 2: Template Literals (ES6) - Mais moderno e legível
+        console.log('\n--- Método 2: Template Literals (Recomendado) ---');
+        console.log(`Olá, meu nome é ${nomeUsuario}, tenho ${idadeUsuario} anos e minha linguagem de programação favorita é ${linguagemFavorita}.`);
+
+        // Substitui o uso anterior de confirm() por prompt() que aceita 1 ou 2
+        // Pergunta ao usuário e processa a resposta (string '1' ou '2')
+        const respostaUsuario = prompt(`Você gosta de estudar ${linguagemFavorita}? Responda com o número 1 para SIM ou 2 para NÃO.`);
+
+        if (respostaUsuario === null) {
+            // Usuário cancelou o prompt
+            console.log('Entrada cancelada pelo usuário.');
+        } else {
+            // Remove espaços e compara estritamente as opções esperadas
+            const r = respostaUsuario.trim();
+            if (r === '1') {
+                console.log('Muito bom! Continue estudando e você terá muito sucesso.');
+            } else if (r === '2') {
+                console.log('Ahh que pena... Já tentou aprender outras linguagens?');
+            } else {
+                // Tratamento para resposta inválida
+                console.log('Resposta não reconhecida. Por favor responda com 1 (SIM) ou 2 (NÃO).');
+            }
+        }
     </script>
 </body>
 </html>
