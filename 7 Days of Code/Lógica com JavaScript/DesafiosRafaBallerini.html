@@ -192,6 +192,310 @@
                 console.log('Resposta não reconhecida. Por favor responda com 1 (SIM) ou 2 (NÃO).');
             }
         }
+
+        // ============================================
+        // DIA 3 - ESTRUTURAS DE CONTROLE DE FLUXO - VERSÃO COMPLEXA
+        // ============================================
+        
+        console.log('\n🎯 ============================================');
+        console.log('📅 DIA 3 - ESTRUTURAS DE CONTROLE DE FLUXO - VERSÃO COMPLEXA');
+        console.log('============================================\n');
+
+        // ============================================
+        // ETAPA 1: Escolher entre Front-End ou Back-End
+        // ============================================
+        // Pergunta ao usuário qual área ele deseja seguir
+        // Usamos prompt() para capturar a entrada do usuário como string
+        const areaEstudo = prompt("Qual área você gostaria de seguir?\n1. Front-End\n2. Back-End\n\nResponda com 'Front-End' ou 'Back-End':");
+
+        // Verifica se o usuário cancelou o prompt (clicou em Cancelar)
+        if (areaEstudo === null) {
+            console.log('❌ Entrada cancelada pelo usuário. Desafio interrompido.');
+        } else {
+            // Remove espaços em branco no início e fim, e converte para minúsculas
+            // Isso evita problemas com "Front-End " ou "FRONT-END" vs "Front-End"
+            const area = areaEstudo.trim().toLowerCase(); // trim = remove espaços e lowerCase = minúsculas
+
+            // Variável para armazenar a tecnologia escolhida (será preenchida nas próximas etapas)
+            let tecnologiaPrincipal = '';
+
+            // ============================================
+            // ETAPA 2: Escolher tecnologia específica
+            // ============================================
+            // Dependendo da área escolhida, oferecemos diferentes opções de tecnologias
+
+            if (area === 'front-end') {
+                // Se escolheu Front-End, pergunta qual framework aprender
+                console.log('\n✅ Você escolheu a área de Front-End!');
+                
+                // prompt() exibe uma caixa de diálogo e retorna o que o usuário digitou
+                const tecnologiaFrontend = prompt("Qual tecnologia você gostaria de aprender?\n1. React\n2. Vue\n\nResponda com 'React' ou 'Vue':");
+                
+                // Se o usuário cancelar, a função prompt retorna null
+                if (tecnologiaFrontend === null) {
+                    console.log('❌ Seleção de tecnologia cancelada.');
+                    // O código continuará mas sem tecnologia definida
+                } else {
+                    // Normaliza a resposta (remove espaços, converte para minúsculas)
+                    const tecFront = tecnologiaFrontend.trim().toLowerCase(); // trim = remove espaços, lowerCase = minúsculas
+                    
+                    if (tecFront === 'react') {
+                        console.log('🚀 React é uma biblioteca JavaScript para construir interfaces de usuário com componentes reutilizáveis!');
+                        tecnologiaPrincipal = 'React';
+                    } else if (tecFront === 'vue') {
+                        console.log('🎨 Vue é um framework progressivo para construir interfaces dinâmicas e reativas!');
+                        tecnologiaPrincipal = 'Vue';
+                    } else {
+                        console.log('⚠️ Opção não reconhecida. Por favor, escolha entre React ou Vue.');
+                    }
+                }
+            } else if (area === 'back-end') {
+                // Se escolheu Back-End, pergunta qual linguagem aprender
+                console.log('\n✅ Você escolheu a área de Back-End!');
+                
+                const tecnologiaBackend = prompt("Qual tecnologia você gostaria de aprender?\n1. C#\n2. Java\n\nResponda com 'C#' ou 'Java':");
+                
+                if (tecnologiaBackend === null) {
+                    console.log('❌ Seleção de tecnologia cancelada.');
+                } else {
+                    const tecBack = tecnologiaBackend.trim().toLowerCase();
+                    
+                    if (tecBack === 'c#' || tecBack === 'csharp') {
+                        console.log('💻 C# é uma linguagem orientada a objetos moderna desenvolvida pela Microsoft, perfeita para desenvolvimento .NET!');
+                        tecnologiaPrincipal = 'C#';
+                    } else if (tecBack === 'java') {
+                        console.log('☕ Java é uma linguagem robusta e multiplataforma, amplamente usada em grandes sistemas!');
+                        tecnologiaPrincipal = 'Java';
+                    } else {
+                        console.log('⚠️ Opção não reconhecida. Por favor, escolha entre C# ou Java.');
+                    }
+                }
+            } else {
+                // Se digitou algo que não é 'front-end' ou 'back-end'
+                console.log('⚠️ Opção não reconhecida. Por favor, escolha entre Front-End ou Back-End.');
+            }
+
+            // ============================================
+            // ETAPA 3: Especializar ou se tornar Fullstack
+            // ============================================
+            // Pergunta se o usuário quer se especializar ou se tornar fullstack
+            // A resposta deve ser 'sim' ou 'não' (case-insensitive)
+            const especializacao = prompt("Você gostaria de se especializar na sua área escolhida ou se tornar Fullstack?\nResponda com 'especializar' ou 'fullstack':");
+
+            if (especializacao === null) {
+                console.log('❌ Seleção de especialização cancelada.');
+            } else {
+                // Normaliza a resposta
+                const escolhaEsp = especializacao.trim().toLowerCase();
+
+                if (escolhaEsp === 'especializar') {
+                    // Se escolhe especializar, mostra mensagem de aprofundamento
+                    if (area === 'front-end') {
+                        console.log('\n🎯 Excelente! Você vai se aprofundar em Front-End.');
+                        console.log('Foque em dominar ' + tecnologiaPrincipal + ' completamente e aprenda sobre otimização, acessibilidade e performance!');
+                    } else if (area === 'back-end') {
+                        console.log('\n🎯 Excelente! Você vai se aprofundar em Back-End.');
+                        console.log('Foque em dominar ' + tecnologiaPrincipal + ' completamente e aprenda sobre bancos de dados, segurança e arquitetura!');
+                    }
+                } else if (escolhaEsp === 'fullstack') {
+                    // Se escolhe fullstack, mostra mensagem motivadora
+                    console.log('\n🚀 Que ambição! Você escolheu se tornar Fullstack!');
+                    console.log('Isso significa que você vai aprender tanto Front-End quanto Back-End. Prepare-se para uma jornada desafiadora e recompensadora!');
+                } else {
+                    // Se digitou algo que não é 'especializar' ou 'fullstack'
+                    console.log('⚠️ Opção não reconhecida. Por favor, escolha entre "especializar" ou "fullstack".');
+                }
+            }
+
+            // ============================================
+            // ETAPA 4: Adicionar tecnologias à lista de aprendizado
+            // ============================================
+            // O usuário pode adicionar quantas tecnologias quiser
+            // Usamos um array (lista) para armazenar as tecnologias
+            const tecnologiasParaAprender = [];
+
+            // Variável para controlar se o usuário quer continuar adicionando tecnologias
+            // Inicializa como true para entrar no loop while na primeira vez
+            let adicionarMais = true;
+
+            // While (enquanto) - continua executando enquanto a condição for verdadeira
+            while (adicionarMais) {
+                // Pergunta qual tecnologia o usuário gostaria de aprender
+                const novaTecnologia = prompt("Qual tecnologia você gostaria de aprender?");
+
+                // Se o usuário cancelou (clicou em Cancelar)
+                if (novaTecnologia === null) {
+                    console.log('❌ Adição de tecnologias cancelada.');
+                    // Define adicionarMais como false para sair do loop
+                    adicionarMais = false;
+                } else if (novaTecnologia.trim() === '') {
+                    // Se o usuário digitou espaços em branco (campo vazio)
+                    console.log('⚠️ Por favor, digite o nome de uma tecnologia.');
+                    // Continua no loop para perguntar novamente
+                } else {
+                    // Se recebeu uma tecnologia válida (não vazia, não cancelada)
+                    
+                    // Remove espaços extras e adiciona à lista (array)
+                    // push() adiciona um novo elemento ao final do array
+                    tecnologiasParaAprender.push(novaTecnologia.trim());
+
+                    // Exibe uma mensagem motivadora sobre a tecnologia adicionada
+                    const tec = novaTecnologia.trim().toLowerCase();
+                    
+                    if (tec === 'react' || tec === 'vue' || tec === 'angular') {
+                        console.log(`✅ ${novaTecnologia} é um ótimo framework para Front-End!`);
+                    } else if (tec === 'c#' || tec === 'java' || tec === 'python') {
+                        console.log(`✅ ${novaTecnologia} é uma linguagem poderosa para Back-End!`);
+                    } else if (tec === 'html' || tec === 'css' || tec === 'javascript') {
+                        console.log(`✅ ${novaTecnologia} é essencial para desenvolvimento web!`);
+                    } else {
+                        console.log(`✅ ${novaTecnologia} é uma tecnologia interessante para aprender!`);
+                    }
+
+                    // Pergunta se o usuário deseja adicionar mais tecnologias
+                    // confirm() retorna true se o usuário clica "OK", false se clica "Cancelar"
+                    const resposta = confirm("Tem mais alguma tecnologia que você gostaria de aprender?");
+                    
+                    // Se a resposta for false (clicou Cancelar), sai do loop
+                    if (!resposta) {
+                        adicionarMais = false;
+                    }
+                    // Se a resposta for true (clicou OK), continua no loop
+                }
+            }
+
+            // ============================================
+            // RESUMO FINAL
+            // ============================================
+            console.log('\n📚 ============================================');
+            console.log('RESUMO DO SEU PLANO DE APRENDIZADO');
+            console.log('============================================\n');
+            
+            console.log('Área escolhida: ' + area.toUpperCase());
+            console.log('Tecnologia principal: ' + (tecnologiaPrincipal || 'Nenhuma selecionada'));
+            
+            // Se o array tem tecnologias, exibe a lista
+            if (tecnologiasParaAprender.length > 0) {
+                console.log('\nTecnologias a aprender:');
+                // for...of percorre cada elemento do array
+                for (let tecnologia of tecnologiasParaAprender) {
+                    // Mostra cada tecnologia com um índice (+1 porque arrays começam em 0)
+                    console.log('  ' + (tecnologiasParaAprender.indexOf(tecnologia) + 1) + '. ' + tecnologia);
+                }
+            } else {
+                console.log('\nNenhuma tecnologia adicional foi adicionada.');
+            }
+
+            console.log('\n💪 Boa sorte em sua jornada de aprendizado!');
+        }
+
+        // ============================================
+        // DIA 3 - VERSÃO SIMPLIFICADA PARA APRENDER
+        // ============================================
+        
+        console.log('\n🎯 ============================================');
+        console.log('📅 DIA 3 - ESTRUTURAS DE CONTROLE (VERSÃO SIMPLES)');
+        console.log('============================================\n');
+
+        // ============================================
+        // PASSO 1: Perguntar qual área escolher
+        // ============================================
+        console.log('--- PASSO 1: Escolher Área ---\n');
+        
+        // Pergunta: "Qual área você quer? Front-End ou Back-End?"
+        const areaEscolhida = prompt("Digite: Front-End ou Back-End");
+        
+        console.log('Você escolheu: ' + areaEscolhida);
+
+        // ============================================
+        // PASSO 2: Perguntar qual tecnologia
+        // ============================================
+        console.log('\n--- PASSO 2: Escolher Tecnologia ---\n');
+        
+        let tecnologia = ''; // Variável para guardar a tecnologia escolhida
+
+        // SE a área é Front-End
+        if (areaEscolhida.toLowerCase() === 'front-end') {
+            // ENTÃO pergunta sobre React ou Vue
+            tecnologia = prompt("Escolha: React ou Vue");
+            console.log('Você escolheu: ' + tecnologia);
+        } 
+        // SENÃO SE a área é Back-End
+        else if (areaEscolhida.toLowerCase() === 'back-end') {
+            // ENTÃO pergunta sobre C# ou Java
+            tecnologia = prompt("Escolha: C# ou Java");
+            console.log('Você escolheu: ' + tecnologia);
+        }
+
+        // ============================================
+        // PASSO 3: Perguntar se vai especializar ou fullstack
+        // ============================================
+        console.log('\n--- PASSO 3: Especializar ou Fullstack ---\n');
+        
+        const especializacao = prompt("Especializar ou Fullstack?");
+        
+        // SE vai especializar
+        if (especializacao.toLowerCase() === 'especializar') {
+            console.log('Você vai se especializar em ' + areaEscolhida + '!');
+        } 
+        // SENÃO SE vai ser fullstack
+        else if (especializacao.toLowerCase() === 'fullstack') {
+            console.log('Você vai ser Fullstack! Aprenderá tudo!');
+        }
+
+        // ============================================
+        // PASSO 4: Adicionar tecnologias (uma por uma)
+        // ============================================
+        console.log('\n--- PASSO 4: Adicionar Tecnologias ---\n');
+        
+        // Array para guardar as tecnologias
+        const minhaListaDeTecnologias = [];
+        
+        // Variável para controlar o loop
+        let continuar = true;
+
+        // ENQUANTO o usuário quiser continuar
+        while (continuar) {
+            // Pergunta: "Qual tecnologia você quer aprender?"
+            const novaTec = prompt("Qual tecnologia você quer aprender?");
+            
+            // SE o usuário não cancelou
+            if (novaTec !== null && novaTec !== '') {
+                // ENTÃO adiciona à lista
+                minhaListaDeTecnologias.push(novaTec);
+                console.log('✅ Adicionada: ' + novaTec);
+                
+                // Pergunta: "Quer adicionar mais?"
+                const quer = confirm("Quer adicionar mais uma?");
+                
+                // SE clicou "OK" (true), continua
+                // SE clicou "Cancelar" (false), sai do loop
+                if (!quer) {
+                    continuar = false;
+                }
+            } else {
+                // SE cancelou ou deixou vazio, sai do loop
+                continuar = false;
+            }
+        }
+
+        // ============================================
+        // MOSTRAR RESUMO FINAL
+        // ============================================
+        console.log('\n📚 ============================================');
+        console.log('SEU PLANO DE APRENDIZADO');
+        console.log('============================================\n');
+        
+        console.log('Área: ' + areaEscolhida);
+        console.log('Tecnologia Principal: ' + tecnologia);
+        console.log('Especialização: ' + especializacao);
+        console.log('\nTecnologias a aprender:');
+        
+        // Para cada tecnologia na lista
+        for (let i = 0; i < minhaListaDeTecnologias.length; i++) {
+            // Mostra: 1. React, 2. Vue, etc
+            console.log((i + 1) + '. ' + minhaListaDeTecnologias[i]);
+        }
     </script>
 </body>
 </html>
