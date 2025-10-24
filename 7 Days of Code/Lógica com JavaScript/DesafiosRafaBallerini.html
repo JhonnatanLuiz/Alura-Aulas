@@ -432,15 +432,22 @@
         // ============================================
         console.log('\n--- PASSO 3: Especializar ou Fullstack ---\n');
         
-        const especializacao = prompt("Especializar ou Fullstack?");
+        const especializacaoSimples = prompt("Especializar ou Fullstack?");
         
-        // SE vai especializar
-        if (especializacao.toLowerCase() === 'especializar') {
-            console.log('Você vai se especializar em ' + areaEscolhida + '!');
-        } 
-        // SENÃO SE vai ser fullstack
-        else if (especializacao.toLowerCase() === 'fullstack') {
-            console.log('Você vai ser Fullstack! Aprenderá tudo!');
+        if (especializacaoSimples === null) {
+            console.log('Entrada de especialização cancelada pelo usuário.');
+        } else {
+            const espLower = especializacaoSimples.trim().toLowerCase();
+            // SE vai especializar
+            if (espLower === 'especializar') {
+                console.log('Você vai se especializar em ' + areaEscolhida + '!');
+            } 
+            // SENÃO SE vai ser fullstack
+            else if (espLower === 'fullstack') {
+                console.log('Você vai ser Fullstack! Aprenderá tudo!');
+            } else {
+                console.log('Resposta não reconhecida. Por favor responda com "especializar" ou "fullstack".');
+            }
         }
 
         // ============================================
@@ -453,17 +460,17 @@
         
         // Variável para controlar o loop
         let continuar = true;
-
+        
         // ENQUANTO o usuário quiser continuar
         while (continuar) {
             // Pergunta: "Qual tecnologia você quer aprender?"
             const novaTec = prompt("Qual tecnologia você quer aprender?");
             
             // SE o usuário não cancelou
-            if (novaTec !== null && novaTec !== '') {
-                // ENTÃO adiciona à lista
-                minhaListaDeTecnologias.push(novaTec);
-                console.log('✅ Adicionada: ' + novaTec);
+            if (novaTec !== null && novaTec.trim() !== '') {
+                // ENTÃO adiciona à lista (trim para evitar entradas com espaços)
+                minhaListaDeTecnologias.push(novaTec.trim());
+                console.log('✅ Adicionada: ' + novaTec.trim());
                 
                 // Pergunta: "Quer adicionar mais?"
                 const quer = confirm("Quer adicionar mais uma?");
@@ -474,11 +481,11 @@
                     continuar = false;
                 }
             } else {
-                // SE cancelou ou deixou vazio, sai do loop
+                // Se o usuário cancelou ou enviou vazio, encerra a adição
                 continuar = false;
             }
         }
-
+        
         // ============================================
         // MOSTRAR RESUMO FINAL
         // ============================================
@@ -488,7 +495,7 @@
         
         console.log('Área: ' + areaEscolhida);
         console.log('Tecnologia Principal: ' + tecnologia);
-        console.log('Especialização: ' + especializacao);
+        console.log('Especialização: ' + (typeof especializacaoSimples !== 'undefined' ? especializacaoSimples : (typeof especializacao !== 'undefined' ? especializacao : 'Nenhuma')));
         console.log('\nTecnologias a aprender:');
         
         // Para cada tecnologia na lista
@@ -496,6 +503,133 @@
             // Mostra: 1. React, 2. Vue, etc
             console.log((i + 1) + '. ' + minhaListaDeTecnologias[i]);
         }
-    </script>
+
+// ============================================
+// DIA 4 - JOGO DA ADIVINHAÇÃO (VERSÃO SIMPLIFICADA)
+// ============================================
+// Objetivo: Adivinhar um número aleatório entre 1 e 10 em 3 tentativas
+
+console.log('\n🎯 DIA 4 - JOGO DA ADIVINHAÇÃO\n');
+
+// ============================================
+// PASSO 1: Criar uma FUNÇÃO para o jogo
+// ============================================
+// Uma função é um bloco de código reutilizável
+// Usamos função porque queremos executar o mesmo jogo várias vezes
+function jogar() {
+    
+    // ============================================
+    // PASSO 2: Gerar número aleatório
+    // ============================================
+    // Math.random() gera número decimal entre 0 e 1 (ex: 0.7543)
+    // * 10 multiplica por 10, deixando entre 0 e 10 (ex: 7.543)
+    // Math.floor() arredonda para baixo (ex: 7.543 vira 7)
+    // + 1 adiciona 1, deixando entre 1 e 10 (ex: 7 vira 8)
+    const numero = Math.floor(Math.random() * 10) + 1;
+    
+    // ============================================
+    // PASSO 3: Variável para controlar se acertou
+    // ============================================
+    // Inicialmente é false (não acertou ainda)
+    // Quando acertar, muda para true e o loop para
+    let acertou = false;
+    
+    // ============================================
+    // PASSO 4: Loop FOR - 3 tentativas
+    // ============================================
+    // for (iniciar em 1; enquanto for <= 3; incrementar 1 a cada volta)
+    // i = 1 (primeira tentativa)
+    // i = 2 (segunda tentativa)
+    // i = 3 (terceira tentativa)
+    // Depois sai do loop
+    for (let i = 1; i <= 3; i++) {
+        
+        // ============================================
+        // PASSO 5: Pedir palpite do usuário
+        // ============================================
+        // prompt() abre uma caixa de diálogo para o usuário digitar
+        // Number() converte o texto digitado em número
+        // Exemplo: prompt retorna "5" (texto), Number converte para 5 (número)
+        const palpite = Number(prompt('Tentativa ' + i + '/3: Adivinhe o número (1-10):'));
+        
+        // ============================================
+        // PASSO 6: Verificar se ACERTOU
+        // ============================================
+        // === significa "exatamente igual"
+        // Se palpite = 7 e numero = 7, então acertou!
+        if (palpite === numero) {
+            // Mostra mensagem de sucesso com o número de tentativas
+            alert('🎉 Acertou em ' + i + ' tentativa(s)!');
+            // Muda acertou para true
+            acertou = true;
+            // break = SAIR do loop for imediatamente
+            // Não precisa fazer as outras tentativas
+            break;
+        } 
+        // SENÃO SE o palpite é MAIOR que o número
+        // Exemplo: palpite = 8 e numero = 5
+        else if (palpite > numero) {
+            // Dica: o número secreto é menor
+            alert('📉 Número muito grande!');
+        } 
+        // SENÃO SE o palpite é MENOR que o número
+        // Exemplo: palpite = 3 e numero = 7
+        else if (palpite < numero) {
+            // Dica: o número secreto é maior
+            alert('📈 Número muito pequeno!');
+        }
+        // Aqui o loop continua para a próxima tentativa (i++)
+    }
+    
+    // ============================================
+    // PASSO 7: Verificar se perdeu
+    // ============================================
+    // Se saiu do loop for SEM acertar (acertou ainda é false)
+    // Significa que usou as 3 tentativas sem acertar
+    if (!acertou) {
+        // !acertou significa "NÃO acertou"
+        // Mostra qual era o número secreto
+        alert('Game Over! O número era ' + numero);
+    }
+}
+
+// ============================================
+// PASSO 8: Loop infinito para jogar múltiplas vezes
+// ============================================
+// Inicialmente o usuário quer jogar
+let jogar_novamente = true;
+
+// Enquanto quiser jogar
+while (jogar_novamente) {
+    // Executa uma rodada do jogo (chama a função)
+    jogar();
+    
+    // ============================================
+    // PASSO 9: Perguntar se quer jogar novamente
+    // ============================================
+    // Abre caixa de diálogo perguntando
+    const resposta = prompt('Jogar novamente? (sim/não):');
+    
+    // ============================================
+    // PASSO 10: Processar resposta do usuário
+    // ============================================
+    // resposta && resposta.toLowerCase().startsWith('s')
+    // Significa:
+    // resposta - verifica se o usuário não clicou "Cancelar" (null)
+    // && - E também
+    // resposta.toLowerCase() - converte para minúsculas (SIM vira sim)
+    // .startsWith('s') - começa com letra 's' (sim, s, sim sim, etc)
+    
+    // Se tudo for verdadeiro, jogar_novamente recebe true (continua)
+    // Se for falso, recebe false (sai do while)
+    jogar_novamente = resposta && resposta.toLowerCase().startsWith('s');
+}
+
+// ============================================
+// PASSO 11: Mensagem final
+// ============================================
+// Quando sair do while, mostra que acabou
+console.log('Jogo encerrado!');
+</script>
 </body>
 </html>
