@@ -1,5 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Montserrat:wght@400;600&display=swap');
 
+/* ========== VARIÁVEIS CSS ========== */
+:root {
+    /* Cores Primárias */
+    --cor-primaria: #000000;        /* Preto - Fundo principal */
+    --cor-secundaria: #F6F6F6;      /* Branco/Cinza claro - Texto principal */
+    --cor-terciaria: #22D4FD;       /* Azul claro - Destaque/Links */
+    
+    /* Cores de Interação */
+    --cor-hover: #1DA1DB;           /* Azul mais escuro - Hover nos links */
+    --cor-hover-fundo: #272727;     /* Cinza escuro - Hover nos botões */
+    
+    /* Fontes */
+    --fonte-primaria: 'Krona One', sans-serif;      /* Fonte para títulos */
+    --fonte-secundaria: 'Montserrat', sans-serif;   /* Fonte para textos */
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -8,9 +24,9 @@
 body {
     height: 100vh;
     box-sizing: border-box;
-    background-color: #000000;
-    color: #F6F6F6;
-    font-family: 'Krona One', sans-serif;
+    background-color: var(--cor-primaria);
+    color: var(--cor-secundaria);
+    font-family: var(--fonte-primaria);
 }
 
 /* ========== CABEÇALHO ========== */
@@ -24,21 +40,21 @@ body {
 }
 
 .cabecalho__menu__link {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--fonte-secundaria);
     font-size: 24px;
     font-weight: 600;
-    color: #22D4FD;
+    color: var(--cor-terciaria);
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .cabecalho__menu__link:hover {
-    color: #1DA1DB;
+    color: var(--cor-hover);
 }
 
 /* ========== APRESENTAÇÃO ========== */
 .titulo-destaque{
-    color: #22D4FD;
+    color: var(--cor-terciaria);
 }
 
 .apresentacao {
@@ -58,13 +74,13 @@ body {
 
 .apresentacao__conteudo__titulo {
     font-size: 36px;
-    font-family: 'Krona One', sans-serif;
+    font-family: var(--fonte-primaria);
     line-height: 1.4;
 }
 
 .apresentacao__conteudo__texto {
     font-size: 24px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--fonte-secundaria);
     line-height: 1.5;
 }
 
@@ -78,7 +94,7 @@ body {
 }
 
 .apresentacao__links__subtitulo {
-    font-family: 'Krona One', sans-serif;
+    font-family: var(--fonte-primaria);
     font-weight: 400;
     font-size: 24px;
 }
@@ -88,12 +104,12 @@ body {
     justify-content: flex-start;
     align-items: center;
     gap: 16px;
-    border: 2px dotted #22D4FD;
+    border: 2px dotted var(--cor-terciaria);
     width: 50%;
     padding: 21.5px 24px;
     text-decoration: none;
-    color: #F6F6F6;
-    font-family: 'Montserrat', sans-serif;
+    color: var(--cor-secundaria);
+    font-family: var(--fonte-secundaria);
     font-size: 24px;
     font-weight: 600;
     border-radius: 16px;
@@ -101,7 +117,7 @@ body {
 }
 
 .apresentacao__links__navegacao:hover {
-    background-color: #272727;
+    background-color: var(--cor-hover-fundo);
 }
 
 .apresentacao__links__navegacao img {
@@ -119,10 +135,10 @@ body {
 /* ========== RODAPÉ ========== */
 .rodape {
     padding: 24px;
-    color: #000000;
-    background-color: #22D4FD;
+    color: var(--cor-primaria);
+    background-color: var(--cor-terciaria);
     text-align: center;
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--fonte-secundaria);
     font-size: 24px;
     font-weight: 600;
 }
