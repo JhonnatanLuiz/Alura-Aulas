@@ -132,6 +132,9 @@ body {
     border-radius: 16px;
 }
 
+.apresentacao__imagem {
+    width: 50%;
+}
 /* ========== RODAPÉ ========== */
 .rodape {
     padding: 24px;
@@ -141,4 +144,209 @@ body {
     font-family: var(--fonte-secundaria);
     font-size: 1.5rem;
     font-weight: 600;
+}
+
+/* ========================================== */
+/* ========== RESPONSIVIDADE ========== */
+/* ========================================== */
+
+/* ========== TABLET (até 1200px) ========== */
+@media (max-width: 1200px) {
+    /* Reduz gap entre elementos */
+    .apresentacao {
+        gap: 40px;
+        padding: 5% 5%;
+        flex-direction: column-reverse;
+    }
+    
+    .cabecalho {
+        padding: 3% 0% 0% 5%;
+    }
+    
+    .cabecalho__menu {
+        gap: 40px;
+    }
+    
+    /* Ajusta tamanho da imagem */
+    .apresentacao img {
+        max-width: 400px;
+    }
+}
+
+/* ========== MOBILE LANDSCAPE / TABLET PEQUENO (até 968px) ========== */
+@media (max-width: 968px) {
+    /* Empilha conteúdo verticalmente */
+    .apresentacao {
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 40px;
+        padding: 5% 8%;
+    }
+    
+    /* Conteúdo ocupa largura total */
+    .apresentacao__conteudo {
+        width: 100%;
+    }
+    
+    /* Imagem centralizada e menor */
+    .apresentacao img {
+        width: 80%;
+        max-width: 350px;
+    }
+    
+    /* Reduz tamanho das fontes */
+    .apresentacao__conteudo__titulo {
+        font-size: 1.75rem; /* 28px */
+    }
+    
+    .apresentacao__conteudo__texto {
+        font-size: 1.25rem; /* 20px */
+    }
+    
+    .apresentacao__links__subtitulo {
+        font-size: 1.25rem;
+    }
+    
+    /* Botões de rede social mais largos */
+    .apresentacao__links__navegacao {
+        width: 70%;
+        font-size: 1.25rem;
+    }
+}
+
+/* ========== MOBILE (até 768px) ========== */
+@media (max-width: 768px) {
+    /* Cabeçalho */
+    .cabecalho {
+        padding: 5% 5%;
+    }
+    
+    .cabecalho__menu {
+        gap: 20px;
+        justify-content: center;
+    }
+    
+    .cabecalho__menu__link {
+        font-size: 1.125rem; /* 18px */
+    }
+    
+    /* Apresentação */
+    .apresentacao {
+        padding: 8% 6%;
+    }
+    
+    .apresentacao__conteudo__titulo {
+        font-size: 1.5rem; /* 24px */
+        text-align: center;
+    }
+    
+    .apresentacao__conteudo__texto {
+        font-size: 1.125rem; /* 18px */
+        text-align: justify;
+    }
+    
+    /* Links centralizados */
+    .apresentacao__links {
+        width: 100%;
+        gap: 24px;
+    }
+    
+    .apresentacao__links__subtitulo {
+        font-size: 1.125rem;
+        text-align: center;
+    }
+    
+    .apresentacao__links__navegacao {
+        width: 90%;
+        font-size: 1.125rem;
+        padding: 18px 20px;
+    }
+    
+    /* Imagem */
+    .apresentacao img {
+        width: 90%;
+        max-width: 300px;
+    }
+    
+    /* Rodapé */
+    .rodape {
+        font-size: 1.125rem;
+        padding: 20px;
+    }
+}
+
+/* ========== MOBILE PEQUENO (até 480px) ========== */
+@media (max-width: 480px) {
+    /* Cabeçalho empilhado */
+    .cabecalho {
+        padding: 6% 4%;
+    }
+    
+    .cabecalho__menu {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+    
+    /* Títulos e textos menores */
+    .apresentacao__conteudo__titulo {
+        font-size: 1.375rem; /* 22px */
+    }
+    
+    .apresentacao__conteudo__texto {
+        font-size: 1rem; /* 16px */
+    }
+    
+    .apresentacao__conteudo {
+        gap: 24px;
+    }
+    
+    /* Links ocupam largura total */
+    .apresentacao__links__navegacao {
+        width: 100%;
+        font-size: 1rem;
+        padding: 16px 18px;
+        gap: 12px;
+    }
+    
+    .apresentacao__links__navegacao img {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .apresentacao__links__subtitulo {
+        font-size: 1rem;
+    }
+    
+    /* Imagem */
+    .apresentacao img {
+        width: 100%;
+        max-width: 250px;
+    }
+    
+    /* Rodapé */
+    .rodape {
+        font-size: 0.875rem; /* 14px */
+        padding: 16px 12px;
+    }
+}
+
+/* ========== MOBILE EXTRA PEQUENO (até 360px) ========== */
+@media (max-width: 360px) {
+    .apresentacao__conteudo__titulo {
+        font-size: 1.25rem; /* 20px */
+    }
+    
+    .apresentacao__conteudo__texto {
+        font-size: 0.938rem; /* 15px */
+    }
+    
+    .apresentacao__links__navegacao {
+        font-size: 0.938rem;
+        padding: 14px 16px;
+    }
+    
+    .rodape {
+        font-size: 0.813rem; /* 13px */
+    }
 }
