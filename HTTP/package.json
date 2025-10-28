@@ -1,0 +1,19 @@
+{
+  "name": "http-interactive-guide",
+  "version": "1.0.0",
+  "description": "Guia interativo completo sobre HTTP com Tailwind CSS e SASS",
+  "scripts": {
+    "sass:watch": "sass --watch style.scss:style.css",
+    "sass:build": "sass style.scss style.css --style compressed",
+    "dev": "sass --watch style.scss:style.css"
+  },
+  "keywords": [
+    "http",
+    "tailwind",
+    "sass",
+    "interactive",
+    "guide"
+  ],
+  "author": "Johnnie",
+  "license": "MIT"
+}

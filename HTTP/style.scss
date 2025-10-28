@@ -1,0 +1,386 @@
+// Variables
+$primary-color: #3b82f6;
+$secondary-color: #8b5cf6;
+$accent-color: #ec4899;
+$dark-bg: #1a1a2e;
+$card-bg: rgba(30, 41, 59, 0.6);
+
+// Mixins
+@mixin gradient-text($colors...) {
+    background: linear-gradient(to right, $colors);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@mixin card-hover {
+    transition: all 0.3s ease;
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+    }
+}
+
+@mixin pulse-animation {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+// Animations
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        max-height: 500px;
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(139, 92, 246, 0.6);
+    }
+}
+
+// Global Styles
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+// Custom Scrollbar
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a2e;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, $primary-color, $secondary-color);
+    border-radius: 5px;
+    
+    &:hover {
+        background: linear-gradient(to bottom, lighten($primary-color, 10%), lighten($secondary-color, 10%));
+    }
+}
+
+// Navigation
+.nav-link {
+    position: relative;
+    font-weight: 500;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(to right, $primary-color, $secondary-color);
+        transition: width 0.3s ease;
+    }
+    
+    &:hover::after {
+        width: 100%;
+    }
+}
+
+// Mobile Menu
+.mobile-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    
+    &.active {
+        max-height: 400px;
+        border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+    }
+}
+
+// Hero Section
+.hero-section {
+    position: relative;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+        pointer-events: none;
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 1s ease-out;
+}
+
+// Cards
+.card {
+    @include card-hover;
+    backdrop-filter: blur(10px);
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: inherit;
+        padding: 2px;
+        background: linear-gradient(135deg, $primary-color, $secondary-color);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    &:hover::before {
+        opacity: 0.5;
+    }
+}
+
+// Method Cards
+.method-card {
+    position: relative;
+    overflow: hidden;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        transition: left 0.5s ease;
+    }
+    
+    &:hover::after {
+        left: 100%;
+    }
+    
+    .method-details {
+        animation: slideDown 0.3s ease-out;
+        
+        code {
+            font-family: 'Fira Code', 'Courier New', monospace;
+            line-height: 1.6;
+        }
+    }
+}
+
+// Status Categories
+.status-category {
+    backdrop-filter: blur(10px);
+    @include card-hover;
+    
+    .status-code {
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        
+        &:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+            padding-left: 16px;
+        }
+    }
+}
+
+// Header Cards
+.header-card {
+    backdrop-filter: blur(10px);
+    @include card-hover;
+    
+    ul li {
+        position: relative;
+        padding-left: 20px;
+        
+        &::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: $primary-color;
+        }
+    }
+}
+
+// Buttons
+.btn-primary,
+.btn-secondary {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+        z-index: -1;
+    }
+    
+    &:hover::before {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+// Modal
+.modal {
+    backdrop-filter: blur(5px);
+    
+    &.active {
+        display: flex !important;
+        animation: fadeIn 0.3s ease-out;
+    }
+    
+    > div {
+        animation: fadeIn 0.4s ease-out;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    }
+}
+
+// Section Titles
+.section-title {
+    position: relative;
+    display: inline-block;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(to right, $primary-color, $secondary-color, $accent-color);
+        border-radius: 2px;
+    }
+}
+
+// Loading State
+.loading {
+    position: relative;
+    pointer-events: none;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        margin: -10px 0 0 -10px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+// Interactive Elements
+.interactive-glow {
+    animation: glow 2s ease-in-out infinite;
+}
+
+// Responsive Typography
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2rem !important;
+    }
+    
+    .method-card,
+    .status-category {
+        margin-bottom: 1rem;
+    }
+}
+
+// Code Blocks
+code,
+pre {
+    font-family: 'Fira Code', 'Monaco', 'Courier New', monospace;
+}
+
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+// Utility Classes
+.glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.text-glow {
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.5),
+                 0 0 20px rgba(139, 92, 246, 0.3);
+}
+
+// Focus States
+*:focus {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
+}
+
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
+}

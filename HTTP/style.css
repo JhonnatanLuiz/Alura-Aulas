@@ -1,0 +1,330 @@
+@charset "UTF-8";
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(139, 92, 246, 0.6);
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a2e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, rgb(107.7609756098, 161.0975609756, 248.2390243902), rgb(173.3953488372, 140.3313953488, 248.6686046512));
+}
+
+.nav-link {
+  position: relative;
+  font-weight: 500;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, #3b82f6, #8b5cf6);
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.mobile-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.mobile-menu.active {
+  max-height: 400px;
+  border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.hero-section {
+  position: relative;
+}
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-out;
+}
+
+.card {
+  transition: all 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+}
+.card {
+  backdrop-filter: blur(10px);
+}
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.card:hover::before {
+  opacity: 0.5;
+}
+
+.method-card {
+  position: relative;
+  overflow: hidden;
+}
+.method-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+.method-card:hover::after {
+  left: 100%;
+}
+.method-card .method-details {
+  animation: slideDown 0.3s ease-out;
+}
+.method-card .method-details code {
+  font-family: "Fira Code", "Courier New", monospace;
+  line-height: 1.6;
+}
+
+.status-category {
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+.status-category:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+}
+.status-category .status-code {
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.status-category .status-code:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+  padding-left: 16px;
+}
+
+.header-card {
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+.header-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+}
+.header-card ul li {
+  position: relative;
+  padding-left: 20px;
+}
+.header-card ul li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: #3b82f6;
+}
+
+.btn-primary,
+.btn-secondary {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.btn-primary::before,
+.btn-secondary::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+  z-index: -1;
+}
+.btn-primary:hover::before,
+.btn-secondary:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.modal {
+  backdrop-filter: blur(5px);
+}
+.modal.active {
+  display: flex !important;
+  animation: fadeIn 0.3s ease-out;
+}
+.modal > div {
+  animation: fadeIn 0.4s ease-out;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
+
+.section-title {
+  position: relative;
+  display: inline-block;
+}
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(to right, #3b82f6, #8b5cf6, #ec4899);
+  border-radius: 2px;
+}
+
+.loading {
+  position: relative;
+  pointer-events: none;
+}
+.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.interactive-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem !important;
+  }
+  .method-card,
+  .status-category {
+    margin-bottom: 1rem;
+  }
+}
+code,
+pre {
+  font-family: "Fira Code", "Monaco", "Courier New", monospace;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.text-glow {
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.5), 0 0 20px rgba(139, 92, 246, 0.3);
+}
+
+*:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/*# sourceMappingURL=style.css.map */

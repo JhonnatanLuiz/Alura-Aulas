@@ -630,6 +630,154 @@ while (jogar_novamente) {
 // ============================================
 // Quando sair do while, mostra que acabou
 console.log('Jogo encerrado!');
+
+// ============================================
+// DIA 5 - LISTA DE COMPRAS POR CATEGORIA
+// ============================================
+// Objetivo: Criar uma lista de compras organizada por categorias
+
+console.log('\n🎯 ============================================');
+console.log('📅 DIA 5 - LISTA DE COMPRAS');
+console.log('============================================\n');
+
+// ============================================
+// PASSO 1: Criar arrays para cada categoria
+// ============================================
+// Cada categoria é um array vazio que receberá os itens
+const frutas = [];
+const laticinios = [];
+const congelados = [];
+const doces = [];
+
+// ============================================
+// PASSO 2: Loop para adicionar itens
+// ============================================
+// Variável para controlar se o usuário quer continuar adicionando
+let adicionarItem = true;
+
+// Enquanto o usuário quiser adicionar itens
+while (adicionarItem) {
+    
+    // ============================================
+    // PASSO 3: Perguntar se deseja adicionar
+    // ============================================
+    // prompt retorna o texto digitado ou null se cancelar
+    const resposta = prompt('Você deseja adicionar uma comida na lista de compras?\nResponda "sim" ou "não"');
+    
+    // Se o usuário cancelou ou respondeu "não"
+    if (resposta === null || resposta.toLowerCase().trim() === 'não' || resposta.toLowerCase().trim() === 'nao') {
+        // Para o loop
+        adicionarItem = false;
+        console.log('\n✅ Encerrando adição de itens...\n');
+    }
+    // Se respondeu "sim"
+    else if (resposta.toLowerCase().trim() === 'sim') {
+        
+        // ============================================
+        // PASSO 4: Perguntar qual comida adicionar
+        // ============================================
+        const comida = prompt('Qual comida você deseja inserir?');
+        
+        // Se cancelou ou não digitou nada
+        if (comida === null || comida.trim() === '') {
+            console.log('⚠️ Nenhuma comida foi inserida.');
+            continue; // Volta para o início do loop
+        }
+        
+        // ============================================
+        // PASSO 5: Perguntar a categoria
+        // ============================================
+        const categoria = prompt(
+            'Em qual categoria essa comida se encaixa?\n\n' +
+            '1. Frutas\n' +
+            '2. Laticínios\n' +
+            '3. Congelados\n' +
+            '4. Doces\n\n' +
+            'Digite o nome da categoria:'
+        );
+        
+        // Se cancelou ou não digitou nada
+        if (categoria === null || categoria.trim() === '') {
+            console.log('⚠️ Nenhuma categoria foi selecionada.');
+            continue; // Volta para o início do loop
+        }
+        
+        // ============================================
+        // PASSO 6: Adicionar item na categoria correta
+        // ============================================
+        // Normaliza a categoria (minúsculas, sem espaços extras)
+        const cat = categoria.toLowerCase().trim();
+        
+        // Switch case - verifica qual categoria foi escolhida
+        switch(cat) {
+            case 'frutas':
+            case 'fruta':
+                frutas.push(comida.trim());
+                console.log(`✅ "${comida}" foi adicionado à categoria Frutas!`);
+                break;
+            
+            case 'laticínios':
+            case 'laticinios':
+            case 'laticinio':
+                laticinios.push(comida.trim());
+                console.log(`✅ "${comida}" foi adicionado à categoria Laticínios!`);
+                break;
+            
+            case 'congelados':
+            case 'congelado':
+                congelados.push(comida.trim());
+                console.log(`✅ "${comida}" foi adicionado à categoria Congelados!`);
+                break;
+            
+            case 'doces':
+            case 'doce':
+                doces.push(comida.trim());
+                console.log(`✅ "${comida}" foi adicionado à categoria Doces!`);
+                break;
+            
+            default:
+                // Se digitou uma categoria que não existe
+                console.log(`⚠️ Categoria "${categoria}" não reconhecida. Use: Frutas, Laticínios, Congelados ou Doces.`);
+        }
+        
+    } else {
+        // Se não respondeu nem "sim" nem "não"
+        console.log('⚠️ Resposta não reconhecida. Por favor, responda "sim" ou "não".');
+    }
+}
+
+// ============================================
+// PASSO 7: Exibir a lista final agrupada
+// ============================================
+console.log('📋 ============================================');
+console.log('LISTA DE COMPRAS');
+console.log('============================================\n');
+
+// Exibe categoria Frutas
+console.log('🍎 Frutas: ' + (frutas.length > 0 ? frutas.join(', ') : ''));
+
+// Exibe categoria Laticínios
+console.log('🥛 Laticínios: ' + (laticinios.length > 0 ? laticinios.join(', ') : ''));
+
+// Exibe categoria Congelados
+console.log('🧊 Congelados: ' + (congelados.length > 0 ? congelados.join(', ') : ''));
+
+// Exibe categoria Doces
+console.log('🍬 Doces: ' + (doces.length > 0 ? doces.join(', ') : ''));
+
+console.log('\n============================================');
+
+// ============================================
+// EXPLICAÇÃO DOS CONCEITOS USADOS:
+// ============================================
+console.log('\n📚 Conceitos aprendidos neste desafio:\n');
+console.log('1. Arrays (listas) para armazenar múltiplos valores');
+console.log('2. While loop para repetir ações enquanto condição for verdadeira');
+console.log('3. Switch case para verificar múltiplas condições');
+console.log('4. push() para adicionar elementos ao array');
+console.log('5. join() para unir elementos do array em uma string');
+console.log('6. Operador ternário (condição ? verdadeiro : falso)');
+console.log('7. toLowerCase() e trim() para normalizar entradas do usuário');
 </script>
 </body>
 </html>
