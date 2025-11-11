@@ -635,6 +635,7 @@ console.log('Jogo encerrado!');
 // DIA 5 - LISTA DE COMPRAS POR CATEGORIA
 // ============================================
 // Objetivo: Criar uma lista de compras organizada por categorias
+// COM OPÇÃO DE REMOVER ITENS
 
 console.log('\n🎯 ============================================');
 console.log('📅 DIA 5 - LISTA DE COMPRAS');
@@ -650,31 +651,154 @@ const congelados = [];
 const doces = [];
 
 // ============================================
-// PASSO 2: Loop para adicionar itens
+// FUNÇÃO AUXILIAR: Exibir lista atual
 // ============================================
-// Variável para controlar se o usuário quer continuar adicionando
-let adicionarItem = true;
+function exibirListaAtual() {
+    console.log('\n📋 Lista Atual:');
+    console.log('🍎 Frutas: ' + (frutas.length > 0 ? frutas.join(', ') : '(vazia)'));
+    console.log('🥛 Laticínios: ' + (laticinios.length > 0 ? laticinios.join(', ') : '(vazia)'));
+    console.log('🧊 Congelados: ' + (congelados.length > 0 ? congelados.join(', ') : '(vazia)'));
+    console.log('🍬 Doces: ' + (doces.length > 0 ? doces.join(', ') : '(vazia)'));
+    console.log('');
+}
 
-// Enquanto o usuário quiser adicionar itens
-while (adicionarItem) {
+// ============================================
+// FUNÇÃO AUXILIAR: Verificar se lista está vazia
+// ============================================
+function listaEstaVazia() {
+    return frutas.length === 0 && laticinios.length === 0 && congelados.length === 0 && doces.length === 0;
+}
+
+// ============================================
+// FUNÇÃO AUXILIAR: Remover item da lista
+// ============================================
+function removerItemDaLista() {
+    console.log('\n--- Removendo Item ---');
     
-    // ============================================
-    // PASSO 3: Perguntar se deseja adicionar
-    // ============================================
-    // prompt retorna o texto digitado ou null se cancelar
-    const resposta = prompt('Você deseja adicionar uma comida na lista de compras?\nResponda "sim" ou "não"');
+    // Primeiro, exibir os itens atuais
+    exibirListaAtual();
     
-    // Se o usuário cancelou ou respondeu "não"
-    if (resposta === null || resposta.toLowerCase().trim() === 'não' || resposta.toLowerCase().trim() === 'nao') {
-        // Para o loop
-        adicionarItem = false;
-        console.log('\n✅ Encerrando adição de itens...\n');
+    // Perguntar qual item remover
+    const itemRemover = prompt('Qual item você deseja remover?');
+    
+    // Se cancelou ou não digitou nada
+    if (itemRemover === null || itemRemover.trim() === '') {
+        console.log('⚠️ Nenhum item foi especificado para remoção.');
+        return;
     }
-    // Se respondeu "sim"
-    else if (resposta.toLowerCase().trim() === 'sim') {
+    
+    const itemNormalizado = itemRemover.trim().toLowerCase();
+    let foiEncontrado = false;
+    
+    // ============================================
+    // Procurar e remover da categoria Frutas
+    // ============================================
+    for (let i = 0; i < frutas.length; i++) {
+        if (frutas[i].toLowerCase() === itemNormalizado) {
+            frutas.splice(i, 1); // Remove o item no índice i
+            console.log(`✅ "${itemRemover}" foi removido da categoria Frutas!`);
+            foiEncontrado = true;
+            break;
+        }
+    }
+    
+    // ============================================
+    // Procurar e remover da categoria Laticínios
+    // ============================================
+    if (!foiEncontrado) {
+        for (let i = 0; i < laticinios.length; i++) {
+            if (laticinios[i].toLowerCase() === itemNormalizado) {
+                laticinios.splice(i, 1);
+                console.log(`✅ "${itemRemover}" foi removido da categoria Laticínios!`);
+                foiEncontrado = true;
+                break;
+            }
+        }
+    }
+    
+    // ============================================
+    // Procurar e remover da categoria Congelados
+    // ============================================
+    if (!foiEncontrado) {
+        for (let i = 0; i < congelados.length; i++) {
+            if (congelados[i].toLowerCase() === itemNormalizado) {
+                congelados.splice(i, 1);
+                console.log(`✅ "${itemRemover}" foi removido da categoria Congelados!`);
+                foiEncontrado = true;
+                break;
+            }
+        }
+    }
+    
+    // ============================================
+    // Procurar e remover da categoria Doces
+    // ============================================
+    if (!foiEncontrado) {
+        for (let i = 0; i < doces.length; i++) {
+            if (doces[i].toLowerCase() === itemNormalizado) {
+                doces.splice(i, 1);
+                console.log(`✅ "${itemRemover}" foi removido da categoria Doces!`);
+                foiEncontrado = true;
+                break;
+            }
+        }
+    }
+    
+    // ============================================
+    // Se item não foi encontrado em nenhuma categoria
+    // ============================================
+    if (!foiEncontrado) {
+        console.log(`❌ Não foi possível encontrar o item dentro da lista!`);
+    }
+}
+
+// ============================================
+// PASSO 2: Loop principal
+// ============================================
+// Variável para controlar se o usuário quer continuar
+let continuarPrograma = true;
+
+// Enquanto o usuário quiser continuar
+while (continuarPrograma) {
+    
+    // ============================================
+    // PASSO 3: Construir a pergunta dinamicamente
+    // ============================================
+    // A opção de remover só aparece se houver itens na lista
+    let pergunta = 'Você deseja adicionar uma comida na lista de compras?\n\n1. Sim\n2. Não';
+    
+    // Se a lista não está vazia, oferece opção de remover
+    if (!listaEstaVazia()) {
+        pergunta += '\n3. Remover um item';
+    }
+    
+    // Pergunta o que o usuário deseja fazer
+    const resposta = prompt(pergunta);
+    
+    // ============================================
+    // PASSO 4: Processar resposta
+    // ============================================
+    
+    // Se clicou em Cancelar ou digitou algo inválido
+    if (resposta === null) {
+        console.log('❌ Operação cancelada pelo usuário.');
+        continuarPrograma = false;
+    }
+    // Se respondeu "não" ou "2"
+    else if (resposta.toLowerCase().trim() === 'não' || resposta.toLowerCase().trim() === 'nao' || resposta.trim() === '2') {
+        continuarPrograma = false;
+        console.log('\n✅ Encerrando programa...\n');
+    }
+    // Se respondeu "remover um item" ou "3"
+    else if ((resposta.toLowerCase().trim() === 'remover um item' || resposta.trim() === '3') && !listaEstaVazia()) {
+        // Chamar função para remover item
+        removerItemDaLista();
+    }
+    // Se respondeu "sim" ou "1"
+    else if (resposta.toLowerCase().trim() === 'sim' || resposta.trim() === '1') {
         
         // ============================================
-        // PASSO 4: Perguntar qual comida adicionar
+        // PASSO 5: Perguntar qual comida adicionar
         // ============================================
         const comida = prompt('Qual comida você deseja inserir?');
         
@@ -685,7 +809,7 @@ while (adicionarItem) {
         }
         
         // ============================================
-        // PASSO 5: Perguntar a categoria
+        // PASSO 6: Perguntar a categoria
         // ============================================
         const categoria = prompt(
             'Em qual categoria essa comida se encaixa?\n\n' +
@@ -693,7 +817,7 @@ while (adicionarItem) {
             '2. Laticínios\n' +
             '3. Congelados\n' +
             '4. Doces\n\n' +
-            'Digite o nome da categoria:'
+            'Digite o número ou o nome da categoria:'
         );
         
         // Se cancelou ou não digitou nada
@@ -703,7 +827,7 @@ while (adicionarItem) {
         }
         
         // ============================================
-        // PASSO 6: Adicionar item na categoria correta
+        // PASSO 7: Adicionar item na categoria correta
         // ============================================
         // Normaliza a categoria (minúsculas, sem espaços extras)
         const cat = categoria.toLowerCase().trim();
@@ -712,6 +836,7 @@ while (adicionarItem) {
         switch(cat) {
             case 'frutas':
             case 'fruta':
+            case '1':
                 frutas.push(comida.trim());
                 console.log(`✅ "${comida}" foi adicionado à categoria Frutas!`);
                 break;
@@ -719,53 +844,76 @@ while (adicionarItem) {
             case 'laticínios':
             case 'laticinios':
             case 'laticinio':
+            case '2':
                 laticinios.push(comida.trim());
                 console.log(`✅ "${comida}" foi adicionado à categoria Laticínios!`);
                 break;
             
             case 'congelados':
             case 'congelado':
+            case '3':
                 congelados.push(comida.trim());
                 console.log(`✅ "${comida}" foi adicionado à categoria Congelados!`);
                 break;
             
             case 'doces':
             case 'doce':
+            case '4':
                 doces.push(comida.trim());
                 console.log(`✅ "${comida}" foi adicionado à categoria Doces!`);
                 break;
             
             default:
                 // Se digitou uma categoria que não existe
-                console.log(`⚠️ Categoria "${categoria}" não reconhecida. Use: Frutas, Laticínios, Congelados ou Doces.`);
+                console.log(`⚠️ Categoria "${categoria}" não reconhecida. Use: Frutas, Laticínios, Congelados ou Doces (ou 1, 2, 3, 4).`);
         }
         
     } else {
-        // Se não respondeu nem "sim" nem "não"
-        console.log('⚠️ Resposta não reconhecida. Por favor, responda "sim" ou "não".');
+        // Se não respondeu nem uma opção válida
+        console.log('⚠️ Resposta não reconhecida. Por favor, escolha uma opção válida.');
     }
 }
 
 // ============================================
-// PASSO 7: Exibir a lista final agrupada
+// PASSO 8: Exibir a lista final agrupada
 // ============================================
-console.log('📋 ============================================');
-console.log('LISTA DE COMPRAS');
+console.log('\n📋 ============================================');
+console.log('LISTA DE COMPRAS FINAL');
 console.log('============================================\n');
 
 // Exibe categoria Frutas
-console.log('🍎 Frutas: ' + (frutas.length > 0 ? frutas.join(', ') : ''));
+if (frutas.length > 0) {
+    console.log('🍎 Frutas: ' + frutas.join(', '));
+} else {
+    console.log('🍎 Frutas: (vazia)');
+}
 
 // Exibe categoria Laticínios
-console.log('🥛 Laticínios: ' + (laticinios.length > 0 ? laticinios.join(', ') : ''));
+if (laticinios.length > 0) {
+    console.log('🥛 Laticínios: ' + laticinios.join(', '));
+} else {
+    console.log('🥛 Laticínios: (vazia)');
+}
 
 // Exibe categoria Congelados
-console.log('🧊 Congelados: ' + (congelados.length > 0 ? congelados.join(', ') : ''));
+if (congelados.length > 0) {
+    console.log('🧊 Congelados: ' + congelados.join(', '));
+} else {
+    console.log('🧊 Congelados: (vazia)');
+}
 
 // Exibe categoria Doces
-console.log('🍬 Doces: ' + (doces.length > 0 ? doces.join(', ') : ''));
+if (doces.length > 0) {
+    console.log('🍬 Doces: ' + doces.join(', '));
+} else {
+    console.log('🍬 Doces: (vazia)');
+}
 
 console.log('\n============================================');
+
+// Contagem total de itens
+const totalItens = frutas.length + laticinios.length + congelados.length + doces.length;
+console.log('\n📊 Total de itens na lista: ' + totalItens);
 
 // ============================================
 // EXPLICAÇÃO DOS CONCEITOS USADOS:
@@ -775,9 +923,12 @@ console.log('1. Arrays (listas) para armazenar múltiplos valores');
 console.log('2. While loop para repetir ações enquanto condição for verdadeira');
 console.log('3. Switch case para verificar múltiplas condições');
 console.log('4. push() para adicionar elementos ao array');
-console.log('5. join() para unir elementos do array em uma string');
-console.log('6. Operador ternário (condição ? verdadeiro : falso)');
-console.log('7. toLowerCase() e trim() para normalizar entradas do usuário');
+console.log('5. splice() para remover elementos do array');
+console.log('6. join() para unir elementos do array em uma string');
+console.log('7. Operador ternário (condição ? verdadeiro : falso)');
+console.log('8. toLowerCase() e trim() para normalizar entradas do usuário');
+console.log('9. Funções para organizar código reutilizável');
+console.log('10. Loops for para procurar e remover itens');
 </script>
 </body>
 </html>
