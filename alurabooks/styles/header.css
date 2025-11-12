@@ -1,0 +1,79 @@
+.cabecalho__menu-hamburguer {
+    width: 24px;
+    height: 24px;
+    background-image: url('../img/Menu.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.cabecalho {
+    background-color: var(--branco);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.container__imagem {
+    padding: 1em;
+}
+
+/* Ocultar o checkbox */
+.container__botao {
+    display: none;
+}
+
+.container__rotulo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 1em;
+}
+
+.lista-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 60vw;
+    max-width: 300px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.container__botao:checked ~ .lista-menu {
+    display: block;
+}
+
+.lista-menu__titulo,
+.lista-menu__item {
+    padding: 1em;
+    background-color: var(--branco);
+}
+
+.lista-menu__titulo {
+    color: var(--laranja);
+    font-weight: 700;
+    border-bottom: 1px solid var(--cinza-claro);
+}
+
+.lista-menu__item {
+    list-style: none;
+}
+
+.lista-menu__link {
+    background: var(--azul-degrade);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-transform: uppercase;
+    text-decoration: none;
+}

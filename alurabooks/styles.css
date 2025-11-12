@@ -1,4 +1,6 @@
 /* CSS Reset */
+@import url("styles/header.css");
+
 * {
     margin: 0;
     padding: 0;
@@ -58,12 +60,13 @@ table {
 /* Estilos do Projeto */
 :root {
     --cor-de-fundo: #ebecee;
+    --branco: #FFFFFF;
+    --laranja: #eb9b00;
+    --azul-degrade: linear-gradient(97.54deg, #002f52 35.49%, #326589 165.37%);
+    --cinza-claro: #e0e0e0;
 }
 
 body {
     background-color: var(--cor-de-fundo);
-}
-
-h1 {
-    background-color: white;
+    font-family: 'Poppins', sans-serif;
 }
