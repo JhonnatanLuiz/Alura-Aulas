@@ -1,0 +1,387 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 5: Ferramentas e WSL | Windows CMD Tutorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cmd-dark': '#0C0C0C',
+                        'cmd-text': '#CCCCCC',
+                        'cmd-green': '#13A10E',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white min-h-screen">
+    <header class="bg-gradient-to-r from-orange-600 via-amber-600 to-orange-600 shadow-2xl sticky top-0 z-50 border-b-4 border-orange-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <a href="../index.html" class="bg-cmd-dark text-cmd-green font-mono text-2xl font-bold px-4 py-2 rounded-lg shadow-lg border-2 border-cmd-green hover:bg-cmd-green hover:text-cmd-dark transition-all">
+                        <span>C:\></span>
+                    </a>
+                    <div>
+                        <h1 class="text-xl font-bold text-white">Aula 5: Ferramentas e WSL</h1>
+                        <p class="text-sm text-orange-200">Winget, Terminal e Linux</p>
+                    </div>
+                </div>
+                <a href="../index.html" class="text-gray-300 hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <nav class="mb-8 flex items-center space-x-2 text-sm">
+            <a href="../index.html" class="text-orange-400 hover:text-orange-300">Início</a>
+            <span class="text-gray-500">/</span>
+            <span class="text-gray-400">Aula 5</span>
+        </nav>
+
+        <div class="grid lg:grid-cols-4 gap-8">
+            <aside class="lg:col-span-1">
+                <div class="bg-gray-800 rounded-xl p-6 sticky top-24 border border-gray-700">
+                    <h3 class="text-lg font-bold mb-4 text-orange-400">📚 Nesta Aula</h3>
+                    <nav class="space-y-2 text-sm">
+                        <a href="#introducao" class="block text-gray-300 hover:text-white hover:bg-gray-700 px-3 py-2 rounded">Introdução</a>
+                        <a href="#winget" class="block text-gray-300 hover:text-white hover:bg-gray-700 px-3 py-2 rounded">Winget</a>
+                        <a href="#terminais" class="block text-gray-300 hover:text-white hover:bg-gray-700 px-3 py-2 rounded">Terminais</a>
+                        <a href="#wsl" class="block text-gray-300 hover:text-white hover:bg-gray-700 px-3 py-2 rounded">WSL</a>
+                        <a href="#linux" class="block text-gray-300 hover:text-white hover:bg-gray-700 px-3 py-2 rounded">Comandos Linux</a>
+                        <a href="#pratica" class="block text-gray-300 hover:text-white hover:bg-gray-700 px-3 py-2 rounded">Exercício</a>
+                    </nav>
+                </div>
+            </aside>
+
+            <main class="lg:col-span-3 space-y-12">
+                <section id="introducao">
+                    <div class="bg-gradient-to-r from-orange-400 to-amber-400 rounded-t-xl p-6">
+                        <h2 class="text-3xl font-bold text-gray-900">🛠️ Ferramentas Avançadas</h2>
+                    </div>
+                    <div class="bg-gray-800 rounded-b-xl p-8 border-x border-b border-gray-700">
+                        <p class="text-lg text-gray-300 mb-4">
+                            Nesta aula final, vamos explorar ferramentas poderosas que transformarão sua experiência com o terminal no Windows!
+                        </p>
+                        <div class="bg-orange-900/30 border border-orange-700 rounded-lg p-4">
+                            <p class="text-sm text-orange-300">
+                                <strong>⏱️ Duração:</strong> 35-40 minutos | <strong>📊 Nível:</strong> Intermediário/Avançado
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="winget">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center">
+                        <span class="bg-blue-600 p-2 rounded-lg mr-3">📦</span> Winget - Gerenciador Oficial
+                    </h2>
+                    <div class="bg-gray-800 rounded-xl p-8 border border-gray-700 space-y-6">
+                        <p class="text-gray-300">
+                            O <strong>Winget</strong> é o gerenciador de pacotes oficial da Microsoft, já incluído no Windows 11 e disponível para Windows 10!
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-blue-900/30 border border-blue-700 rounded-lg p-4">
+                                <h4 class="text-blue-400 font-bold mb-2">✅ Vantagens</h4>
+                                <ul class="text-sm text-gray-300 space-y-1">
+                                    <li>• Oficial da Microsoft</li>
+                                    <li>• Já vem instalado</li>
+                                    <li>• Interface simples</li>
+                                    <li>• Grande catálogo</li>
+                                </ul>
+                            </div>
+                            <div class="bg-purple-900/30 border border-purple-700 rounded-lg p-4">
+                                <h4 class="text-purple-400 font-bold mb-2">🔄 Comandos</h4>
+                                <ul class="text-sm text-gray-300 space-y-1">
+                                    <li>• <code class="bg-cmd-dark text-cmd-green px-1 text-xs">winget install</code></li>
+                                    <li>• <code class="bg-cmd-dark text-cmd-green px-1 text-xs">winget upgrade</code></li>
+                                    <li>• <code class="bg-cmd-dark text-cmd-green px-1 text-xs">winget search</code></li>
+                                    <li>• <code class="bg-cmd-dark text-cmd-green px-1 text-xs">winget list</code></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-cmd-dark rounded-lg p-6 font-mono text-sm border-2 border-blue-500">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-blue-400 font-bold">Exemplos Winget</span>
+                                <button onclick="copyText(this)" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-xs">Copiar</button>
+                            </div>
+                            <pre class="text-cmd-text"><span class="text-gray-500"># Buscar programa</span>
+<span class="text-white">C:\></span> <span class="text-yellow-300">winget search "visual studio code"</span>
+
+<span class="text-gray-500"># Instalar</span>
+<span class="text-white">C:\></span> <span class="text-yellow-300">winget install Microsoft.VisualStudioCode</span>
+
+<span class="text-gray-500"># Atualizar tudo</span>
+<span class="text-white">C:\></span> <span class="text-yellow-300">winget upgrade --all</span>
+
+<span class="text-gray-500"># Ver instalados</span>
+<span class="text-white">C:\></span> <span class="text-yellow-300">winget list</span></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="terminais">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center">
+                        <span class="bg-purple-600 p-2 rounded-lg mr-3">💻</span> Terminais Modernos
+                    </h2>
+                    <div class="bg-gray-800 rounded-xl p-8 border border-gray-700 space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-indigo-900/30 border border-indigo-700 rounded-lg p-6">
+                                <h3 class="text-xl font-bold text-indigo-400 mb-3">🎨 Windows Terminal</h3>
+                                <p class="text-sm text-gray-300 mb-3">Terminal oficial com abas, temas e customização</p>
+                                <code class="text-cmd-green text-xs block bg-cmd-dark p-2 rounded">winget install Microsoft.WindowsTerminal</code>
+                            </div>
+                            <div class="bg-green-900/30 border border-green-700 rounded-lg p-6">
+                                <h3 class="text-xl font-bold text-green-400 mb-3">🚀 Cmder</h3>
+                                <p class="text-sm text-gray-300 mb-3">Terminal portátil com Git integrado</p>
+                                <code class="text-cmd-green text-xs block bg-cmd-dark p-2 rounded">choco install cmder -y</code>
+                            </div>
+                        </div>
+
+                        <div class="bg-purple-900/30 border border-purple-700 rounded-lg p-6">
+                            <h4 class="text-purple-400 font-bold mb-3">🎨 Personalização do Windows Terminal</h4>
+                            <ul class="text-sm text-gray-300 space-y-2">
+                                <li>• <strong>Temas:</strong> Clique na seta ▼ → Configurações → Aparência</li>
+                                <li>• <strong>Fontes:</strong> Instale "Cascadia Code" ou "Fira Code"</li>
+                                <li>• <strong>Transparência:</strong> Ajuste opacidade do fundo</li>
+                                <li>• <strong>Cores:</strong> Escolha esquemas pré-definidos</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-cmd-dark rounded-lg p-6 font-mono text-sm border-2 border-purple-500">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-purple-400 font-bold">Instalar fonte Cascadia Code</span>
+                                <button onclick="copyText(this)" class="bg-purple-600 hover:bg-purple-700 text-white px-3 py-1 rounded text-xs">Copiar</button>
+                            </div>
+                            <pre class="text-cmd-text"><span class="text-white">C:\></span> <span class="text-yellow-300">winget install Microsoft.CascadiaCode</span></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="wsl">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center">
+                        <span class="bg-green-600 p-2 rounded-lg mr-3">🐧</span> WSL - Linux no Windows
+                    </h2>
+                    <div class="bg-gray-800 rounded-xl p-8 border border-gray-700 space-y-6">
+                        <p class="text-gray-300">
+                            O <strong>Windows Subsystem for Linux (WSL)</strong> permite executar Linux nativamente no Windows!
+                        </p>
+
+                        <div class="bg-yellow-900/30 border border-yellow-700 rounded-lg p-4">
+                            <p class="text-sm text-yellow-300">
+                                <strong>💡 Por que usar?</strong> Acesse ferramentas Linux, desenvolva aplicações, aprenda comandos Unix!
+                            </p>
+                        </div>
+
+                        <div class="bg-cmd-dark rounded-lg p-6 font-mono text-sm border-2 border-green-500">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-green-400 font-bold">Instalar WSL (como Admin)</span>
+                                <button onclick="copyText(this)" class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-xs">Copiar</button>
+                            </div>
+                            <pre class="text-cmd-text"><span class="text-gray-500"># Instalar WSL com Ubuntu (padrão)</span>
+<span class="text-white">C:\></span> <span class="text-yellow-300">wsl --install</span>
+
+<span class="text-gray-500"># Listar distribuições disponíveis</span>
+<span class="text-white">C:\></span> <span class="text-yellow-300">wsl --list --online</span>
+
+<span class="text-gray-500"># Instalar distribuição específica</span>
+<span class="text-white">C:\></span> <span class="text-yellow-300">wsl --install -d Ubuntu-22.04</span>
+
+<span class="text-gray-500"># Entrar no Linux</span>
+<span class="text-white">C:\></span> <span class="text-yellow-300">wsl</span></pre>
+                        </div>
+
+                        <div class="bg-red-900/30 border border-red-700 rounded-lg p-4">
+                            <p class="text-sm text-red-300">
+                                <strong>⚠️ Nota:</strong> Reinicie o computador após a instalação!
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="linux">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center">
+                        <span class="bg-yellow-600 p-2 rounded-lg mr-3">🐧</span> Comandos Básicos do Linux
+                    </h2>
+                    <div class="bg-gray-800 rounded-xl p-8 border border-gray-700 space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                            <div class="bg-blue-900/30 border border-blue-700 rounded-lg p-4">
+                                <h4 class="text-blue-400 font-bold mb-2">📁 ls</h4>
+                                <p class="text-xs text-gray-300 mb-1">Listar arquivos</p>
+                                <code class="text-cmd-green text-xs block bg-cmd-dark p-1 rounded">ls -la</code>
+                            </div>
+                            <div class="bg-green-900/30 border border-green-700 rounded-lg p-4">
+                                <h4 class="text-green-400 font-bold mb-2">📂 cd</h4>
+                                <p class="text-xs text-gray-300 mb-1">Mudar diretório</p>
+                                <code class="text-cmd-green text-xs block bg-cmd-dark p-1 rounded">cd /home</code>
+                            </div>
+                            <div class="bg-purple-900/30 border border-purple-700 rounded-lg p-4">
+                                <h4 class="text-purple-400 font-bold mb-2">📝 mkdir</h4>
+                                <p class="text-xs text-gray-300 mb-1">Criar pasta</p>
+                                <code class="text-cmd-green text-xs block bg-cmd-dark p-1 rounded">mkdir projetos</code>
+                            </div>
+                            <div class="bg-orange-900/30 border border-orange-700 rounded-lg p-4">
+                                <h4 class="text-orange-400 font-bold mb-2">📍 pwd</h4>
+                                <p class="text-xs text-gray-300 mb-1">Ver diretório atual</p>
+                                <code class="text-cmd-green text-xs block bg-cmd-dark p-1 rounded">pwd</code>
+                            </div>
+                            <div class="bg-pink-900/30 border border-pink-700 rounded-lg p-4">
+                                <h4 class="text-pink-400 font-bold mb-2">📄 cat</h4>
+                                <p class="text-xs text-gray-300 mb-1">Ver conteúdo</p>
+                                <code class="text-cmd-green text-xs block bg-cmd-dark p-1 rounded">cat arquivo.txt</code>
+                            </div>
+                            <div class="bg-red-900/30 border border-red-700 rounded-lg p-4">
+                                <h4 class="text-red-400 font-bold mb-2">🗑️ rm</h4>
+                                <p class="text-xs text-gray-300 mb-1">Remover arquivo</p>
+                                <code class="text-cmd-green text-xs block bg-cmd-dark p-1 rounded">rm arquivo.txt</code>
+                            </div>
+                        </div>
+
+                        <div class="bg-cmd-dark rounded-lg p-6 font-mono text-sm border-2 border-yellow-500">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-yellow-400 font-bold">Comparação Windows ↔ Linux</span>
+                                <button onclick="copyText(this)" class="bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-1 rounded text-xs">Copiar</button>
+                            </div>
+                            <pre class="text-cmd-text"><span class="text-gray-500">Windows           Linux</span>
+<span class="text-white">dir          →    ls -la</span>
+<span class="text-white">cd           →    cd</span>
+<span class="text-white">mkdir        →    mkdir</span>
+<span class="text-white">del          →    rm</span>
+<span class="text-white">copy         →    cp</span>
+<span class="text-white">move         →    mv</span>
+<span class="text-white">type         →    cat</span>
+<span class="text-white">cls          →    clear</span></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="pratica">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center">
+                        <span class="bg-orange-600 p-2 rounded-lg mr-3">🎯</span> Exercício Final
+                    </h2>
+                    <div class="bg-gray-800 rounded-xl p-8 border border-gray-700 space-y-6">
+                        <div class="bg-orange-900/30 border border-orange-700 rounded-lg p-6">
+                            <h3 class="text-xl font-bold text-orange-400 mb-4">🏆 Desafio: Ambiente Completo</h3>
+                            <ol class="space-y-2 text-gray-300 list-decimal list-inside">
+                                <li>Instale o Windows Terminal via Winget</li>
+                                <li>Instale a fonte Cascadia Code</li>
+                                <li>Configure um tema escuro personalizado</li>
+                                <li>Instale o WSL com Ubuntu</li>
+                                <li>Crie uma pasta no Linux e navegue até ela</li>
+                            </ol>
+                        </div>
+
+                        <details class="bg-gray-700 rounded-lg border border-gray-600">
+                            <summary class="cursor-pointer p-4 font-bold text-orange-400">💡 Solução</summary>
+                            <div class="p-6 bg-cmd-dark rounded-b-lg">
+                                <pre class="text-cmd-text font-mono text-sm"><span class="text-gray-500"># 1. Instalar Windows Terminal</span>
+<span class="text-white">C:\></span> <span class="text-yellow-300">winget install Microsoft.WindowsTerminal</span>
+
+<span class="text-gray-500"># 2. Instalar Cascadia Code</span>
+<span class="text-white">C:\></span> <span class="text-yellow-300">winget install Microsoft.CascadiaCode</span>
+
+<span class="text-gray-500"># 3. Configurar tema (abra Terminal → Configurações → Aparência)</span>
+
+<span class="text-gray-500"># 4. Instalar WSL</span>
+<span class="text-white">C:\></span> <span class="text-yellow-300">wsl --install</span>
+
+<span class="text-gray-500"># 5. Após reiniciar, entrar no Linux</span>
+<span class="text-white">C:\></span> <span class="text-yellow-300">wsl</span>
+
+<span class="text-gray-500"># No Linux:</span>
+<span class="text-green-400">user@DESKTOP:~$</span> <span class="text-yellow-300">mkdir meus-projetos</span>
+<span class="text-green-400">user@DESKTOP:~$</span> <span class="text-yellow-300">cd meus-projetos</span>
+<span class="text-green-400">user@DESKTOP:~/meus-projetos$</span> <span class="text-yellow-300">pwd</span>
+<span class="text-white">/home/user/meus-projetos</span></pre>
+                            </div>
+                        </details>
+                    </div>
+                </section>
+
+                <section class="bg-gradient-to-r from-orange-900/50 to-amber-900/50 rounded-xl p-8 border border-orange-700">
+                    <h2 class="text-2xl font-bold mb-4">📌 Resumo Final</h2>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Winget é o gerenciador oficial da Microsoft</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Windows Terminal oferece customização avançada</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>WSL traz Linux para o Windows</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Comandos Linux são similares ao CMD</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="bg-gradient-to-r from-green-600 to-emerald-500 rounded-xl p-8 text-center">
+                    <h2 class="text-3xl font-bold mb-4">🎉 Parabéns!</h2>
+                    <p class="text-lg mb-6">Você concluiu o curso completo de Windows CMD!</p>
+                    <p class="text-gray-100">Continue praticando e explorando novas ferramentas. O terminal é seu aliado! 🚀</p>
+                </section>
+
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 border-t border-gray-700">
+                    <a href="aula4.html" class="w-full sm:w-auto text-center bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg transition-all">← Anterior</a>
+                    <a href="../index.html" class="w-full sm:w-auto text-center bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-lg transition-all">🏠 Início</a>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white py-8 mt-16 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400 text-sm">
+                &copy; 2025 Windows CMD Tutorial - Desenvolvido por <strong>Jhonnatan Luiz</strong>
+            </p>
+        </div>
+    </footer>
+
+    <style>
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        .wrap-text {
+            white-space: pre-wrap !important;
+            word-break: break-all;
+        }
+    </style>
+
+    <script>
+        function copyText(button) {
+            const codeBlock = button.closest('.bg-cmd-dark').querySelector('pre');
+            const text = codeBlock.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = '✓ Copiado!';
+                setTimeout(() => button.textContent = 'Copiar', 2000);
+            });
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>

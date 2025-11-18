@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 1: Começando no Prompt | Windows CMD Tutorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cmd-dark': '#0C0C0C',
+                        'cmd-text': '#CCCCCC',
+                        'cmd-green': '#13A10E',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white min-h-screen">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-900 via-indigo-900 to-purple-900 shadow-2xl sticky top-0 z-50 border-b-4 border-blue-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <a href="../index.html" class="bg-cmd-dark text-cmd-green font-mono text-2xl font-bold px-4 py-2 rounded-lg shadow-lg border-2 border-cmd-green hover:bg-cmd-green hover:text-cmd-dark transition-all">
+                        <span>C:\&gt;</span>
+                    </a>
+                    <div>
+                        <h1 class="text-xl font-bold text-white">Aula 1: Começando no Prompt</h1>
+                        <p class="text-sm text-blue-300">Comandos básicos do CMD</p>
+                    </div>
+                </div>
+                <a href="../index.html" class="text-gray-300 hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Breadcrumb -->
+        <nav class="mb-8 flex items-center space-x-2 text-sm">
+            <a href="../index.html" class="text-blue-400 hover:text-blue-300">Início</a>
+            <span class="text-gray-500">/</span>
+            <span class="text-gray-400">Aula 1</span>
+        </nav>
+
+        <!-- Conteúdo Principal -->
+        <div class="grid lg:grid-cols-4 gap-8">
+            <!-- Sidebar -->
+            <aside class="lg:col-span-1">
+                <div class="bg-gray-800 rounded-xl p-6 sticky top-24 border border-gray-700">
+                    <h3 class="text-lg font-bold mb-4 text-blue-400">📚 Nesta Aula</h3>
+                    <nav class="space-y-2 text-sm">
+                        <a href="#por-que" class="block text-gray-300 hover:text-white hover:bg-gray-700 px-3 py-2 rounded transition-colors">Por que usar terminal</a>
+                        <a href="#abrir-cmd" class="block text-gray-300 hover:text-white hover:bg-gray-700 px-3 py-2 rounded transition-colors">Como abrir o CMD</a>
+                        <a href="#dir" class="block text-gray-300 hover:text-white hover:bg-gray-700 px-3 py-2 rounded transition-colors">Comando dir</a>
+                        <a href="#cd" class="block text-gray-300 hover:text-white hover:bg-gray-700 px-3 py-2 rounded transition-colors">Comando cd</a>
+                        <a href="#mkdir" class="block text-gray-300 hover:text-white hover:bg-gray-700 px-3 py-2 rounded transition-colors">Comando mkdir</a>
+                        <a href="#cls" class="block text-gray-300 hover:text-white hover:bg-gray-700 px-3 py-2 rounded transition-colors">Comando cls</a>
+                        <a href="#pratica" class="block text-gray-300 hover:text-white hover:bg-gray-700 px-3 py-2 rounded transition-colors">Exercício Prático</a>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Conteúdo -->
+            <main class="lg:col-span-3 space-y-12">
+                <!-- Introdução -->
+                <section>
+                    <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-t-xl p-6">
+                        <h2 class="text-3xl font-bold">🚀 Bem-vindo à Aula 1!</h2>
+                    </div>
+                    <div class="bg-gray-800 rounded-b-xl p-8 border-x border-b border-gray-700">
+                        <p class="text-lg text-gray-300 mb-4">
+                            Nesta aula, você vai aprender os fundamentos do Prompt de Comando do Windows (CMD). 
+                            Vamos começar do zero, entendendo por que o terminal é importante e quais são os comandos básicos essenciais.
+                        </p>
+                        <div class="bg-blue-900/30 border border-blue-700 rounded-lg p-4">
+                            <p class="text-sm text-blue-300">
+                                <strong>⏱️ Duração estimada:</strong> 15-20 minutos<br>
+                                <strong>📊 Nível:</strong> Iniciante<br>
+                                <strong>🎯 Objetivos:</strong> Entender o terminal e executar comandos básicos
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Por que usar terminal -->
+                <section id="por-que">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center">
+                        <span class="bg-purple-600 text-white p-2 rounded-lg mr-3">💡</span>
+                        Por que usar um terminal?
+                    </h2>
+                    <div class="bg-gray-800 rounded-xl p-8 border border-gray-700">
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div class="bg-gradient-to-br from-green-900/30 to-green-800/20 rounded-lg p-6 border border-green-700">
+                                <h3 class="text-xl font-bold mb-3 text-green-400">✅ Vantagens</h3>
+                                <ul class="space-y-2 text-gray-300">
+                                    <li>• <strong>Rapidez</strong> - Execute tarefas em segundos</li>
+                                    <li>• <strong>Automação</strong> - Crie scripts para repetir ações</li>
+                                    <li>• <strong>Controle</strong> - Acesso a recursos avançados</li>
+                                    <li>• <strong>Leveza</strong> - Menos uso de memória que GUI</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gradient-to-br from-blue-900/30 to-blue-800/20 rounded-lg p-6 border border-blue-700">
+                                <h3 class="text-xl font-bold mb-3 text-blue-400">🎯 Casos de Uso</h3>
+                                <ul class="space-y-2 text-gray-300">
+                                    <li>• Gerenciar arquivos em massa</li>
+                                    <li>• Configurar redes e servidores</li>
+                                    <li>• Instalar programas via CLI</li>
+                                    <li>• Debugging e troubleshooting</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-900/30 border border-yellow-700 rounded-lg p-4">
+                            <p class="text-yellow-300 text-sm">
+                                <strong>💡 Dica:</strong> Desenvolvedores usam o terminal diariamente. Dominar o CMD vai acelerar muito seu trabalho!
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Como abrir o CMD -->
+                <section id="abrir-cmd">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center">
+                        <span class="bg-indigo-600 text-white p-2 rounded-lg mr-3">🖥️</span>
+                        Como abrir o CMD
+                    </h2>
+                    <div class="bg-gray-800 rounded-xl p-8 border border-gray-700">
+                        <p class="text-gray-300 mb-6">Existem várias formas de abrir o Prompt de Comando no Windows:</p>
+                        
+                        <div class="space-y-4">
+                            <!-- Método 1 -->
+                            <div class="bg-gray-900 rounded-lg p-6 border border-gray-600">
+                                <h3 class="text-xl font-bold mb-3 text-blue-400">Método 1: Menu Iniciar</h3>
+                                <ol class="list-decimal list-inside space-y-2 text-gray-300 mb-4">
+                                    <li>Clique no botão <strong>Iniciar</strong> (Windows)</li>
+                                    <li>Digite <code class="bg-cmd-dark text-cmd-green px-2 py-1 rounded">cmd</code></li>
+                                    <li>Pressione <kbd class="bg-gray-700 px-2 py-1 rounded">Enter</kbd></li>
+                                </ol>
+                                <button onclick="copyText('cmd')" class="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded transition-all">
+                                    📋 Copiar "cmd"
+                                </button>
+                            </div>
+
+                            <!-- Método 2 -->
+                            <div class="bg-gray-900 rounded-lg p-6 border border-gray-600">
+                                <h3 class="text-xl font-bold mb-3 text-purple-400">Método 2: Executar (Win + R)</h3>
+                                <ol class="list-decimal list-inside space-y-2 text-gray-300 mb-4">
+                                    <li>Pressione <kbd class="bg-gray-700 px-2 py-1 rounded">Win</kbd> + <kbd class="bg-gray-700 px-2 py-1 rounded">R</kbd></li>
+                                    <li>Digite <code class="bg-cmd-dark text-cmd-green px-2 py-1 rounded">cmd</code></li>
+                                    <li>Clique em <strong>OK</strong> ou pressione <kbd class="bg-gray-700 px-2 py-1 rounded">Enter</kbd></li>
+                                </ol>
+                            </div>
+
+                            <!-- Método 3 -->
+                            <div class="bg-gray-900 rounded-lg p-6 border border-gray-600">
+                                <h3 class="text-xl font-bold mb-3 text-green-400">Método 3: Modo Administrador</h3>
+                                <ol class="list-decimal list-inside space-y-2 text-gray-300 mb-4">
+                                    <li>Clique com botão direito no <strong>Iniciar</strong></li>
+                                    <li>Selecione <strong>"Prompt de Comando (Admin)"</strong> ou <strong>"Windows Terminal (Admin)"</strong></li>
+                                </ol>
+                                <div class="bg-red-900/30 border border-red-700 rounded-lg p-3 mt-3">
+                                    <p class="text-red-300 text-sm">
+                                        <strong>⚠️ Atenção:</strong> Modo administrador tem acesso total ao sistema. Use com cuidado!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Comando DIR -->
+                <section id="dir">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center">
+                        <span class="bg-green-600 text-white p-2 rounded-lg mr-3">📁</span>
+                        Comando: dir
+                    </h2>
+                    <div class="bg-gray-800 rounded-xl p-8 border border-gray-700">
+                        <p class="text-gray-300 mb-6">
+                            O comando <code class="bg-cmd-dark text-cmd-green px-2 py-1 rounded font-bold">dir</code> lista todos os arquivos e pastas no diretório atual.
+                        </p>
+
+                        <!-- Exemplo -->
+                        <div class="mb-6">
+                            <h3 class="text-xl font-bold mb-3 text-blue-400">Exemplo de Uso</h3>
+                            <div class="bg-cmd-dark rounded-lg p-4 font-mono text-sm border-2 border-cmd-green">
+                                <div class="text-white">C:\Users\Você&gt; <span class="text-cmd-green">dir</span></div>
+                                <div class="text-cmd-text mt-2">O volume na unidade C não tem nome.</div>
+                                <div class="text-cmd-text">O Número de Série do Volume é 1A2B-3C4D</div>
+                                <div class="text-cmd-text mt-2">Pasta de C:\Users\Você</div>
+                                <div class="text-cmd-text mt-2">18/11/2025  10:30    &lt;DIR&gt;          .</div>
+                                <div class="text-cmd-text">18/11/2025  10:30    &lt;DIR&gt;          ..</div>
+                                <div class="text-cmd-text">15/11/2025  14:22    &lt;DIR&gt;          Desktop</div>
+                                <div class="text-cmd-text">10/11/2025  09:15    &lt;DIR&gt;          Documents</div>
+                                <div class="text-cmd-text">12/11/2025  16:45    &lt;DIR&gt;          Downloads</div>
+                                <div class="text-cmd-text mt-2">               0 arquivo(s)              0 bytes</div>
+                                <div class="text-cmd-text">               5 pasta(s)   125.438.976.000 bytes disponíveis</div>
+                            </div>
+                            <button onclick="copyText('dir')" class="mt-3 bg-green-600 hover:bg-green-700 text-white text-sm px-4 py-2 rounded transition-all">
+                                📋 Copiar comando
+                            </button>
+                        </div>
+
+                        <!-- Variações -->
+                        <div class="bg-blue-900/30 border border-blue-700 rounded-lg p-6">
+                            <h3 class="text-xl font-bold mb-4 text-blue-400">🔧 Variações Úteis</h3>
+                            <div class="space-y-3">
+                                <div>
+                                    <code class="bg-cmd-dark text-cmd-green px-2 py-1 rounded">dir /w</code>
+                                    <span class="text-gray-400 ml-3">- Lista em formato amplo (várias colunas)</span>
+                                </div>
+                                <div>
+                                    <code class="bg-cmd-dark text-cmd-green px-2 py-1 rounded">dir /p</code>
+                                    <span class="text-gray-400 ml-3">- Pausa quando a tela enche</span>
+                                </div>
+                                <div>
+                                    <code class="bg-cmd-dark text-cmd-green px-2 py-1 rounded">dir /a</code>
+                                    <span class="text-gray-400 ml-3">- Mostra arquivos ocultos</span>
+                                </div>
+                                <div>
+                                    <code class="bg-cmd-dark text-cmd-green px-2 py-1 rounded">dir *.txt</code>
+                                    <span class="text-gray-400 ml-3">- Lista apenas arquivos .txt</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Comando CD -->
+                <section id="cd">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center">
+                        <span class="bg-orange-600 text-white p-2 rounded-lg mr-3">📂</span>
+                        Comando: cd
+                    </h2>
+                    <div class="bg-gray-800 rounded-xl p-8 border border-gray-700">
+                        <p class="text-gray-300 mb-6">
+                            O comando <code class="bg-cmd-dark text-cmd-green px-2 py-1 rounded font-bold">cd</code> (Change Directory) permite navegar entre pastas.
+                        </p>
+
+                        <!-- Exemplos -->
+                        <div class="space-y-6 mb-6">
+                            <div>
+                                <h3 class="text-lg font-bold mb-3 text-orange-400">Entrar em uma pasta</h3>
+                                <div class="bg-cmd-dark rounded-lg p-4 font-mono text-sm border-2 border-cmd-green">
+                                    <div class="text-white">C:\Users\Você&gt; <span class="text-cmd-green">cd Documents</span></div>
+                                    <div class="text-white mt-1">C:\Users\Você\Documents&gt;</div>
+                                </div>
+                                <button onclick="copyText('cd Documents')" class="mt-2 bg-orange-600 hover:bg-orange-700 text-white text-sm px-4 py-2 rounded transition-all">
+                                    📋 Copiar comando
+                                </button>
+                            </div>
+
+                            <div>
+                                <h3 class="text-lg font-bold mb-3 text-orange-400">Voltar uma pasta (cd ..)</h3>
+                                <div class="bg-cmd-dark rounded-lg p-4 font-mono text-sm border-2 border-cmd-green">
+                                    <div class="text-white">C:\Users\Você\Documents&gt; <span class="text-cmd-green">cd ..</span></div>
+                                    <div class="text-white mt-1">C:\Users\Você&gt;</div>
+                                </div>
+                                <button onclick="copyText('cd ..')" class="mt-2 bg-orange-600 hover:bg-orange-700 text-white text-sm px-4 py-2 rounded transition-all">
+                                    📋 Copiar comando
+                                </button>
+                            </div>
+
+                            <div>
+                                <h3 class="text-lg font-bold mb-3 text-orange-400">Ir para raiz do disco (cd \)</h3>
+                                <div class="bg-cmd-dark rounded-lg p-4 font-mono text-sm border-2 border-cmd-green">
+                                    <div class="text-white">C:\Users\Você\Documents&gt; <span class="text-cmd-green">cd \</span></div>
+                                    <div class="text-white mt-1">C:\&gt;</div>
+                                </div>
+                                <button onclick="copyText('cd \\')" class="mt-2 bg-orange-600 hover:bg-orange-700 text-white text-sm px-4 py-2 rounded transition-all">
+                                    📋 Copiar comando
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-yellow-900/30 border border-yellow-700 rounded-lg p-4">
+                            <p class="text-yellow-300 text-sm">
+                                <strong>💡 Dica:</strong> Use <kbd class="bg-gray-700 px-2 py-1 rounded">Tab</kbd> para autocompletar nomes de pastas!
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Comando MKDIR -->
+                <section id="mkdir">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center">
+                        <span class="bg-pink-600 text-white p-2 rounded-lg mr-3">➕</span>
+                        Comando: mkdir
+                    </h2>
+                    <div class="bg-gray-800 rounded-xl p-8 border border-gray-700">
+                        <p class="text-gray-300 mb-6">
+                            O comando <code class="bg-cmd-dark text-cmd-green px-2 py-1 rounded font-bold">mkdir</code> (Make Directory) cria uma nova pasta.
+                        </p>
+
+                        <!-- Exemplo -->
+                        <div class="mb-6">
+                            <h3 class="text-xl font-bold mb-3 text-pink-400">Criar uma pasta</h3>
+                            <div class="bg-cmd-dark rounded-lg p-4 font-mono text-sm border-2 border-cmd-green">
+                                <div class="text-white">C:\Users\Você&gt; <span class="text-cmd-green">mkdir MeuProjeto</span></div>
+                                <div class="text-white mt-2">C:\Users\Você&gt; <span class="text-cmd-green">dir</span></div>
+                                <div class="text-cmd-text mt-1">18/11/2025  11:00    &lt;DIR&gt;          MeuProjeto</div>
+                            </div>
+                            <button onclick="copyText('mkdir MeuProjeto')" class="mt-3 bg-pink-600 hover:bg-pink-700 text-white text-sm px-4 py-2 rounded transition-all">
+                                📋 Copiar comando
+                            </button>
+                        </div>
+
+                        <!-- Criar múltiplas pastas -->
+                        <div class="bg-purple-900/30 border border-purple-700 rounded-lg p-6">
+                            <h3 class="text-xl font-bold mb-4 text-purple-400">Criar múltiplas pastas</h3>
+                            <div class="bg-cmd-dark rounded-lg p-4 font-mono text-sm border-2 border-cmd-green mb-3">
+                                <div class="text-white">C:\Users\Você&gt; <span class="text-cmd-green">mkdir pasta1 pasta2 pasta3</span></div>
+                            </div>
+                            <p class="text-gray-400 text-sm">Isso criará 3 pastas de uma vez!</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Comando CLS -->
+                <section id="cls">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center">
+                        <span class="bg-red-600 text-white p-2 rounded-lg mr-3">🧹</span>
+                        Comando: cls
+                    </h2>
+                    <div class="bg-gray-800 rounded-xl p-8 border border-gray-700">
+                        <p class="text-gray-300 mb-6">
+                            O comando <code class="bg-cmd-dark text-cmd-green px-2 py-1 rounded font-bold">cls</code> (Clear Screen) limpa toda a tela do terminal.
+                        </p>
+
+                        <div class="bg-cmd-dark rounded-lg p-4 font-mono text-sm border-2 border-cmd-green mb-4">
+                            <div class="text-white">C:\Users\Você&gt; <span class="text-cmd-green">cls</span></div>
+                            <div class="text-cmd-text mt-2">[Tela limpa]</div>
+                        </div>
+
+                        <button onclick="copyText('cls')" class="bg-red-600 hover:bg-red-700 text-white text-sm px-4 py-2 rounded transition-all">
+                            📋 Copiar comando
+                        </button>
+
+                        <div class="bg-blue-900/30 border border-blue-700 rounded-lg p-4 mt-6">
+                            <p class="text-blue-300 text-sm">
+                                <strong>💡 Dica:</strong> Use <code class="bg-cmd-dark text-cmd-green px-2 py-1 rounded">cls</code> quando o terminal estiver muito poluído para facilitar a leitura!
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Exercício Prático -->
+                <section id="pratica">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center">
+                        <span class="bg-yellow-600 text-white p-2 rounded-lg mr-3">🎯</span>
+                        Exercício Prático
+                    </h2>
+                    <div class="bg-gradient-to-br from-yellow-900/30 to-orange-900/30 rounded-xl p-8 border border-yellow-700">
+                        <p class="text-gray-300 mb-6">Pratique o que aprendeu seguindo estes passos:</p>
+                        
+                        <div class="space-y-4">
+                            <div class="bg-gray-900 rounded-lg p-4 border border-gray-600">
+                                <div class="flex items-start">
+                                    <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold mr-3">1</span>
+                                    <div class="flex-1">
+                                        <p class="text-gray-300">Abra o CMD usando qualquer método</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-900 rounded-lg p-4 border border-gray-600">
+                                <div class="flex items-start">
+                                    <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold mr-3">2</span>
+                                    <div class="flex-1">
+                                        <p class="text-gray-300 mb-2">Liste todos os arquivos e pastas</p>
+                                        <code class="bg-cmd-dark text-cmd-green px-2 py-1 rounded">dir</code>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-900 rounded-lg p-4 border border-gray-600">
+                                <div class="flex items-start">
+                                    <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold mr-3">3</span>
+                                    <div class="flex-1">
+                                        <p class="text-gray-300 mb-2">Entre na pasta Documents</p>
+                                        <code class="bg-cmd-dark text-cmd-green px-2 py-1 rounded">cd Documents</code>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-900 rounded-lg p-4 border border-gray-600">
+                                <div class="flex items-start">
+                                    <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold mr-3">4</span>
+                                    <div class="flex-1">
+                                        <p class="text-gray-300 mb-2">Crie uma pasta chamada "TestesCMD"</p>
+                                        <code class="bg-cmd-dark text-cmd-green px-2 py-1 rounded">mkdir TestesCMD</code>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-900 rounded-lg p-4 border border-gray-600">
+                                <div class="flex items-start">
+                                    <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold mr-3">5</span>
+                                    <div class="flex-1">
+                                        <p class="text-gray-300 mb-2">Entre na pasta que você criou</p>
+                                        <code class="bg-cmd-dark text-cmd-green px-2 py-1 rounded">cd TestesCMD</code>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-900 rounded-lg p-4 border border-gray-600">
+                                <div class="flex items-start">
+                                    <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold mr-3">6</span>
+                                    <div class="flex-1">
+                                        <p class="text-gray-300 mb-2">Limpe a tela</p>
+                                        <code class="bg-cmd-dark text-cmd-green px-2 py-1 rounded">cls</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 bg-green-900/30 border border-green-700 rounded-lg p-4">
+                            <p class="text-green-300">
+                                <strong>🎉 Parabéns!</strong> Você completou o exercício prático da Aula 1!
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Resumo -->
+                <section class="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-xl p-8 border border-blue-700">
+                    <h2 class="text-3xl font-bold mb-6">📝 Resumo da Aula 1</h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4 text-blue-400">Comandos Aprendidos</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span><code class="bg-cmd-dark text-cmd-green px-2 py-1 rounded">dir</code> - Listar arquivos</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span><code class="bg-cmd-dark text-cmd-green px-2 py-1 rounded">cd</code> - Navegar pastas</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span><code class="bg-cmd-dark text-cmd-green px-2 py-1 rounded">mkdir</code> - Criar pastas</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-green-400 mr-2">✓</span>
+                                    <span><code class="bg-cmd-dark text-cmd-green px-2 py-1 rounded">cls</code> - Limpar tela</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-4 text-blue-400">Conceitos Importantes</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <span class="text-yellow-400 mr-2">⭐</span>
+                                    <span>Vantagens do terminal</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-yellow-400 mr-2">⭐</span>
+                                    <span>Como abrir o CMD</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-yellow-400 mr-2">⭐</span>
+                                    <span>Navegação por diretórios</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-yellow-400 mr-2">⭐</span>
+                                    <span>Criação de estruturas</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Navegação entre aulas -->
+                <div class="flex justify-between items-center mt-12 pt-8 border-t border-gray-700">
+                    <a href="../index.html" class="bg-gray-700 hover:bg-gray-600 text-white font-medium px-6 py-3 rounded-lg transition-all shadow-lg inline-flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                        Voltar ao Início
+                    </a>
+                    <a href="aula2.html" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium px-6 py-3 rounded-lg transition-all shadow-lg hover:shadow-xl inline-flex items-center">
+                        Próxima: Aula 2
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                        </svg>
+                    </a>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white py-8 mt-16 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400 text-sm">
+                &copy; 2025 Windows CMD Tutorial - Desenvolvido por <strong>Jhonnatan Luiz</strong>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Função para copiar texto
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Feedback visual
+                const btn = event.target;
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '✅ Copiado!';
+                btn.classList.remove('bg-blue-600', 'bg-green-600', 'bg-orange-600', 'bg-pink-600', 'bg-red-600');
+                btn.classList.add('bg-green-500');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('bg-green-500');
+                    if(originalText.includes('dir')) btn.classList.add('bg-green-600');
+                    else if(originalText.includes('cd')) btn.classList.add('bg-orange-600');
+                    else if(originalText.includes('mkdir')) btn.classList.add('bg-pink-600');
+                    else if(originalText.includes('cls')) btn.classList.add('bg-red-600');
+                    else btn.classList.add('bg-blue-600');
+                }, 2000);
+            });
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

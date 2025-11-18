@@ -67,6 +67,7 @@ table {
     --azul-degrade: linear-gradient(97.54deg, #002f52 35.49%, #326589 165.37%);
     --cinza-claro: #e0e0e0;
     --fonte-principal: 'Poppins';
+    --azul:#002f52;
 }
 
 body {
