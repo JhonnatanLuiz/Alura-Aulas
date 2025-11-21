@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso Terminal Linux</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen">
+    <div id="header-container"></div>
+
+    <div class="flex flex-1 overflow-hidden">
+        <aside id="sidebar-container" class="w-64 bg-white shadow-md hidden md:block overflow-y-auto"></aside>
+
+        <main class="flex-1 p-6 md:p-10 overflow-y-auto">
+            <div id="content" class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6">
+                        Domine o <span class="text-blue-600">Terminal Linux</span>
+                    </h1>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                        Aprenda os comandos essenciais para navegar, gerenciar arquivos e automatizar tarefas como um
+                        desenvolvedor profissional.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden mb-12 border border-gray-100">
+                    <div class="grid md:grid-cols-2 items-center">
+                        <div class="p-8 md:p-12">
+                            <h2 class="text-2xl font-bold text-gray-800 mb-4">Por que aprender o Terminal?</h2>
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <svg class="h-6 w-6 text-green-500 mr-3 mt-1" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span class="text-gray-600">Essencial para servidores e cloud computing.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-6 w-6 text-green-500 mr-3 mt-1" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span class="text-gray-600">Aumenta drasticamente sua produtividade.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-6 w-6 text-green-500 mr-3 mt-1" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span class="text-gray-600">Ferramenta poderosa para automação e scripts.</span>
+                                </li>
+                            </ul>
+                            <div class="mt-8">
+                                <a href="aulas/aula1.html"
+                                    class="inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                                    Começar Agora
+                                </a>
+                            </div>
+                        </div>
+                        <div class="bg-gray-900 h-full p-8 flex items-center justify-center">
+                            <img src="img/terminal.png" alt="Terminal Illustration"
+                                class="rounded-lg shadow-2xl transform rotate-1 hover:rotate-0 transition-transform duration-500">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div
+                        class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Virtualização</h3>
+                        <p class="text-gray-600 text-sm">Aprenda a configurar e usar máquinas virtuais com Linux.</p>
+                    </div>
+                    <div
+                        class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Gestão de Arquivos</h3>
+                        <p class="text-gray-600 text-sm">Crie, edite, mova e gerencie arquivos pelo terminal.</p>
+                    </div>
+                    <div
+                        class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Permissões</h3>
+                        <p class="text-gray-600 text-sm">Entenda e configure permissões de acesso e segurança.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="footer-container"></div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

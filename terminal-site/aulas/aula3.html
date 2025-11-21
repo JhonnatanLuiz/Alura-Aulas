@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 3 - Terminal Linux</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen">
+    <div id="header-container"></div>
+
+    <div class="flex flex-1 overflow-hidden">
+        <aside id="sidebar-container" class="w-64 bg-white shadow-md hidden md:block overflow-y-auto"></aside>
+
+        <main class="flex-1 p-6 md:p-10 overflow-y-auto">
+            <div id="content" class="max-w-4xl mx-auto prose prose-blue">
+                <h1 class="text-3xl font-bold text-gray-900 mb-6">Aula 3: Editando Arquivos com VI e Nano</h1>
+
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-8">
+                    <p class="text-blue-700 font-medium">Nesta aula, você vai aprender:</p>
+                    <ul class="list-disc list-inside text-blue-600 mt-2">
+                        <li>Como usar o editor VI</li>
+                        <li>Como usar o editor Nano</li>
+                        <li>Filtrar e ordenar conteúdo de arquivos</li>
+                    </ul>
+                </div>
+
+                <h2>Editores de Texto no Terminal</h2>
+                <p>Muitas vezes você precisará editar arquivos de configuração diretamente no servidor, onde não há
+                    interface gráfica. Para isso, usamos editores de terminal.</p>
+
+                <div class="space-y-6 my-8">
+                    <div class="bg-gray-800 rounded-lg p-6 text-white shadow-lg">
+                        <h3 class="text-green-400 font-mono text-lg mb-2 border-b border-gray-700 pb-2">Nano</h3>
+                        <p class="text-gray-300 mb-3">O editor mais simples para iniciantes.</p>
+                        <div class="bg-black rounded p-3 font-mono text-sm mb-3">
+                            <span class="text-green-500">$</span> nano arquivo.txt
+                        </div>
+                        <ul class="text-sm text-gray-400 space-y-1">
+                            <li><code>Ctrl + O</code>: Salvar (Write Out)</li>
+                            <li><code>Ctrl + X</code>: Sair</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-gray-800 rounded-lg p-6 text-white shadow-lg">
+                        <h3 class="text-green-400 font-mono text-lg mb-2 border-b border-gray-700 pb-2">VI / VIM</h3>
+                        <p class="text-gray-300 mb-3">Poderoso e onipresente, mas com curva de aprendizado.</p>
+                        <div class="bg-black rounded p-3 font-mono text-sm mb-3">
+                            <span class="text-green-500">$</span> vi arquivo.txt
+                        </div>
+                        <ul class="text-sm text-gray-400 space-y-1">
+                            <li><code>i</code>: Modo de inserção (para digitar)</li>
+                            <li><code>Esc</code>: Sair do modo de inserção</li>
+                            <li><code>:w</code>: Salvar</li>
+                            <li><code>:q</code>: Sair</li>
+                            <li><code>:wq</code>: Salvar e sair</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-gray-800 rounded-lg p-6 text-white shadow-lg">
+                        <h3 class="text-green-400 font-mono text-lg mb-2 border-b border-gray-700 pb-2">Visualizando
+                            Conteúdo</h3>
+                        <p class="text-gray-300 mb-3">Comandos úteis para ler arquivos grandes.</p>
+                        <div class="bg-black rounded p-3 font-mono text-sm">
+                            <span class="text-green-500">$</span> head arquivo.txt <span class="text-gray-500">#
+                                Primeiras 10 linhas</span><br>
+                            <span class="text-green-500">$</span> tail arquivo.txt <span class="text-gray-500"># Últimas
+                                10 linhas</span><br>
+                            <span class="text-green-500">$</span> sort nomes.txt <span class="text-gray-500"># Ordena
+                                alfabeticamente</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Pratique no Terminal</h2>
+                <p>Tente abrir o nano (simulado) ou usar head/tail.</p>
+
+                <!-- Terminal Simulator Container -->
+                <div id="terminal-simulator" class="mt-6">
+                    <div class="bg-gray-900 rounded-lg shadow-2xl overflow-hidden font-mono text-sm h-64 flex flex-col">
+                        <div class="bg-gray-800 px-4 py-2 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            <span class="ml-2 text-gray-400 text-xs">bash — 80x24</span>
+                        </div>
+                        <div class="flex-1 p-4 text-green-400 overflow-y-auto" id="terminal-output-3">
+                            <div class="mb-2">Ubuntu 22.04 LTS</div>
+                            <div class="flex">
+                                <span class="text-blue-400 mr-2">user@linux:~$</span>
+                                <input type="text"
+                                    class="bg-transparent border-none outline-none text-white flex-1 focus:ring-0"
+                                    placeholder="Digite um comando...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between mt-12 pt-6 border-t border-gray-200">
+                    <a href="aula2.html"
+                        class="flex items-center text-gray-600 hover:text-blue-600 font-medium transition-colors">
+                        <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                        Aula Anterior
+                    </a>
+                    <a href="aula4.html"
+                        class="flex items-center text-blue-600 hover:text-blue-800 font-bold transition-colors">
+                        Próxima Aula: Compactação
+                        <svg class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="footer-container"></div>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>
