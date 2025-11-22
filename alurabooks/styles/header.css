@@ -49,7 +49,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.container__botao:checked ~ .lista-menu {
+.container__botao:checked~.lista-menu {
     display: block;
 }
 
@@ -76,4 +76,42 @@
     background-clip: text;
     text-transform: uppercase;
     text-decoration: none;
+}
+
+@media screen and (min-width: 1024px) {
+    .container__rotulo {
+        display: none;
+    }
+
+    .lista-menu {
+        display: flex;
+        position: static;
+        width: auto;
+        box-shadow: none;
+        align-items: center;
+        gap: 2em;
+    }
+
+    .lista-menu__titulo {
+        display: none;
+    }
+
+    .lista-menu__item {
+        padding: 0;
+        background-color: transparent;
+    }
+
+    .lista-menu__link {
+        font-size: 16px;
+        text-transform: none;
+        font-weight: 400;
+        color: var(--azul);
+        background: none;
+        -webkit-text-fill-color: initial;
+    }
+
+    .lista-menu__link:hover {
+        color: var(--laranja);
+        font-weight: 700;
+    }
 }
