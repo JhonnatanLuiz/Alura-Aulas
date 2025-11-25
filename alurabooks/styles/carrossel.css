@@ -56,7 +56,7 @@
 
 .swiper-pagination {
     position: initial;
-    margin: 1em 0;
+    margin: 2em 0 3em 0;
 }
 
 .card__descricao {
@@ -97,6 +97,7 @@
 .descricao__texto {
     font-size: 14px;
 }
+
 .botoes__item {
     margin: 0 0.5em;
 }
@@ -112,6 +113,7 @@
 }
 
 @media (max-width: 767px) {
+
     .swiper-button-prev,
     .swiper-button-next {
         display: none;
@@ -141,11 +143,20 @@
         padding: 2em 0 3em;
     }
 
+    .carrossel__titulo {
+        font-size: 26px;
+    }
+
     .swiper {
-        max-width: 60rem;
+        width: 60%;
     }
 
     .swiper-slide img {
         max-width: 14rem;
+    }
+
+    .card {
+        width: 40%;
+        margin: 2em auto;
     }
 }

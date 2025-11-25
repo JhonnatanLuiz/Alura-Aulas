@@ -1,0 +1,126 @@
+.contato {
+    background-color: var(--branco);
+    padding: 1em;
+}
+
+.contato__titulo {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--azul-degrade);
+    text-align: center;
+    margin-bottom: 0.5em;
+    text-transform: uppercase;
+}
+
+.contato__texto {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--azul-degrade);
+    text-align: center;
+    margin: 1em 0;
+}
+
+.contato__formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.formulario__campo {
+    padding: 1em;
+    border: 1px solid var(--azul);
+    border-radius: 24px;
+    font-family: var(--fonte-principal);
+    font-size: 14px;
+    color: var(--azul);
+    background-color: var(--cor-de-fundo);
+    transition: all 0.3s ease;
+}
+
+.formulario__campo::placeholder {
+    color: #a0a0a0;
+    font-weight: 300;
+}
+
+.formulario__campo:focus {
+    outline: none;
+    border-color: var(--laranja);
+    background-color: var(--branco);
+    box-shadow: 0 0 0 3px rgba(235, 155, 0, 0.1);
+}
+
+.formulario__botao {
+    background: var(--azul-degrade);
+    color: var(--branco);
+    font-weight: 700;
+    font-size: 16px;
+    padding: 1em 2em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 47, 82, 0.2);
+}
+
+.formulario__botao:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 47, 82, 0.3);
+}
+
+.formulario__botao:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 47, 82, 0.2);
+}
+
+@media screen and (min-width: 768px) {
+    .contato {
+        padding: 3em 2em;
+    }
+
+    .contato__titulo {
+        font-size: 24px;
+    }
+
+    .contato__texto {
+        font-size: 16px;
+        margin-bottom: 2em;
+    }
+
+    .formulario__campo {
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .contato {
+        padding: 4em 3em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        gap: 2em;
+    }
+
+    .contato__titulo {
+        font-size: 28px;
+        text-align: left;
+    }
+
+    .contato__texto {
+        font-size: 18px;
+        margin-bottom: 0;
+        text-align: left;
+    }
+
+    .contato__descricao {
+        width: 30%;
+    }
+
+    .contato__formulario {
+        width: 40%;
+    }
+}
